@@ -1,0 +1,22 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+
+  &__list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  &__list > *:not(:last-child) {
+    margin-right: 2.6rem;
+  }
+
+  &__link {
+    text-decoration: none;
+  }
+}
