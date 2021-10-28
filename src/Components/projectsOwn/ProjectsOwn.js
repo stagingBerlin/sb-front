@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Project() {
+function ProjectsOwn() {
     return (
         <div>
-            Project
+            My Projects
         </div>
     )
 }
 
-export default Project
+export default ProjectsOwn

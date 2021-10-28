@@ -1,11 +1,11 @@
 import React from 'react'
 
-function User() {
+function NetworkOwn() {
     return (
         <div>
-            User (other)
+            Network
         </div>
     )
 }
 
-export default User
+export default NetworkOwn
