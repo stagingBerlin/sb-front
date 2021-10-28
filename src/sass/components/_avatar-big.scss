@@ -1,0 +1,20 @@
+.avatar {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid $color-primary;
+
+  &__img {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__img:hover {
+    cursor: pointer;
+  }
+
+  &__file {
+    display: none;
+  }
+}

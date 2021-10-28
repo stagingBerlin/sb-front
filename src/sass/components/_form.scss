@@ -1,0 +1,91 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem;
+  width: 35rem;
+  min-height: 37.5rem;
+  border-radius: 1rem;
+  box-shadow: $box-shadow;
+
+  @include respond(phone) {
+    width: 100%;
+    box-shadow: none;
+  }
+
+  &__heading {
+    font-size: 1.8rem;
+    padding-bottom: 2rem;
+    color: $color-primary;
+  }
+
+  &__content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__content > *:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &__input {
+    width: 100%;
+    border-radius: 0.8rem;
+    border: $border-input;
+    padding: 1rem 1.5rem;
+    font-size: 1.4rem;
+
+    &::placeholder {
+      font-size: 1.4rem;
+      color: $color-black-light;
+    }
+  }
+
+  &__toSignup {
+    display: flex;
+    font-size: 1.2rem;
+  }
+
+  &__linktoSignup,
+  &:link,
+  &:visited {
+    margin-left: 0.5rem;
+    color: $color-primary;
+    font-weight: 600;
+  }
+
+  &__linktoSignup:hover {
+    color: $color-primary-dark;
+    transition: 0.5s;
+  }
+
+  &__media {
+    width: 8.4rem;
+    display: flex;
+    justify-content: space-between;
+
+    &--facebook,
+    &--twitter {
+      font-size: 3.2rem;
+    }
+
+    &--facebook {
+      color: #1976d2;
+    }
+
+    &--twitter {
+      color: #4da0f1;
+    }
+  }
+
+  &__error {
+    color: $color-red;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+}

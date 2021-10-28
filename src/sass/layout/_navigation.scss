@@ -4,19 +4,57 @@
   align-items: center;
   padding: 2rem;
 
-  &__list {
-    list-style: none;
+  &__logoBox {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
   }
 
-  &__list > *:not(:last-child) {
-    margin-right: 2.6rem;
+  &__logoBox > *:not(:last-child) {
+    margin-right: 4rem;
   }
 
-  &__link {
+  &__logo {
+    font-size: 5.4rem;
+    color: $color-primary;
+  }
+
+  &__title {
+    // margin-left: 1.5rem;
+    font-size: 1.8rem;
+    color: $color-primary;
+    font-weight: 600;
+    line-height: 2.2rem;
+  }
+
+  &__list {
+    list-style: none;
+    margin-right: 2rem;
+    display: flex;
+  }
+
+  &__link,
+  &:link,
+  &:visited {
+    font-size: 1.8rem;
+    margin-right: 2.5rem;
     text-decoration: none;
+    color: $color-primary;
+    font-weight: 600;
   }
+
+  &__logoBox:hover &__logo,
+  &__logoBox:hover &__title {
+    color: $color-primary-dark;
+    transition: 0.5s;
+  }
+}
+
+.outMsg {
+  height: 60px;
+  font-size: 33px;
+  color: aliceblue;
+  background-image: linear-gradient(to right, #60769a, #2f4f8f);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

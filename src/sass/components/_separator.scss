@@ -1,0 +1,25 @@
+.separator {
+  color: #929eae;
+  margin: 0;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  position: relative;
+  flex: 1;
+  border-bottom: 1px solid #ededed;
+}
+
+.separator:not(:empty)::before {
+  margin-right: 0.99em;
+}
+
+.separator:not(:empty)::after {
+  margin-left: 0.99em;
+}
