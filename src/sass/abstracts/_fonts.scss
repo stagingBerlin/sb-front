@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "OrL-Reg";
+  src: url(../../fonts/OrLemmen-Regular.otf) format("truetype");
+}
+
+@font-face {
+  font-family: "OrL-Thin";
+  src: url(../../fonts/OrLemmen-Thin.otf) format("truetype");
+}
+
+$OrL-Reg: "OrL-Reg";
+$OrL-Thin: "OrL-Thin";
