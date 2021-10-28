@@ -1,11 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext } from "react"
 import { useHistory } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
+import { UserContext } from "../../context/UserContext"
+import { SignUpUser } from '../../helpers/ApiCalls'
 
 export default function Signup() {
 
     const { setUser } = useContext(UserContext)
-
+    const history = useHistory()
     const [ avatar, setAvatar ] = useState()
     const [ signupData, setSignupData ] = useState({
         firstname: "",
@@ -41,13 +42,13 @@ export default function Signup() {
     
         const completeData = { ...signupData, imageUrl: avatar}
         
-        // const res = await SignupUser(completeData);
-        // console.log(res);
+        const res = await SignUpUser(completeData);
+        console.log(res);
     
-        // if(res.error){
-        //   setErrorMsg(res.error.message)
-        // }
-        // else{
+        if(res.error){
+          setErrorMsg(res.error.message)
+        }
+        else{
           setUser(completeData)
           
           setAvatar(null)
@@ -59,9 +60,9 @@ export default function Signup() {
             password: ""
           })
           setErrorMsg()
-    
-        //   history.push("/dashboard")
-        // }
+          history.push("/account/:id/dashboard")
+
+        }
       };
       
     return (
