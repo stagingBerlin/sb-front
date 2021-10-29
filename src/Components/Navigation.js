@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import { NavLink } from "react-router-dom"
 import { UserContext } from '../context/UserContext'
+import { Signout } from '../helpers/ApiCalls'
 
 export default function Navigation() {
 
@@ -8,12 +9,12 @@ export default function Navigation() {
     const [ outMsg, setOutMsg ] = useState()
 
     const handleClick = async () => {
-    //   const resp = await logout()
-    //   setUser()
-    //   setOutMsg(resp)
-    //   setTimeout(()=> {
-    //     setOutMsg()
-    //   }, 5000)
+      const resp = await Signout()
+      setUser()
+      setOutMsg(resp)
+      setTimeout(()=> {
+        setOutMsg()
+      }, 5000)
     }
     
 

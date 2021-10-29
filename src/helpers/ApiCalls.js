@@ -33,8 +33,8 @@ export const SignInUser = async (data) => {
 
   export const Signout = async () => {
     try {
-          const res = await fetch(`${serverUrl}/users/logout`, {
-          method: 'GET',
+          const res = await fetch(`${serverUrl}/auth/logout`, {
+          method: 'POST',
           credentials: 'include'
         }).json();
         return res;
