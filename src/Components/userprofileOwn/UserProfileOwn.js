@@ -3,7 +3,7 @@ import React from 'react'
 function UserOwnProfile() {
     return (
         <div>
-            User Profile
+            <h1>Welcome to your own Profile</h1>
         </div>
     )
 }

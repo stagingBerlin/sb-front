@@ -48,13 +48,10 @@ export default function Signup() {
     
         // const completeData = { ...signupData, imageUrl: avatar}
         const completeData = { ...signupData, isHiring: isHiring}
-        //console.log(completeData);
         const res = await SignUpUser(completeData);
-        console.log(res);
     
         if(res.error){
-          //setErrorMsg(res.error.message)
-          console.log(res.error)
+          setErrorMsg(res.error.message)
         }
         else{
           setUser(completeData)
@@ -65,7 +62,7 @@ export default function Signup() {
             password: ""
           })
           setErrorMsg()
-          history.push("/account/:id/dashboard")
+          history.push(`/account/${res._id}/profile`)
 
         }
       };
