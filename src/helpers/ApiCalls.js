@@ -3,7 +3,7 @@ const serverUrl = 'http://localhost:5000';
 export const SignInUser = async (data) => {
     try {
       const res = await (
-        await fetch(`${serverUrl}/users/login`, {
+        await fetch(`${serverUrl}/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json'}, 
           body: JSON.stringify(data),    
@@ -18,7 +18,7 @@ export const SignInUser = async (data) => {
   export const SignUpUser = async (data) => {
     try {
       const res = await (
-        await fetch(`${serverUrl}/users/`, {
+        await fetch(`${serverUrl}/auth/signup`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(data),   
@@ -26,6 +26,7 @@ export const SignInUser = async (data) => {
         })).json();
         return res;
     } catch(error){
+      console.log(error)
       return error
     }
   }
