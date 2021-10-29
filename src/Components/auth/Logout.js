@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import { Signout } from '../helpers/apiCalls';
 import { toast } from 'react-toastify';
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
+import { Signout } from '../../helpers/authHelpers/apiCallsAuth';
 
 const Logout = ({history}) => {
 

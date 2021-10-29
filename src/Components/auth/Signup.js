@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react"
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../../context/UserContext"
-import { SignUpUser } from '../../helpers/ApiCalls'
+import { SignUpUser } from '../../helpers/authHelpers/apiCallsAuth'
 
 export default function Signup() {
 
@@ -153,7 +153,7 @@ export default function Signup() {
               defaultChecked
               className="form__input">
             </input>
-            <label for="ishiring">I'm looking for a job</label>
+            <label htmlFor="ishiring">I'm looking for a job</label>
 
             <input 
               type="radio"  
@@ -162,7 +162,7 @@ export default function Signup() {
               checked={isHiring}
               className="form__input">
             </input>
-            <label for="ishiring">I'm looking for people</label>
+            <label htmlFor="ishiring">I'm looking for people</label>
 
             {
               errorMsg ?
