@@ -3,11 +3,9 @@ import { UserContext } from "../../context/UserContext"
 
 function UserProfileOwn() {
     const { user, setUser } = useContext(UserContext)
-    
-    console.log(user)
 
     return (
-        <div>
+        <div className="grid-container">
           <h2>{user.username}'s profile </h2>
         </div>
     )
