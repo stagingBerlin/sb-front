@@ -1,0 +1,10 @@
+.button-grid-2fr{
+
+    border-radius: $button-border-radius;
+    border: $button-border;
+    background-color: $background-col;
+    font-family: $L10-Reg;
+    height: 3rem;
+    font-size: 1rem;
+    grid-column-end: span 2
+}
