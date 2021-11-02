@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink } from "react-router-dom"
 import { UserContext } from '../context/UserContext'
 import { Signout } from '../helpers/authHelpers/apiCallsAuth'
@@ -29,7 +29,7 @@ export default function Navigation() {
         <>
             <nav className="navigation">
               <NavLink 
-                to="/" 
+                to="/account/dashboard" 
                 className="navigation__link navigation__link--AppName"
                 >
                   <div className="navigation__logoBox">
@@ -38,6 +38,7 @@ export default function Navigation() {
               <NavLink
               to="/about"
               className="navigation__link navigation__link--AppName"
+              activeStyle={activeStyle}
               >
               About
               </NavLink>
@@ -49,7 +50,7 @@ export default function Navigation() {
                   <>
                   <li className="navigation__item">
                     <NavLink
-                      to="/account/:id/dashboard"
+                      to="/account/dashboard"
                       className="navigation__link"
                       activeStyle={activeStyle}
                     >
@@ -58,9 +59,9 @@ export default function Navigation() {
                   </li>
                   <li className="navigation__item">
                     <NavLink
-                      to="/account/:id/profile"
+                      to="/account/profile"
                       className="navigation__link"
-                      onClick={handleClick}
+                      activeStyle={activeStyle}
                     >
                       My Profile
                     </NavLink>

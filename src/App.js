@@ -11,8 +11,6 @@ import UserProfileOther from './Components/userProfileOther/UserProfileOther'
 import UserProfileOwn from './Components/userprofileOwn/UserProfileOwn'
 import UserSearch from './Components/userSearch/UserSearch'
 
-
-
 function App() {
   return (
     <div className="App">
@@ -22,14 +20,14 @@ function App() {
             <Route path="/login" exact component={Login} />
             <Route path="/signup" exact component={Signup} />
             <Route path="/about" exact component={About} />
-            <PrivateRoute exact path='/account/:id/dashboard' component={UserDashboard} />
-            <PrivateRoute exact path='/account/:id/profile' component={UserProfileOwn} />
-            <PrivateRoute exact path='/account/:id/search' component={UserSearch} />
-            <PrivateRoute exact path='/account/:id/people' component={UserProfileOther} />
+            <PrivateRoute exact path='/account/dashboard' component={UserDashboard} />
+            <PrivateRoute exact path='/account/profile' component={UserProfileOwn} />
+            <PrivateRoute exact path='/account/search' component={UserSearch} />
+            <PrivateRoute exact path='/account/people' component={UserProfileOther} />
           </Switch>
         <Footer/>
     </div>
   );
 }
 
-export default App;
+export default App

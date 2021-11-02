@@ -7,11 +7,12 @@ import { toast } from 'react-toastify';
 export default function Login() {
 
     const history = useHistory()
+    const { setUser }= useContext(UserContext)
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [ errorMsg, setErrorMsg] = useState()
-    const { setUser }= useContext(UserContext)
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -25,7 +26,8 @@ export default function Login() {
           setErrorMsg(user.error.message)
         } else {
           setUser(data)
-          history.push("/account/:id/dashboard")
+          console.log(data)
+          history.push("/account/dashboard")
         }
       }
     

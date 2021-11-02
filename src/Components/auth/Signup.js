@@ -5,11 +5,12 @@ import { SignUpUser } from '../../helpers/authHelpers/apiCallsAuth'
 
 export default function Signup() {
 
-    const { setUser } = useContext(UserContext)
+    const { user, setUser } = useContext(UserContext)
     const history = useHistory()
     
-    // const [ avatar, setAvatar ] = useState()
+    //const [ avatar, setAvatar ] = useState()
     const [ signupData, setSignupData ] = useState({
+        avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/320px-User-avatar.svg.png",
         email: "",
         password: ""
     })
@@ -65,9 +66,8 @@ export default function Signup() {
             password: ""
           })
           setErrorMsg()
-          history.push("/account/:id/dashboard")
-
-        }
+          history.push("/account/dashboard") 
+        }    
       };
       
     return (
