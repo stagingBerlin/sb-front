@@ -6,6 +6,7 @@ import DashboardProjectsFeatured from "./DashboardProjectsFeatured";
 import DashboardNetwork from "./DashboardNetwork";
 
 function UserDashboard() {
+
   return (
     <div>
       <div className="grid-container">

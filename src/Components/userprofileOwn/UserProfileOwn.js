@@ -3,12 +3,13 @@ import { UserContext } from "../../context/UserContext"
 
 function UserProfileOwn() {
     const { user, setUser } = useContext(UserContext)
-    const { profile, setProfile } = useState()
+    
+    console.log(user)
 
     return (
-        <>
-          profile page
-        </>
+        <div>
+          <h2>{user.username}'s profile </h2>
+        </div>
     )
 }
 

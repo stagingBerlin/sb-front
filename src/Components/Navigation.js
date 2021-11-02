@@ -1,15 +1,15 @@
 import React, { useContext, useState } from 'react'
 import { NavLink } from "react-router-dom"
-import { UserContext } from '../context/UserContext';
-import { Signout } from '../helpers/authHelpers/apiCallsAuth';
+import { UserContext } from '../context/UserContext'
+import { Signout } from '../helpers/authHelpers/apiCallsAuth'
 
 export default function Navigation() {
 
-    const { user, setUser } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext)
     const [ outMsg, setOutMsg ] = useState();
 
     const handleClick = async () => {
-      const resp = await Signout();
+      const resp = await Signout()
       setUser();
       setOutMsg(resp);
       setTimeout(()=> {
@@ -28,23 +28,23 @@ export default function Navigation() {
     return (
         <>
             <nav className="navigation">
-              <NavLink 
-                to="/account/dashboard" 
-                className="navigation__link navigation__link--AppName"
+              <div className="navigation__logoBox">
+                <NavLink 
+                  to="/account/dashboard" 
+                  className="navigation__link navigation__link--AppName"
                 >
-                  <div className="navigation__logoBox">
-                      <i class="fas fa-ad navigation__logo"></i>
-                      <h5 className="navigation__title">Staging Berlin</h5>
-              <NavLink
-              to="/about"
-              className="navigation__link navigation__link--AppName"
-              activeStyle={activeStyle}
-              >
-              About
-              </NavLink>
-                  </div>    
+                <i className="fas fa-ad navigation__logo"></i>
+                <h5 className="navigation__title">Staging Berlin</h5>
               </NavLink>
 
+              <NavLink
+                to="/about"
+                className="navigation__link navigation__link--AppName"
+                activeStyle={activeStyle}
+              >
+                About
+              </NavLink>
+              </div>    
             <ul className="navigation__list">
                 {user ? (
                   <>
