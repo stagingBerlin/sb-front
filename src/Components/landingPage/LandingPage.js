@@ -3,18 +3,14 @@ import FeaturedProjects from "./FeaturedProjects";
 
 function LandingPage() {
   return (
-      <div className="stage">
-        <div className="stage__container">
-          <div className="stage__img__container-left">
-            <img className="img-left" src="./img/pillar.png" alt="" />
-            <div className="test">Test</div>
-          </div>
-          <div className="stage__img__container-right">
-            <img className="img-right" src="./img/pillar.png" alt="" />
-          </div>
-          <FeaturedProjects />
-        </div>
-      </div>
+    <div>
+      <div>STAGING BERLIN</div>
+      <div>Look for a theatre job or create one!</div>
+      <button>Sign up</button>
+      <button>Login</button>
+      <FeaturedProjects/>
+    </div>
+    
   );
 }
 
