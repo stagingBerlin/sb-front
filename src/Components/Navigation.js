@@ -1,28 +1,28 @@
 import React, { useContext, useState } from 'react'
 import { NavLink } from "react-router-dom"
-import { UserContext } from '../context/UserContext'
-import { Signout } from '../helpers/authHelpers/apiCallsAuth'
+import { UserContext } from '../context/UserContext';
+import { Signout } from '../helpers/authHelpers/apiCallsAuth';
 
 export default function Navigation() {
 
-    const { user, setUser } = useContext(UserContext)
-    const [ outMsg, setOutMsg ] = useState()
+    const { user, setUser } = useContext(UserContext);
+    const [ outMsg, setOutMsg ] = useState();
 
     const handleClick = async () => {
-      const resp = await Signout()
-      setUser()
-      setOutMsg(resp)
+      const resp = await Signout();
+      setUser();
+      setOutMsg(resp);
       setTimeout(()=> {
         setOutMsg()
-      }, 5000)
-    }
+      }, 5000);
+    };
     
 
     const activeStyle = { 
         fontWeight: "bold",
         color: "#1f6e6c",
         textDecoration: "underline",
-      }
+      };
     
 
     return (
@@ -80,15 +80,6 @@ export default function Navigation() {
                 <>
                   <li className="navigation__item">
                     <NavLink
-                      to="/login"
-                      activeStyle={activeStyle}
-                      className="navigation__link"
-                    >
-                    Login
-                    </NavLink>
-                  </li>
-                  <li className="navigation__item">
-                    <NavLink
                       to="/signup"
                       activeStyle={activeStyle}
                       className="navigation__link"
@@ -96,18 +87,27 @@ export default function Navigation() {
                       SignUp
                     </NavLink>
                   </li>
+                  <li className="navigation__item">
+                    <NavLink
+                      to="/login"
+                      activeStyle={activeStyle}
+                      className="navigation__link"
+                    >
+                    Login
+                    </NavLink>
+                  </li>
                 </>
               )}
           </ul>
         </nav>
-          {/* {
+          {
             outMsg ? 
             <div className="outMsg">
               {outMsg.message}
             </div>
             :
-            ""
-          } */}
+            <></>
+          }
     </>
    )
-}
+};

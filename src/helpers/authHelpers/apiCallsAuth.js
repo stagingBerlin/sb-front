@@ -3,7 +3,8 @@ import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:5000';
 axios.defaults.withCredentials = true;
 
-const serverUrl = 'http://localhost:5000';
+
+// const serverUrl = 'http://localhost:5000';
 
 // export const SignInUser = async (data) => {
 //     try {
@@ -36,22 +37,28 @@ const serverUrl = 'http://localhost:5000';
   //   }
   // }
 
-// export const SignInUser = async (data) => {
-//     try {
-//       const res = await (
-//         await fetch(`${serverUrl}/auth/login`, {
-//           method: 'POST',
-//           headers: { 'Content-Type': 'application/json'}, 
-//           body: JSON.stringify(data),    
-//           credentials: "include"  
-//         })).json();
-//         return res;
-//     } catch(error){
-//       return error
-//     }
+// export const Signout = async () => {
+//   try {
+//         const res = await fetch(`${serverUrl}/auth/logout`, {
+//         method: 'POST',
+//         credentials: 'include'
+//       }).json();
+//       return res;
+//   } catch (error) {
+//     return error;
 //   }
+  
+// };
 
-
+export const Signout = async () => {
+  try {
+        const res = await axios.post('/auth/logout')
+      return res.data;
+  } catch (error) {
+    return error;
+  }
+  
+};
 
 export const SignUpUser = async (data) => {
   try {
@@ -74,15 +81,14 @@ export const SignInUser = async (data) => {
     }
   }
 
-  export const Signout = async () => {
-    try {
-          const res = await fetch(`${serverUrl}/auth/logout`, {
-          method: 'POST',
-          credentials: 'include'
-        }).json();
-        return res;
-    } catch (error) {
-      return error;
-    }
-    
-  };
+  
+export const authenticateUser = async () => {
+  try {
+    const res = await axios.post("/auth/verify")
+    return res.data
+  } catch (error) {
+    return error.response.data
+  }
+}
+
+

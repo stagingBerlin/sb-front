@@ -22,11 +22,12 @@ export default function Login() {
         }
 
         const user = await SignInUser(data);
+
         if(user.error){
           setErrorMsg(user.error.message)
         } else {
-          setUser(data)
-          console.log(data)
+          setUser(user)
+        
           history.push("/account/dashboard")
         }
       }

@@ -15,7 +15,6 @@ export default function Signup() {
         password: ""
     })
     const [isHiring, setIsHiring] = useState(false)
-
     const [ errorMsg, setErrorMsg ] = useState();
 
     const toggleChecked = (e) => {
@@ -49,13 +48,10 @@ export default function Signup() {
     
         // const completeData = { ...signupData, imageUrl: avatar}
         const completeData = { ...signupData, isHiring: isHiring}
-        //console.log(completeData);
         const res = await SignUpUser(completeData);
-        console.log(res);
     
         if(res.error){
-          //setErrorMsg(res.error.message)
-          console.log(res.error)
+          setErrorMsg(res.error.message)
         }
         else{
           setUser(completeData)

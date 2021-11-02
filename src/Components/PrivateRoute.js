@@ -2,6 +2,8 @@ import React from 'react';
 import { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import { Redirect, Route } from 'react-router';
+import LandingPage from './landingPage/LandingPage';
+import UserDashboard from './userDashboard/UserDashboard';
 
 
 const PrivateRoute = ({ path, component, redirectTo='/login' }) => {
@@ -15,10 +17,11 @@ const PrivateRoute = ({ path, component, redirectTo='/login' }) => {
     )
 
     if (authIsDone)
+
     return user ? ( 
-            <Route path={path} component={component}></Route> 
+            <Route path='/account/dashboard' component={UserDashboard}></Route> 
             ) : ( 
-            <Redirect to={redirectTo} /> 
+            <Redirect to={LandingPage} /> 
             )
     }
 
