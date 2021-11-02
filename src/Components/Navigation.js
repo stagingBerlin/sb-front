@@ -28,22 +28,23 @@ export default function Navigation() {
     return (
         <>
             <nav className="navigation">
-              <NavLink 
-                to="/" 
-                className="navigation__link navigation__link--AppName"
+              <div className="navigation__logoBox">
+                <NavLink 
+                  to="/" 
+                  className="navigation__link navigation__link--AppName"
                 >
-                  <div className="navigation__logoBox">
-                      <i class="fas fa-ad navigation__logo"></i>
-                      <h5 className="navigation__title">Staging Berlin</h5>
-              <NavLink
-              to="/about"
-              className="navigation__link navigation__link--AppName"
-              >
-              About
-              </NavLink>
-                  </div>    
+                <i className="fas fa-ad navigation__logo"></i>
+                <h5 className="navigation__title">Staging Berlin</h5>
               </NavLink>
 
+              <NavLink
+                to="/about"
+                className="navigation__link navigation__link--AppName"
+                activeStyle={activeStyle}
+              >
+                About
+              </NavLink>
+              </div>    
             <ul className="navigation__list">
                 {user ? (
                   <>
@@ -60,7 +61,7 @@ export default function Navigation() {
                     <NavLink
                       to="/account/:id/profile"
                       className="navigation__link"
-                      onClick={handleClick}
+                      activeStyle={activeStyle}
                     >
                       My Profile
                     </NavLink>
