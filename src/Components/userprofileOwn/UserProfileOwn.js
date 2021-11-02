@@ -6,7 +6,7 @@ function UserProfileOwn() {
 
     return (
         <div className="grid-container">
-          <h2>{user.username}'s profile </h2>
+          {user.username}'s profile
         </div>
     )
 }
