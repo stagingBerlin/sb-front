@@ -8,5 +8,12 @@
   src: url(../../fonts/OrLemmen-Thin.otf) format("truetype");
 }
 
+@font-face {
+  font-family: "L10-Reg";
+  src: url(../../fonts/L10-Regular.otf) format("truetype");
+}
+
 $OrL-Reg: "OrL-Reg";
 $OrL-Thin: "OrL-Thin";
+
+$L10-Reg: "L10-Reg";
