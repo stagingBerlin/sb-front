@@ -47,7 +47,7 @@ export default function Navigation() {
               </div>    
 
             <ul className="navigation__list">
-                {user ? (
+                {user && !user.isHiring ? (
                   <>
                     <li className="navigation__item">
                       <NavLink
@@ -74,6 +74,46 @@ export default function Navigation() {
                         activeStyle={activeStyle}
                       >
                         Job Search
+                      </NavLink>
+                    </li>
+                    <li className="navigation__item">
+                      <NavLink
+                        to="/"
+                        className="navigation__link"
+                        onClick={handleClick}
+                      >
+                        Logout
+                      </NavLink>
+                    </li>
+                    </>
+                ) : user && user.isHiring ? 
+                (
+                  <>
+                    <li className="navigation__item">
+                      <NavLink
+                        to="/account/dashboard"
+                        className="navigation__link"
+                        activeStyle={activeStyle}
+                      >
+                        Dashboard
+                      </NavLink>
+                    </li>
+                    <li className="navigation__item">
+                      <NavLink
+                        to="/account/profile"
+                        className="navigation__link"
+                        activeStyle={activeStyle}
+                      >
+                        My Profile
+                      </NavLink>
+                    </li>
+                    <li className="navigation__item">
+                      <NavLink
+                        to="/account/project"
+                        className="navigation__link"
+                        activeStyle={activeStyle}
+                      >
+                        My Project
                       </NavLink>
                     </li>
                     <li className="navigation__item">

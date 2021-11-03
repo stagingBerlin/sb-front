@@ -30,6 +30,9 @@
     grid-column-start: 9;
 }
 
+.grid-col-span-3{
+  grid-column-end: span 3  
+}
 .grid-col-span-5{
   grid-column-end: span 5  
 }
