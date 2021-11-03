@@ -2,7 +2,7 @@ import React, {useState, useContext } from 'react'
 import { UserContext } from "../../context/UserContext"
 
 function UserProfileOwn() {
-    const { user, setUser } = useContext(UserContext)
+    const { user, setUser, authIsDone } = useContext(UserContext)
 
     return (
         <div className="grid-container">
