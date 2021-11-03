@@ -27,7 +27,7 @@ export const UserContextProvider = ({children}) => {
         };
         auth();
     }, []);
-    console.log(user)
+   
     return (
         <UserContext.Provider
             value={
