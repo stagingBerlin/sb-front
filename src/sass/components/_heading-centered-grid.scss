@@ -1,0 +1,9 @@
+.heading-centered-grid{
+   display: flex;
+   font-size: 1rem;
+   font-family: $L10-Reg;
+   justify-content: center;
+   padding-top: 2rem;
+   padding-bottom: 0.5rem;
+   border-bottom: 1px solid $grid-border-color;
+}
