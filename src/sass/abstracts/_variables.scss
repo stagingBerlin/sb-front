@@ -24,7 +24,16 @@ $filler-col: #FAF9F9;
 $input-col: #FAF8F8;
 $nav-col: #F1F0F0;
 
-$button-border: 1px solid black;
+$grid-border-color: #1d1d1d;
+
+//------------------------Button
+
+$button-border: 1px solid $grid-border-color;
 $button-border-radius: 0px;
 
+//------------------------Grid
+
 $grid-spacing-input: 1rem;
+
+
+
