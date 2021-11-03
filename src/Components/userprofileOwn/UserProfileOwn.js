@@ -6,7 +6,18 @@ function UserProfileOwn() {
 
     return (
         <div className="grid-container">
-          {user.username}'s profile
+           <div className="grid-col-2 grid-col-span-3">
+              <h2>{user.username}'s profile</h2>
+              <img src={user.avatar} width="50%" />
+              <p>Name:</p>
+              <p>Profession: </p>
+              <p>Email: {user.email}</p>
+              <p>{user.isHiring ? "Owning Projects:" : "Applied Projects:"}</p>
+              <p>Bookmarked Projects: </p>
+              
+              <p></p>
+           </div>
+          
         </div>
     )
 }

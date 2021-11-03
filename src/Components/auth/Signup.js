@@ -68,6 +68,7 @@ export default function Signup() {
       
     return (
         <>
+        <div className="auth-page">
            <form className="form" onSubmit={handleSubmit}>
           <h2 className="form__heading">Sign Up </h2>
           <div className="form__content">
@@ -181,6 +182,9 @@ export default function Signup() {
             </div>
           </div>
         </form>
+
+
+        </div>
         </>
     )
 }

@@ -80,4 +80,10 @@
 
 .border-right-none {
   border-right: 0px;
+
+.grid-col-span-3{
+  grid-column-end: span 3  
+}
+.grid-col-span-5{
+  grid-column-end: span 5  
 }
