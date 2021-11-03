@@ -35,6 +35,7 @@ export default function Login() {
 
     return (
         <>
+        <div className="auth-page">
           <form className="form" onSubmit={handleSubmit}>
             <h2 className="form__heading">Login</h2>
     
@@ -88,6 +89,7 @@ export default function Login() {
               </div>
             </div> 
         </form>
+        </div>
         </>
     )
 }
