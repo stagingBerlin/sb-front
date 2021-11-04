@@ -14,6 +14,17 @@ axios.defaults.withCredentials = true;
         return error.response.data
       }
     }
+  
+  export const getJobs = async () => {
+
+    try {
+      const res = await axios.get(`/jobs`)
+      return res
+    } catch(error){
+        return error;
+    }
+
+  }
 
   export const updateUser = async (data) => {
 
@@ -33,3 +44,5 @@ axios.defaults.withCredentials = true;
     }
 
   }
+
+  
