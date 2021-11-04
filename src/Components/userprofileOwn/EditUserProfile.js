@@ -1,11 +1,25 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect} from 'react'
 import { UserContext } from '../../context/UserContext'
 import { updateUser } from '../../helpers/apiCalls'
-
+import { getJobs } from '../../helpers/apiCalls'
 
 function EditUserProfile() {
     const { user, setUser } = useContext(UserContext)
     const [update, setUpdate] = useState({name: "", _id: user._id})
+    const [jobs, setJobs]= useState([])
+
+    useEffect(() => {
+      const getData = async () => {
+        const res = await getJobs()
+        const ress = Object.values(res)
+        setJobs(ress[0])
+        console.log(ress[0])
+      }
+      getData()
+    },[])
+
+    
+    console.log(user)
     
     const handleInput = (e) => {
         console.log(e.target.name, " : ", e.target.value)
@@ -29,8 +43,8 @@ function EditUserProfile() {
             <input
             name="name"
             type="text"
-            value={update.name}
-            placeholder={"Your name"}
+            //value={update.name}
+            placeholder={user.name}
             onChange={handleInput}
             />
             
@@ -38,19 +52,19 @@ function EditUserProfile() {
             name="email"
             type="email"
             value={user.email}
-            placeholder={"Your email"}
-            onChange={handleInput}
+            //placeholder={"Your email"}
+            //onChange={handleInput}
+            disabled
             />
             
             <input
             name="username"
             type="text"
-            value={update.username}
-            placeholder={"Username"}
+            //value={user.username}
+            placeholder={user.username}
             onChange={handleInput}
             />
 
-            
             <input 
             list="jobs" 
             name="profession" 
@@ -58,13 +72,11 @@ function EditUserProfile() {
             onChange={handleInput} 
             /> 
             <datalist id="jobs">
-                <option value="actor" />
-                <option value="dancer"/>
-                <option value="costume" />
-                <option value="singer" />
-                <option value="light" />
-                <option value="musician" /> 
-                <option value="stage" />       
+            {
+              jobs && jobs.map((job, i)=> (
+              <option value = {job.title} key={i} />
+              ))
+            }
             </datalist>
              
             <input type="submit" value="UPDATE" className="button-grid-2fr grid-col-2" />
