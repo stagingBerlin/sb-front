@@ -13,32 +13,36 @@ function UserDashboard() {
   return (
     <div>
       <div className="grid-container">
-        <div className="grid-col-2">
+        {/* <div className="grid-col-2">
           <img src="" alt="" />
-        </div>
+        </div> */}
 
-        <div className="grid-col-2">available</div>
-        { user.isHiring ? 
+        {/* <div className="grid-col-2">available</div> */}
+        {/* { user.isHiring ? 
         <NavLink to="/account/editproject" className="button-grid-2fr grid-col-2">Create Project</NavLink>
-        : <NavLink to="/account/editprofile" className="button-grid-2fr grid-col-2">Edit Profile</NavLink> }
+        : <NavLink to="/account/editprofile" className="button-grid-2fr grid-col-2">Edit Profile</NavLink> } */}
         
-        
-        <div className="grid-col-2">
+        {/* <div className="grid-col-2">
           <div>Network</div>
           <DashboardNetwork />
         </div>
         <div className="grid-col-2">
           <div>Current Project</div>
-          <DashboardProjectsCurrent />
+          <DashboardProjectsCurrent /> */}
 
         <div className="grid-container-left grid-col-span-2 grid-col-2 border-right ">
           <div className="grid-col-1 grid-col-span-2">available</div>
-          <button className="button-grid-2fr grid-col-1 border-right-none">
+
+          { user.isHiring ? 
+        <NavLink to="/account/editproject" className="button-grid-2fr grid-col-1 border-right-none">Create Project</NavLink>
+        : <NavLink to="/account/editprofile" className="button-grid-2fr grid-col-1 border-right-none">Edit Profile</NavLink> }
+
+          {/* <button className="button-grid-2fr grid-col-1 border-right-none">
             Edit Profile
           </button>
           <button className="button-grid-2fr grid-col-1 border-right-none">
             Create Project
-          </button>
+          </button> */}
           <div className="grid-col-1 grid-col-span-2">
             <div className="heading-centered-grid">
               <div>Network</div>
