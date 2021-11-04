@@ -4,15 +4,15 @@ import { NavLink } from "react-router-dom"
 
 function UserProfileOwn() {
     const { user, setUser, authIsDone } = useContext(UserContext)
-    
+    console.log(user.profession[0])
 
     return (
         <div className="grid-container">
            <div className="grid-col-2 grid-col-span-3">
               <h2>{user.username}'s profile</h2>
-              <img src={user.avatar} width="50%" />
+               <img src={user.avatar} width="50%" />
               <p>Name:{user.name ?? ""}</p>
-              <p>Profession:{user.profession ?? ""} </p>
+              <p>Profession:{user.profession.map((job, i)=> job.title) ?? []} </p>
               <p>Email: {user.email}</p>
               <p>{user.isHiring ? "Owning Projects:" : "Applied Projects:"}</p>
               <p>Bookmarked Projects: </p>
