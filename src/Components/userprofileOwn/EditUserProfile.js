@@ -6,6 +6,7 @@ import { getJobs } from '../../helpers/apiCalls'
 import MultipleSelect from './MultipleSelect'
 
 function EditUserProfile() {
+  
     const { user, setUser } = useContext(UserContext)
     const [update, setUpdate] = useState({
       avatar : user.avatar,
@@ -80,7 +81,7 @@ function EditUserProfile() {
     }
     
     return (
-        <div>
+        <>
           <form onSubmit={handleSubmit}>
             <div className="avatar">
               <label className="avatar__label" htmlFor="avatar">
@@ -105,24 +106,28 @@ function EditUserProfile() {
                 onChange={(e) => avatarChange(e)}
               />
             </div>
+              <label htmlFor="name">Name: </label>
               <input
+                id="name"
                 name="name"
                 type="text"
                 //value={update.name}
                 placeholder={user.name}
                 onChange={handleInput}
               />
-            
+              <label for="email">Email: </label>
               <input
+                id="email"
                 name="email"
                 type="email"
                 value={user.email}
                 disabled
               />
-            
+              <label htmlFor="username">Username: </label>
               <input
                 name="username"
                 type="text"
+                id="username"
                 //value={update.username}
                 placeholder={user.username}
                 onChange={handleInput}
@@ -140,7 +145,7 @@ function EditUserProfile() {
             
             <input type="submit" value="UPDATE" className="button-grid-2fr grid-col-2" />
           </form>
-        </div>
+        </>
     )
 }
 

@@ -66,7 +66,7 @@ function UserDashboard() {
           </div>
         </div>
       </div>
-    F</div>
+    </div>
   );
 }
 

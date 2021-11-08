@@ -12,6 +12,7 @@ import UserProfileOwn from './Components/userprofileOwn/UserProfileOwn'
 import ProjectSearch from './Components/projectSearch/ProjectSearch'
 import ProjectsOwn from './Components/projectsOwn/ProjectsOwn'
 import EditUserProfile from './Components/userprofileOwn/EditUserProfile'
+import CreateProjectsOwn from './Components/projectsOwn/CreateProjectsOwn'
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <PrivateRoute exact path='/account/profile' component={UserProfileOwn} />
             <PrivateRoute exact path='/account/search' component={ProjectSearch} />
             <PrivateRoute exact path='/account/project' component={ProjectsOwn} />
+            <PrivateRoute exact path='/account/createproject' component={CreateProjectsOwn} />
             <PrivateRoute exact path='/account/people' component={UserProfileOther} />
             <PrivateRoute exact path='/account/editprofile' component={EditUserProfile} />
           </Switch>
