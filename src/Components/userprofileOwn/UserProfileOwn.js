@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom"
 import axios from 'axios';
 
 function UserProfileOwn() {
+    
     const { user } = useContext(UserContext)
 
     return (

@@ -20,22 +20,22 @@ function EditUserProfile() {
     const [jobs, setJobs]= useState([])
 
     // hier we will store our selected job's ids
-    const [jobId, setJobId] = useState([]);
+    const [jobId, setJobId] = useState([])
 
     // state for MultipleSelect Component sended as props
     // names of jobs are going top be stored
-    const [jobName, setJobName] = useState([]);
+    const [jobName, setJobName] = useState([])
 
     const avatarChange = (e) => {
-      let fileSelected = e.target.files[0]; 
+      let fileSelected = e.target.files[0];
 
-      if(!fileSelected) return;
+      if(!fileSelected) return
 
-      let fileReader = new FileReader();
-      fileReader.readAsDataURL( fileSelected ); 
+      let fileReader = new FileReader()
+      fileReader.readAsDataURL( fileSelected )
 
       fileReader.onloadend = (ev) => {
-        setAvatarPreview( fileReader.result );
+        setAvatarPreview( fileReader.result )
       };
   };
 
@@ -82,7 +82,7 @@ function EditUserProfile() {
     return (
         <div>
           <form onSubmit={handleSubmit}>
-          <div className="avatar">
+            <div className="avatar">
               <label className="avatar__label" htmlFor="avatar">
                 <img
                   className="avatar__img"
@@ -105,28 +105,28 @@ function EditUserProfile() {
                 onChange={(e) => avatarChange(e)}
               />
             </div>
-            <input
-              name="name"
-              type="text"
-              //value={update.name}
-              placeholder={user.name}
-              onChange={handleInput}
-            />
+              <input
+                name="name"
+                type="text"
+                //value={update.name}
+                placeholder={user.name}
+                onChange={handleInput}
+              />
             
-            <input
-              name="email"
-              type="email"
-              value={user.email}
-              disabled
-            />
+              <input
+                name="email"
+                type="email"
+                value={user.email}
+                disabled
+              />
             
-            <input
-              name="username"
-              type="text"
-              //value={update.username}
-              placeholder={user.username}
-              onChange={handleInput}
-            />
+              <input
+                name="username"
+                type="text"
+                //value={update.username}
+                placeholder={user.username}
+                onChange={handleInput}
+              />
 
             <MultipleSelect
               jobName={jobName} 
