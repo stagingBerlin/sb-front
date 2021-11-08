@@ -2,7 +2,47 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem;
+  padding: 0.5rem;
+
+  background: rgba(250, 248, 248, 1);
+  background: -moz-linear-gradient(
+    top,
+    rgba(250, 248, 248, 1) 0%,
+    rgba(250, 248, 248, 1) 81%,
+    rgba(242, 239, 242, 1) 100%
+  );
+  background: -webkit-gradient(
+    left top,
+    left bottom,
+    color-stop(0%, rgba(250, 248, 248, 1)),
+    color-stop(81%, rgba(250, 248, 248, 1)),
+    color-stop(100%, rgba(242, 239, 242, 1))
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(250, 248, 248, 1) 0%,
+    rgba(250, 248, 248, 1) 81%,
+    rgba(242, 239, 242, 1) 100%
+  );
+  background: -o-linear-gradient(
+    top,
+    rgba(250, 248, 248, 1) 0%,
+    rgba(250, 248, 248, 1) 81%,
+    rgba(242, 239, 242, 1) 100%
+  );
+  background: -ms-linear-gradient(
+    top,
+    rgba(250, 248, 248, 1) 0%,
+    rgba(250, 248, 248, 1) 81%,
+    rgba(242, 239, 242, 1) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(250, 248, 248, 1) 0%,
+    rgba(250, 248, 248, 1) 81%,
+    rgba(242, 239, 242, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faf8f8', endColorstr='#f2eff2', GradientType=0 );
 
   &__logoBox {
     display: flex;
@@ -20,8 +60,8 @@
 
   &__title {
     // margin-left: 1.5rem;
-    font-size: 1.8rem;
-    color: $color-primary;
+    font-size: 1.3rem;
+    color: $color-black;
     font-weight: 600;
     line-height: 2.2rem;
   }
@@ -35,10 +75,10 @@
   &__link,
   &:link,
   &:visited {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     margin-right: 2.5rem;
     text-decoration: none;
-    color: $color-primary;
+    color: $color-black;
     font-weight: 600;
   }
 
@@ -47,6 +87,78 @@
     color: $color-primary-dark;
     transition: 0.5s;
   }
+}
+
+//deko-------------------------
+
+.deko-bars-container-nav {
+  width: 100%;
+  height: 1.2rem;
+  overflow: hidden;
+  position: relative;
+
+  .curve-left {
+    height: 2.4rem;
+    width: 2.4rem;
+    background-color: $background-col;
+    border-radius: 1.2rem;
+    position: absolute;
+    top: 0px;
+    left: -1.2rem;
+  }
+  .curve-right {
+    height: 2.4rem;
+    width: 2.4rem;
+    background-color: $background-col;
+    border-radius: 1.2rem;
+    position: absolute;
+    top: 0px;
+  right: -1.2rem;
+  }
+}
+
+.bar {
+  width: 100%;
+  height: 0.4rem;
+  background: rgba(250, 248, 248, 1);
+  background: -moz-linear-gradient(
+    top,
+    rgba(250, 248, 248, 1) 0%,
+    rgba(250, 248, 248, 1) 81%,
+    rgba(242, 239, 242, 1) 100%
+  );
+  background: -webkit-gradient(
+    left top,
+    left bottom,
+    color-stop(0%, rgba(250, 248, 248, 1)),
+    color-stop(81%, rgba(250, 248, 248, 1)),
+    color-stop(100%, rgba(242, 239, 242, 1))
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(250, 248, 248, 1) 0%,
+    rgba(250, 248, 248, 1) 81%,
+    rgba(242, 239, 242, 1) 100%
+  );
+  background: -o-linear-gradient(
+    top,
+    rgba(250, 248, 248, 1) 0%,
+    rgba(250, 248, 248, 1) 81%,
+    rgba(242, 239, 242, 1) 100%
+  );
+  background: -ms-linear-gradient(
+    top,
+    rgba(250, 248, 248, 1) 0%,
+    rgba(250, 248, 248, 1) 81%,
+    rgba(242, 239, 242, 1) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(250, 248, 248, 1) 0%,
+    rgba(250, 248, 248, 1) 81%,
+    rgba(242, 239, 242, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faf8f8', endColorstr='#f2eff2', GradientType=0 );
 }
 
 .outMsg {
