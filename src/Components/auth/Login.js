@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react"
 import { useHistory, Link } from "react-router-dom"
 import { UserContext } from "../../context/UserContext"
 import { SignInUser } from "../../helpers/authHelpers/apiCallsAuth"
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 
 export default function Login() {
 

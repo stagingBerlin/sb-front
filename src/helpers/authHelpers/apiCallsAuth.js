@@ -8,7 +8,7 @@ export const Signout = async () => {
       const res = await axios.post('/auth/logout')
       return res.data;
   } catch (error) {
-    return error;
+    return error.response.data;
   }
 };
 
@@ -25,8 +25,7 @@ export const SignUpUser = async (data) => {
 export const SignInUser = async (data) => {
     try {
       const res = await axios.post("/auth/login", data)
-      console.log(res);
-        return res.data;
+      return res.data;
     } catch(error){
       return error.response.data
     }
