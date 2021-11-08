@@ -46,7 +46,7 @@ export default function Signup() {
           setErrorMsg(res.error.message)
         }
         else{
-          setUser(completeData)
+          setUser(res)
           
           //setAvatar(null)
           setSignupData({ 

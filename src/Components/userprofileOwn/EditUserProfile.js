@@ -5,7 +5,6 @@ import { updateUser } from '../../helpers/apiCalls'
 import { getJobs } from '../../helpers/apiCalls'
 import MultipleSelect from './MultipleSelect'
 
-
 function EditUserProfile() {
     const { user, setUser } = useContext(UserContext)
     const [update, setUpdate] = useState({
@@ -13,6 +12,9 @@ function EditUserProfile() {
       username : user.username,
       name: user.name,
     })
+    const [avatarPreview, setAvatarPreview] = useState("")
+
+    const history = useHistory()
 
     // hier we will store our fetched jobs from API
     const [jobs, setJobs]= useState([])
@@ -24,13 +26,25 @@ function EditUserProfile() {
     // names of jobs are going top be stored
     const [jobName, setJobName] = useState([]);
 
-    // const history = useHistory()
-    
+    const avatarChange = (e) => {
+      let fileSelected = e.target.files[0]; 
 
-    // this method will find the selected job in the jobsa rray and store the ids in the jobId state
+      if(!fileSelected) return;
+
+      let fileReader = new FileReader();
+      fileReader.readAsDataURL( fileSelected ); 
+
+      fileReader.onloadend = (ev) => {
+        setAvatarPreview( fileReader.result );
+      };
+  };
+
+    console.log(user.avatar);
+
+    // this method will find the selected job in the jobs array and store the ids in the jobId state
     const getJobIds = () => {
       const tempArr = []
-      jobName.forEach(item => {
+      jobName.map(item => {
         const findObj = jobs.find(job => job.title === item)
         tempArr.push(findObj._id)
       })
@@ -57,8 +71,9 @@ function EditUserProfile() {
       e.preventDefault()
       try {
         // we send to the BE as arguments user id and complete data we want to update in the user
-         const res = await updateUser( user._id , {...update, profession: jobId})
+         const res = await updateUser( user._id , {...update, avatar: avatarPreview, profession: jobId})
          setUser(res)
+         history.push('/account/profile')
       } catch (error) {
          console.log(error)
       }
@@ -67,6 +82,29 @@ function EditUserProfile() {
     return (
         <div>
           <form onSubmit={handleSubmit}>
+          <div className="avatar">
+              <label className="avatar__label" htmlFor="avatar">
+                <img
+                  className="avatar__img"
+                  width="100"
+                  height="100"
+                  src={
+                        avatarPreview
+                      ? avatarPreview
+                      : user.avatar
+                  }
+                  alt="avatar"
+                />
+              </label>
+              <input
+                id="avatar"
+                name="avatar"
+                className="avatar__file"
+                type="file"
+                accept="image/*"
+                onChange={(e) => avatarChange(e)}
+              />
+            </div>
             <input
               name="name"
               type="text"
