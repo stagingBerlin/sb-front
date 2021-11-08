@@ -1,5 +1,4 @@
 import axios from 'axios';
-const serverUrl = 'http://localhost:5000';
 
 axios.defaults.baseURL = 'http://localhost:5000';
 axios.defaults.withCredentials = true;
@@ -19,30 +18,20 @@ axios.defaults.withCredentials = true;
 
     try {
       const res = await axios.get(`/jobs`)
-      return res
+      return res.data
     } catch(error){
         return error;
     }
 
   }
 
-  export const updateUser = async (data) => {
-
+  export const updateUser = async (id, data) => {
     try {
-      const res = await (
-        await fetch(`${serverUrl}/users/${data._id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json'}, 
-          body: JSON.stringify(
-                data
-                ),   
-          credentials: "include"   
-        })).json();
-        return res;
+      const res = await axios.put(`/users/${id}`, data)
+        return res.data;
     } catch(error){
       return error;
     }
-
   }
 
   

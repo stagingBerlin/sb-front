@@ -33,6 +33,7 @@ html {
 
 body {
   box-sizing: border-box;
+  font-family: $L10-Reg;
 
   @include respond(big-desktop) {
     // width > 1800?

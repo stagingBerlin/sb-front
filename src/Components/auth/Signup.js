@@ -5,12 +5,10 @@ import { SignUpUser } from '../../helpers/authHelpers/apiCallsAuth'
 
 export default function Signup() {
 
-    const { user, setUser } = useContext(UserContext)
+    const { setUser } = useContext(UserContext)
     const history = useHistory()
     
-    //const [ avatar, setAvatar ] = useState()
     const [ signupData, setSignupData ] = useState({
-        avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/320px-User-avatar.svg.png",
         email: "",
         password: ""
     })
@@ -18,11 +16,7 @@ export default function Signup() {
     const [ errorMsg, setErrorMsg ] = useState();
 
     const toggleChecked = (e) => {
-      
-      // console.log(e.target.checked)
-      // console.log(isHiring);
       setIsHiring(value => !value)
-
     }
 
     const handleChange = (e) => {
@@ -31,23 +25,21 @@ export default function Signup() {
         })
       }
 
-    const handleInputFile = (e) => {
-        const inputFile = e.target.files[0];
+    // const handleInputFile = (e) => {
+    //     const inputFile = e.target.files[0];
     
-        const reader = new FileReader();
-        reader.onload = () => {
-          // console.log(reader);
-          // setAvatar(reader.result);
-        };
-        reader.readAsDataURL(inputFile);
-      };
+    //     const reader = new FileReader();
+    //     reader.onload = () => {
+    //       // console.log(reader);
+    //       // setAvatar(reader.result);
+    //     };
+    //     reader.readAsDataURL(inputFile);
+    //   };
     
 
       const handleSubmit = async (e) => {
         e.preventDefault();
-    
-        // const completeData = { ...signupData, imageUrl: avatar}
-        const completeData = { ...signupData, isHiring: isHiring}
+        const completeData = { ...signupData, isHiring: isHiring }
         const res = await SignUpUser(completeData);
     
         if(res.error){
