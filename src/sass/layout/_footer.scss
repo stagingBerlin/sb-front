@@ -1,0 +1,69 @@
+.deko-bars-container-footer {
+  width: 100%;
+  height: 1.2rem;
+  overflow: hidden;
+  position: relative;
+
+  .curve-left {
+    height: 2.4rem;
+    width: 2.4rem;
+    background-color: $background-col;
+    border-radius: 1.2rem;
+    position: absolute;
+    bottom: 0px;
+    left: -1.2rem;
+  }
+  .curve-right {
+    height: 2.4rem;
+    width: 2.4rem;
+    background-color: $background-col;
+    border-radius: 1.2rem;
+    position: absolute;
+    bottom: 0px;
+    right: -1.2rem;
+  }
+}
+
+.border-footer {
+  width: 100%;
+  height: 3rem;
+  background: rgba(242, 239, 242, 1);
+  background: -moz-linear-gradient(
+    top,
+    rgba(242, 239, 242, 1) 0%,
+    rgba(250, 248, 248, 1) 19%,
+    rgba(250, 248, 248, 1) 100%
+  );
+  background: -webkit-gradient(
+    left top,
+    left bottom,
+    color-stop(0%, rgba(242, 239, 242, 1)),
+    color-stop(19%, rgba(250, 248, 248, 1)),
+    color-stop(100%, rgba(250, 248, 248, 1))
+  );
+  background: -webkit-linear-gradient(
+    top,
+    rgba(242, 239, 242, 1) 0%,
+    rgba(250, 248, 248, 1) 19%,
+    rgba(250, 248, 248, 1) 100%
+  );
+  background: -o-linear-gradient(
+    top,
+    rgba(242, 239, 242, 1) 0%,
+    rgba(250, 248, 248, 1) 19%,
+    rgba(250, 248, 248, 1) 100%
+  );
+  background: -ms-linear-gradient(
+    top,
+    rgba(242, 239, 242, 1) 0%,
+    rgba(250, 248, 248, 1) 19%,
+    rgba(250, 248, 248, 1) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(242, 239, 242, 1) 0%,
+    rgba(250, 248, 248, 1) 19%,
+    rgba(250, 248, 248, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2eff2', endColorstr='#faf8f8', GradientType=0 );
+}
