@@ -27,7 +27,7 @@ export default function Navigation() {
       <nav className="navigation border-left border-right">
         <div className="navigation__logoBox">
           <NavLink
-            to="/"
+            to="/account/dashboard"
             className="navigation__link navigation__link--AppName"
             activeStyle={activeStyle}
           >

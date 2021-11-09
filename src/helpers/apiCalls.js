@@ -34,4 +34,23 @@ axios.defaults.withCredentials = true;
     }
   }
 
-  
+  export const createProject = async (data) => {
+    try {
+      const res = await axios.post("/projects", data)
+        return res.data;
+    } catch(error){
+      console.log(error)
+      return error.response.data
+    }
+  }
+
+  export const getOwnProject = async () => {
+
+    try {
+      const res = await axios.get("/projects/ownProjects")
+      return res.data
+    } catch(error){
+        return error
+    }
+
+  }
