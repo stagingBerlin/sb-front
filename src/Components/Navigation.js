@@ -27,13 +27,19 @@ export default function Navigation() {
       <nav className="navigation border-left border-right">
         <div className="navigation__logoBox">
           <NavLink
-            to="/account/dashboard"
+            to="/"
             className="navigation__link navigation__link--AppName"
+            activeStyle={activeStyle}
           >
-            <i className="fas fa-ad navigation__logo"></i>
+            <div className="logo navigation__link">
+              <img src="/img/SB_Logo.svg" alt="" />
+            </div>
+          </NavLink>
+          <NavLink
+            to="/account/dashboard"
+            className="navigation__link navigation__link--AppName">
             <h5 className="navigation__title">Staging Berlin</h5>
           </NavLink>
-
           <NavLink
             to="/about"
             className="navigation__link navigation__link--AppName"
