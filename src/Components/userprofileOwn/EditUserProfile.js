@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect} from 'react'
-import { useHistory  } from 'react-router'
+import { useHistory, NavLink  } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
 import { updateUser } from '../../helpers/apiCalls'
 import { getJobs } from '../../helpers/apiCalls'
@@ -40,7 +40,7 @@ function EditUserProfile() {
       };
   };
 
-    console.log(user.avatar);
+    //console.log(avatarPreview);
 
     // this method will find the selected job in the jobs array and store the ids in the jobId state
     const getJobIds = () => {
@@ -74,12 +74,26 @@ function EditUserProfile() {
         // we send to the BE as arguments user id and complete data we want to update in the user
          const res = await updateUser( user._id , {...update, avatar: avatarPreview, profession: jobId})
          setUser(res)
+         console.log(user)
          history.push('/account/profile')
       } catch (error) {
          console.log(error)
       }
     }
+
+    const delAvatar = async () => {
+      try {
+        const res = await updateUser( user._id , {...update, avatar: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/320px-User-avatar.svg.png"})
+        setUser(res)
+      } catch (error) {
+        console.log(error)
+     }
+    }
     
+    const backToProfile = () => {
+      return history.push('/account/profile')
+    }
+
     return (
         <>
           <form onSubmit={handleSubmit}>
@@ -104,8 +118,14 @@ function EditUserProfile() {
                 type="file"
                 accept="image/*"
                 onChange={(e) => avatarChange(e)}
-              />
+              /> 
             </div>
+              <input
+                type="button"
+                onClick={delAvatar}
+                value="Delete Avatar"
+                className="button-grid-2fr grid-col-2"
+              />
               <label htmlFor="name">Name: </label>
               <input
                 id="name"
@@ -144,6 +164,7 @@ function EditUserProfile() {
             />
             
             <input type="submit" value="UPDATE" className="button-grid-2fr grid-col-2" />
+            <input type="submit" value="BACK" className="button-grid-2fr grid-col-2" onClick={backToProfile} /> 
           </form>
         </>
     )

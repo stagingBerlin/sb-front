@@ -5,5 +5,14 @@
     font-family: $L10-Reg;
     height: 3rem;
     font-size: 1rem;
-    grid-column-end: span 2
+    grid-column-end: span 2;
+
+    &:hover {
+        cursor: pointer;
+        background-color: $color-black-light;
+        color: $color-black;
+        box-shadow: $box-shadow;
+    }
+
+
 }
