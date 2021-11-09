@@ -1,71 +1,113 @@
-import React from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import { UserContext } from '../../context/UserContext'
+import { useHistory } from 'react-router'
+import { createProject } from '../../helpers/apiCalls'
+import { getJobs } from '../../helpers/apiCalls'
+import MultipleSelect from '../userprofileOwn/MultipleSelect'
 
 const CreateProjectsOwn = () => {
+    
+    const { user, setUser } = useContext(UserContext)
+    const [data, setData] = useState({
+      title : "",
+      contact : user.name,
+      authorship: user.name,
+      description: "",
+      roles: [],
+      participants: []
+    })
+    const [jobs, setJobs]= useState([])
+    const [jobId, setJobId] = useState([])
+    const [jobName, setJobName] = useState([])
+
+    const history = useHistory()
+
+    useEffect(() => {
+      const getJobsApi = async () => {
+        const res = await getJobs()
+        setJobs(res)
+      }
+      getJobsApi()
+      getJobIds()
+    }, [jobName])
+
+    const getJobIds = () => {
+      const tempArr = []
+      jobName.map(item => {
+        const findObj = jobs.find(job => job.title === item)
+        tempArr.push(findObj._id)
+      })
+      setJobId(tempArr)
+    }
+
+    const handleInput = (e) => {
+      setData({ 
+        ...data, 
+        [e.target.name]: e.target.value
+      })
+    }
+
+    const handleSubmit = async (e) => {
+      e.preventDefault()
+      try {
+          const res = await createProject({...data, roles: jobId})
+          setUser(res)
+          console.log(res)
+          history.push('/account/project')
+      } catch (error) {
+         console.log(error)
+      }
+    }
+
     return (
         <>
-          {/* <form onSubmit={handleSubmit}>
-            <div className="avatar">
-              <label className="avatar__label" htmlFor="avatar">
-                <img
-                  className="avatar__img"
-                  width="100"
-                  height="100"
-                  src={
-                        avatarPreview
-                      ? avatarPreview
-                      : user.avatar
-                  }
-                  alt="avatar"
-                />
-              </label>
+          <form id="pform" onSubmit={handleSubmit}>
+              <label htmlFor="title">Title: </label>
               <input
-                id="avatar"
-                name="avatar"
-                className="avatar__file"
-                type="file"
-                accept="image/*"
-                onChange={(e) => avatarChange(e)}
-              />
-            </div>
-              <label htmlFor="name">Name: </label>
-              <input
-                id="name"
-                name="name"
+                id="title"
+                name="title"
                 type="text"
-                //value={update.name}
-                placeholder={user.name}
+                placeholder="Project Title"
                 onChange={handleInput}
               />
-              <label for="email">Email: </label>
+              <label htmlFor="contact">Contact: </label>
               <input
-                id="email"
-                name="email"
-                type="email"
-                value={user.email}
+                id="contact"
+                name="contact"
+                type="text"
+                value={user.username}
                 disabled
               />
-              <label htmlFor="username">Username: </label>
+              <label htmlFor="concept">Concept: </label>
               <input
-                name="username"
+                name="concept"
                 type="text"
-                id="username"
-                //value={update.username}
-                placeholder={user.username}
+                id="concept"
+                defaultValue={user.name}
+                // placeholder="change only when it's not your own project"
                 onChange={handleInput}
               />
-
-            <MultipleSelect
-              jobName={jobName} 
-              setJobName={setJobName} 
-              jobId={jobId} 
-              setJobId={setJobId}
-              jobs={jobs} 
-              setJobs={setJobs}
-              user={user}
-            />
+              <MultipleSelect
+                jobName={jobName} 
+                setJobName={setJobName} 
+                jobId={jobId} 
+                setJobId={setJobId}
+                jobs={jobs} 
+                setJobs={setJobs}
+                user={user}
+              />
+              <textarea
+                name="description"
+                type="text"
+                form="pform"
+                onChange={handleInput}
+                placeholder="Project description..."
+                rows="8" 
+                cols="50"
+              />
             
-            <input type="submit" value="UPDATE" className="button-grid-2fr grid-col-2" />
-          </form> */}
+            <input type="submit" value="Create" className="button-grid-2fr grid-col-2" />
+          </form>
         </>
     )
 }

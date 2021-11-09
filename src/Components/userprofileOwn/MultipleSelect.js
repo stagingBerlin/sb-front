@@ -46,13 +46,11 @@ export default function MultipleSelect ({
       typeof value === "string" ? value.split(",") : value
     );
   };
-
-  console.log(user.profession);
   
   return (
     <>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-chip-label">My roles</InputLabel>
+        <InputLabel id="demo-multiple-chip-label">Roles</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
