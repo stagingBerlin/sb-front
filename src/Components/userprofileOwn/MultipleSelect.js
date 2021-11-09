@@ -36,10 +36,10 @@ export default function MultipleSelect ({
 }) {
     const theme = useTheme();
   
-  const handleChange = (e) => {
-    const {
-      target: { value }
-    } = e;
+    const handleChange = (e) => {
+      const {
+        target: { value }
+      } = e;
 
     setJobName(
       // On autofill we get a the stringified value.

@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../context/UserContext'
-import { useHistory } from 'react-router'
+import { useHistory} from 'react-router'
 import { createProject } from '../../helpers/apiCalls'
 import { getJobs } from '../../helpers/apiCalls'
 import MultipleSelect from '../userprofileOwn/MultipleSelect'
 
 const CreateProjectsOwn = () => {
-    
+
     const { user, setUser } = useContext(UserContext)
     const [data, setData] = useState({
       title : "",
@@ -45,6 +45,7 @@ const CreateProjectsOwn = () => {
         ...data, 
         [e.target.name]: e.target.value
       })
+      console.log(e.target.value);
     }
 
     const handleSubmit = async (e) => {
@@ -82,13 +83,12 @@ const CreateProjectsOwn = () => {
                 value={user.username}
                 disabled
               />
-              <label htmlFor="concept">Concept: </label>
+              <label htmlFor="authorship">Concept: </label>
               <input
-                name="concept"
+                name="authorship"
                 type="text"
-                id="concept"
+                id="authorship"
                 defaultValue={user.name}
-                // placeholder="change only when it's not your own project"
                 onChange={handleInput}
               />
               <MultipleSelect
