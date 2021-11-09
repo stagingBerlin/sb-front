@@ -59,6 +59,10 @@ const CreateProjectsOwn = () => {
       }
     }
 
+    const backToProject = () => {
+      return history.push('/account/project')
+    }
+
     return (
         <>
           <form id="pform" onSubmit={handleSubmit}>
@@ -107,6 +111,7 @@ const CreateProjectsOwn = () => {
               />
             
             <input type="submit" value="Create" className="button-grid-2fr grid-col-2" />
+            <input type="button" value="Cancel" className="button-grid-2fr grid-col-2" onClick={backToProject} />
           </form>
         </>
     )
