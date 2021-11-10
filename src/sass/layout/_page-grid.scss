@@ -8,6 +8,7 @@
 
 .grid-container-left {
   @include grid(2);
+ 
 }
 
 .grid-container-right {
@@ -36,7 +37,6 @@
 .grid-col-8 {
   grid-column-start: 8;
 }
-
 .grid-col-9 {
   grid-column-start: 9;
 }
@@ -57,6 +57,14 @@
 
 .justify-items-end {
   justify-items: end;
+}
+
+.justify-items-center {
+  justify-items: center;
+}
+
+.justify-self-center {
+  justify-self: center;
 }
 
 .grid-col-span-3 {
