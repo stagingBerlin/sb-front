@@ -1,19 +1,23 @@
-.button-grid-2fr{
-    border-radius: $button-border-radius;
-    border: $button-border;
-    background-color: $background-col;
-    font-family: $L10-Reg;
-    height: 3rem;
-    font-size: 1rem;
-    grid-column-end: span 2;
-
-
-    &:hover {
-        cursor: pointer;
-        background-color: $color-black-light;
-        color: $color-black;
-        box-shadow: $box-shadow;
-    }
-
-
+.button-grid-2fr {
+  border-radius: $button-border-radius;
+  border: $button-border;
+  background-color: $background-col;
+  font-family: $L10-Reg;
+  height: 3rem;
+  font-size: 1rem;
+  grid-column-end: span 2;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    background-color: $nav-footer-border-col;
+    color: $color-black;
+    box-shadow: $box-shadow;
+    transition: 0.5s;
+  }
+  a {
+    text-decoration: none;
+  }
 }

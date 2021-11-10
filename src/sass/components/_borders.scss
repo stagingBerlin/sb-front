@@ -21,3 +21,21 @@
 .border{
   border: 1px solid $grid-border-color;
 }
+
+//--------------------borders-nav
+
+.border-bottom-nav{
+  border-bottom: 1px solid $nav-footer-border-col;
+}
+
+.border-top-nav{
+  border-top: 1px solid $nav-footer-border-col;
+}
+
+.border-left-nav{
+  border-left: 1px solid $nav-footer-border-col;
+}
+
+.border-right-nav{
+  border-right: 1px solid $nav-footer-border-col;
+}

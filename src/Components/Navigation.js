@@ -24,7 +24,7 @@ export default function Navigation() {
 
   return (
     <>
-      <nav className="navigation border-left border-right">
+      <nav className="navigation border-left-nav border-right-nav">
         <div className="navigation__logoBox">
           <NavLink
             to="/account/dashboard"
@@ -155,9 +155,9 @@ export default function Navigation() {
       <div className="deko-bars-container-nav">
         <div className="bar"></div>
         <div className="bar"></div>
-        <div className="bar border-bottom"></div>
-        <div className="curve-left border-right border-top"></div>
-        <div className="curve-right border-left border-top"></div>
+        <div className="bar border-bottom-nav"></div>
+        <div className="curve-left border-right-nav border-top-nav"></div>
+        <div className="curve-right border-left-nav border-top-nav"></div>
         <div></div>
       </div>
       {outMsg ? <div className="outMsg">{outMsg.message}</div> : <></>}
