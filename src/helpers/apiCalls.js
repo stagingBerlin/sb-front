@@ -50,7 +50,8 @@ axios.defaults.withCredentials = true;
       const res = await axios.get("/projects/ownProjects")
       return res.data
     } catch(error){
-        return error
+        console.log(error.response.data)
+        return error.response.data
     }
 
   }

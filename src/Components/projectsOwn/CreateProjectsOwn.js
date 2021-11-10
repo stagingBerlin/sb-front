@@ -5,40 +5,36 @@ import { createProject } from '../../helpers/apiCalls'
 import { getJobs } from '../../helpers/apiCalls'
 import MultipleSelect from '../userprofileOwn/MultipleSelect'
 
+
 const CreateProjectsOwn = () => {
 
-    const { user, setUser } = useContext(UserContext)
+    const { user, setUser, jobs, setJobs, ownProjects, setOwnProjects } = useContext(UserContext)
     const [data, setData] = useState({
       title : "",
-      contact : user.name,
+      owner : user.name,
       authorship: user.name,
       description: "",
       roles: [],
       participants: []
     })
-    const [jobs, setJobs]= useState([])
+  
+    
     const [jobId, setJobId] = useState([])
     const [jobName, setJobName] = useState([])
 
     const history = useHistory()
 
     useEffect(() => {
-      const getJobsApi = async () => {
-        const res = await getJobs()
-        setJobs(res)
-      }
-      getJobsApi()
-      getJobIds()
+      
+        const tempArr = []
+        jobName.map(item => {
+          const findObj = jobs.find(job => job.title === item)
+          tempArr.push(findObj)
+        })
+        setJobId(tempArr)
+      
     }, [jobName])
 
-    const getJobIds = () => {
-      const tempArr = []
-      jobName.map(item => {
-        const findObj = jobs.find(job => job.title === item)
-        tempArr.push(findObj._id)
-      })
-      setJobId(tempArr)
-    }
 
     const handleInput = (e) => {
       setData({ 
@@ -52,8 +48,9 @@ const CreateProjectsOwn = () => {
       e.preventDefault()
       try {
           const res = await createProject({...data, roles: jobId})
-          setUser(res)
+          setOwnProjects([...ownProjects, res])
           console.log(res)
+          console.log(user)
           history.push('/account/project')
       } catch (error) {
          console.log(error)
@@ -75,10 +72,10 @@ const CreateProjectsOwn = () => {
                 placeholder="Project Title"
                 onChange={handleInput}
               />
-              <label htmlFor="contact">Contact: </label>
+              <label htmlFor="owner">Contact: </label>
               <input
-                id="contact"
-                name="contact"
+                id="owner"
+                name="owner"
                 type="text"
                 value={user.username}
                 disabled
@@ -88,7 +85,7 @@ const CreateProjectsOwn = () => {
                 name="authorship"
                 type="text"
                 id="authorship"
-                defaultValue={user.name}
+                placeholder={user.name}
                 onChange={handleInput}
               />
               <MultipleSelect

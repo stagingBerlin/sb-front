@@ -6,6 +6,7 @@ import Badge from '@mui/material/Badge'
 import Avatar from '@mui/material/Avatar'
 import Stack from '@mui/material/Stack'
 
+/**************************** MUI FEATURES ****************************/ 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
       backgroundColor: '#44b700',
@@ -46,6 +47,7 @@ function stringAvatar(name) {
     };
   }
 
+/*********************** Main Component Function **************************/
 function UserProfileOwn() {
 
     const { user } = useContext(UserContext)
@@ -92,8 +94,8 @@ function UserProfileOwn() {
                {/* <img src={user.avatar} width="50%" style={{"borderRadius": "50%"}} alt="profile" /> */}
               <p>Name: {user.name ?? ""}</p>
               <p>Roles: 
-              {user.isHiring ? " Project Manager ∙ " : null}
-              {user.profession.map((job, i)=> job.title).join(' ∙ ')} </p>
+              {user.isHiring ? " Project Manager ∙ " : " "}
+              {user.profession.map((job, i)=> job.title).join(" ∙ ")} </p>
               <p>Email: {user.email}</p>
               <p>{user.isHiring ? "My Own Project:" : "Applied Projects:"}</p>
               <p>My Networks: </p>

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { authenticateUser } from '../helpers/authHelpers/apiCallsAuth';
-import { getJobs } from '../helpers/apiCalls';
+import { getJobs, getOwnProject } from '../helpers/apiCalls';
 
 export const UserContext = createContext()
 
@@ -8,6 +8,7 @@ export const UserContextProvider = ({children}) => {
 
     const [ user, setUser ] = useState()
     const [ authIsDone, setAuthIsDone ] = useState(false)
+    const [ ownProjects, setOwnProjects] = useState([])
 
     // hier we will store our fetched jobs from API
     const [jobs, setJobs]= useState([])
@@ -33,8 +34,15 @@ export const UserContextProvider = ({children}) => {
             const res = await getJobs()
             setJobs(res)
           }
-
-          getJobsApi()
+        
+          const fetchOwnProjects = async ()=> {
+            const res = await getOwnProject()
+            setOwnProjects(res)
+            console.log(res);
+          } 
+          
+        fetchOwnProjects()
+        getJobsApi()
         auth();
     }, []);
    
@@ -44,7 +52,8 @@ export const UserContextProvider = ({children}) => {
                 {
                     user, setUser,
                     authIsDone, setAuthIsDone,
-                    jobs, setJobs
+                    jobs, setJobs,
+                    ownProjects, setOwnProjects
                 }
             }
         >
