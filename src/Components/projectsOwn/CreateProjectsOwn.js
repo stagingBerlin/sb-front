@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { useHistory} from 'react-router'
 import { createProject } from '../../helpers/apiCalls'
-import { getJobs } from '../../helpers/apiCalls'
 import MultipleSelect from '../userprofileOwn/MultipleSelect'
 
 
@@ -17,7 +16,7 @@ const CreateProjectsOwn = () => {
       roles: [],
       participants: []
     })
-  
+    const [isNewProject, setIsNewProject] = useState(false)
     
     const [jobId, setJobId] = useState([])
     const [jobName, setJobName] = useState([])
@@ -49,21 +48,26 @@ const CreateProjectsOwn = () => {
       try {
           const res = await createProject({...data, roles: jobId})
           setOwnProjects([...ownProjects, res])
-          console.log(res)
-          console.log(user)
-          history.push('/account/project')
+          setIsNewProject(true)
+          setTimeout(()=> {
+          setIsNewProject(false)
+          history.push('/account/project')}
+          , 1600)
+          
       } catch (error) {
          console.log(error)
       }
     }
-
+    console.log(isNewProject)
+    
     const backToProject = () => {
       return history.push('/account/project')
     }
 
     return (
-        <>
-          <form id="pform" onSubmit={handleSubmit}>
+        <div>
+          {isNewProject ? <h2>New Project has been created!</h2> : (
+            <form id="pform" onSubmit={handleSubmit}>
               <label htmlFor="title">Title: </label>
               <input
                 id="title"
@@ -85,7 +89,7 @@ const CreateProjectsOwn = () => {
                 name="authorship"
                 type="text"
                 id="authorship"
-                placeholder={user.name}
+                defaultValue={user.name}
                 onChange={handleInput}
               />
               <MultipleSelect
@@ -107,10 +111,12 @@ const CreateProjectsOwn = () => {
                 cols="50"
               />
             
-            <input type="submit" value="Create" className="button-grid-2fr grid-col-2" />
+            <input type="submit" value="Create" className="button-grid-2fr grid-col-2" onClick={handleSubmit} />
             <input type="button" value="Cancel" className="button-grid-2fr grid-col-2" onClick={backToProject} />
           </form>
-        </>
+          )}
+          
+        </div>
     )
 }
 

@@ -10,6 +10,7 @@ import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 
+/****************** MUI FUNCTION ************************/
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
     backgroundColor: "#44b700",
@@ -50,6 +51,8 @@ function stringAvatar(name) {
     children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
   };
 }
+
+/****************** MAIN FUNCTION ************************/
 function UserDashboard() {
   const { user, setUser } = useContext(UserContext);
   return (
@@ -101,7 +104,7 @@ function UserDashboard() {
                 to="/account/createproject"
                 className="button-grid-2fr border-right-none justify-items-center"
               >
-                <div classname="border">Create Project</div>
+                <div className="border">Create Project</div>
                
               </NavLink>
             ) : (
