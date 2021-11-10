@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect} from 'react'
 import { useHistory, NavLink  } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
 import { updateUser } from '../../helpers/apiCalls'
-import { getJobs } from '../../helpers/apiCalls'
 import MultipleSelect from './MultipleSelect'
 
 function EditUserProfile() {
@@ -26,6 +25,7 @@ function EditUserProfile() {
     const profession = user.profession.map(item => item.title)
     const [jobName, setJobName] = useState(profession)
   
+
     const avatarChange = (e) => {
       let fileSelected = e.target.files[0];
 
