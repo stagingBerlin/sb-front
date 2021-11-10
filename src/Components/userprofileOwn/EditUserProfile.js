@@ -7,7 +7,7 @@ import MultipleSelect from './MultipleSelect'
 
 function EditUserProfile() {
   
-    const { user, setUser } = useContext(UserContext)
+    const { user, setUser, jobs, setJobs } = useContext(UserContext)
     const [update, setUpdate] = useState({
       avatar : user.avatar,
       username : user.username,
@@ -17,16 +17,15 @@ function EditUserProfile() {
 
     const history = useHistory()
 
-    // hier we will store our fetched jobs from API
-    const [jobs, setJobs]= useState([])
-
     // hier we will store our selected job's ids
     const [jobId, setJobId] = useState([])
 
     // state for MultipleSelect Component sended as props
     // names of jobs are going top be stored
-    const [jobName, setJobName] = useState([])
 
+    const profession = user.profession.map(item => item.title)
+    const [jobName, setJobName] = useState(profession)
+  
     const avatarChange = (e) => {
       let fileSelected = e.target.files[0];
 
@@ -40,24 +39,17 @@ function EditUserProfile() {
       };
   };
 
-    //console.log(avatarPreview);
-
     // this method will find the selected job in the jobs array and store the ids in the jobId state
     const getJobIds = () => {
       const tempArr = []
       jobName.map(item => {
         const findObj = jobs.find(job => job.title === item)
-        tempArr.push(findObj._id)
+        tempArr.push(findObj)
       })
       setJobId(tempArr)
     }
 
     useEffect(() => {
-      const getJobsApi = async () => {
-        const res = await getJobs()
-        setJobs(res)
-      }
-      getJobsApi()
       getJobIds()
     }, [jobName])
 
@@ -74,7 +66,7 @@ function EditUserProfile() {
         // we send to the BE as arguments user id and complete data we want to update in the user
          const res = await updateUser( user._id , {...update, avatar: avatarPreview, profession: jobId})
          setUser(res)
-         console.log(user)
+        //  console.log(user)
          history.push('/account/profile')
       } catch (error) {
          console.log(error)

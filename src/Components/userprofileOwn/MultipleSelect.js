@@ -46,9 +46,7 @@ export default function MultipleSelect ({
       typeof value === "string" ? value.split(",") : value
     );
   };
-  const profession = user.profession.map(item => item.title)
-
-
+  
   return (
     <>
       <FormControl sx={{ m: 1, width: 300 }}>
@@ -57,7 +55,7 @@ export default function MultipleSelect ({
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={profession.length === 0 ? jobName : profession }
+          value={jobName}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (
