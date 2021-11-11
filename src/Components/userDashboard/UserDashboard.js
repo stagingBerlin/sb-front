@@ -85,11 +85,13 @@ function UserDashboard() {
                 overlap="circular"
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 variant="dot"
+                className="margin-bttm-l"
               >
                 <Avatar
-                  sx={{ width: 94, height: 94 }}
+                  sx={{ width: 100, height: 100 }}
                   alt="profile pic"
                   src={user.avatar}
+                  className="border"
                 />
               </StyledBadge>
             )}

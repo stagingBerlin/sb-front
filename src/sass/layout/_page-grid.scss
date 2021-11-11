@@ -8,7 +8,6 @@
 
 .grid-container-left {
   @include grid(2);
- 
 }
 
 .grid-container-right {
@@ -17,6 +16,10 @@
 
 .grid-footer {
   @include grid(10);
+}
+
+.grid-landing-buttons {
+  @include grid(4);
 }
 
 .grid-col-1 {
@@ -40,7 +43,6 @@
 .grid-col-9 {
   grid-column-start: 9;
 }
-
 .grid-col-span-5 {
   grid-column-end: span 5;
 }
@@ -50,30 +52,24 @@
 .grid-col-span-4 {
   grid-column-end: span 4;
 }
-
 .grid-row-2 {
   grid-row-start: 2;
 }
-
 .justify-items-end {
   justify-items: end;
 }
-
 .justify-items-center {
   justify-items: center;
 }
-
 .justify-self-center {
   justify-self: center;
 }
-
 .grid-col-span-3 {
   grid-column-end: span 3;
 }
 .grid-col-span-5 {
   grid-column-end: span 5;
 }
-
 .grid-col-span-10 {
   grid-column-end: span 10;
 }
