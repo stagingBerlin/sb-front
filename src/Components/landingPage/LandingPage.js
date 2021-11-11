@@ -21,7 +21,7 @@ function LandingPage() {
             <div className="">Login</div>
           </NavLink>
         </div>
-        <div className="grid-col-span-4 grid-col-8 grid-row-2 outline">
+        <div className="grid-col-span-4 grid-col-8 grid-row-2 grid-row-end-10 outline">
           <ProjectsCarousel/>
         </div>
       </div>
