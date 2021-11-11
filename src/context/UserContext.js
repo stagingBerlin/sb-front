@@ -9,9 +9,9 @@ export const UserContextProvider = ({children}) => {
     const [ user, setUser ] = useState()
     const [ authIsDone, setAuthIsDone ] = useState(false)
     const [ ownProjects, setOwnProjects] = useState([])
-
     // hier we will store our fetched jobs from API
     const [jobs, setJobs]= useState([])
+
     useEffect(()=> {
         const auth = async () => {
             try {
@@ -37,8 +37,9 @@ export const UserContextProvider = ({children}) => {
         
           const fetchOwnProjects = async ()=> {
             const res = await getOwnProject()
-            setOwnProjects(res)
-            console.log(res);
+            if (!res.error) {
+                setOwnProjects(res)
+            } 
           } 
           
         fetchOwnProjects()

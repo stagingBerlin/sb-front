@@ -1,14 +1,14 @@
-import React, { useState, useContext } from "react";
-import { NavLink } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
-import DashboardFeed from "./DashboardFeed";
-import DashboardProjectsCurrent from "./DashboardProjectsCurrent";
-import DashboardProjectsFeatured from "./DashboardProjectsFeatured";
-import DashboardNetwork from "./DashboardNetwork";
-import { styled } from "@mui/material/styles";
-import Badge from "@mui/material/Badge";
-import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
+import React, { useState, useContext } from "react"
+import { NavLink } from "react-router-dom"
+import { UserContext } from "../../context/UserContext"
+import DashboardFeed from "./DashboardFeed"
+import DashboardProjectsCurrent from "./DashboardProjectsCurrent"
+import DashboardProjectsFeatured from "./DashboardProjectsFeatured"
+import DashboardNetwork from "./DashboardNetwork"
+import { styled } from "@mui/material/styles"
+import Badge from "@mui/material/Badge"
+import Avatar from "@mui/material/Avatar"
+import Stack from "@mui/material/Stack"
 
 /****************** MUI FUNCTION ************************/
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -54,7 +54,9 @@ function stringAvatar(name) {
 
 /****************** MAIN FUNCTION ************************/
 function UserDashboard() {
-  const { user, setUser } = useContext(UserContext);
+
+  const { user, setUser, ownProjects, setOwnProjects  } = useContext(UserContext)
+
   return (
     <div className="content-margin-top">
       <div className="grid-container">
@@ -106,7 +108,7 @@ function UserDashboard() {
                 to="/account/createproject"
                 className="button-grid-2fr border-right-none justify-items-center"
               >
-                <div className="border">Create Project</div>
+                <div className="border">Create a new Project</div>
                
               </NavLink>
             ) : (

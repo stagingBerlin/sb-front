@@ -40,18 +40,18 @@ function EditUserProfile() {
   };
 
     // this method will find the selected job in the jobs array and store the ids in the jobId state
-    const getJobIds = () => {
-      const tempArr = []
-      jobName.map(item => {
-        const findObj = jobs.find(job => job.title === item)
-        tempArr.push(findObj)
-      })
-      setJobId(tempArr)
-    }
+    // const getJobIds = () => {
+    //   const tempArr = []
+    //   jobName.map(item => {
+    //     const findObj = jobs.find(job => job.title === item)
+    //     tempArr.push(findObj)
+    //   })
+    //   setJobId(tempArr)
+    // }
 
-    useEffect(() => {
-      getJobIds()
-    }, [jobName])
+    // useEffect(() => {
+    //   getJobIds()
+    // }, [jobName])
 
     const handleInput = (e) => {
         setUpdate({ 

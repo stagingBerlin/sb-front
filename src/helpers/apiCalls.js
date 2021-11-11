@@ -44,10 +44,10 @@ axios.defaults.withCredentials = true;
     }
   }
 
-  export const getOwnProject = async () => {
+  export const getOwnProjects = async () => {
 
     try {
-      const res = await axios.get("/projects/ownProjects")
+      const res = await axios.get(`/projects/ownProjects/`)
       return res.data
     } catch(error){
         console.log(error.response.data)
@@ -56,4 +56,23 @@ axios.defaults.withCredentials = true;
 
   }
 
-  
+  export const getOwnProject = async (id) => {
+
+    try {
+      const res = await axios.get(`/projects/ownProjects/${id}`)
+      return res.data
+    } catch(error){
+        console.log(error.response.data)
+        return error.response.data
+    }
+
+  }
+
+  export const updateOwnProject = async (id, data) => {
+    try {
+      const res = await axios.put(`/projects/ownProjects/${id}`, data)
+        return res.data
+    } catch(error){
+      return error
+    }
+  }

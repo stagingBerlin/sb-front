@@ -61,7 +61,7 @@ const CreateProjectsOwn = () => {
     console.log(isNewProject)
     
     const backToProject = () => {
-      return history.push('/account/project')
+      return history.push('/account/dashboard')
     }
 
     return (

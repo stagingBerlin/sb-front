@@ -13,6 +13,8 @@ import ProjectSearch from './Components/projectSearch/ProjectSearch'
 import ProjectsOwn from './Components/projectsOwn/ProjectsOwn'
 import EditUserProfile from './Components/userprofileOwn/EditUserProfile'
 import CreateProjectsOwn from './Components/projectsOwn/CreateProjectsOwn'
+import EinzelViewOwnProject from './Components/projectsOwn/EinzelViewOwnProject'
+import EditOwnProject from './Components/projectsOwn/EditOwnProject'
 
 function App() {
   
@@ -29,9 +31,12 @@ function App() {
             <PrivateRoute exact path='/account/profile' component={UserProfileOwn} />
             <PrivateRoute exact path='/account/search' component={ProjectSearch} />
             <PrivateRoute exact path='/account/project' component={ProjectsOwn} />
+            <PrivateRoute exact path='/account/project/edit' component={EditOwnProject} />
+            <PrivateRoute exact path='/account/project/:id' component={({ match }) => <EinzelViewOwnProject id={match.params.id}/>} />
             <PrivateRoute exact path='/account/createproject' component={CreateProjectsOwn} />
             <PrivateRoute exact path='/account/people' component={UserProfileOther} />
             <PrivateRoute exact path='/account/editprofile' component={EditUserProfile} />
+
           </Switch>
         <Footer/>
     </div>
