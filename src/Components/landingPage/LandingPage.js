@@ -1,5 +1,5 @@
 import React from "react";
-import FeaturedProjects from "./FeaturedProjects";
+import ProjectsCarousel from "./ProjectsCarousel";
 import { NavLink } from "react-router-dom";
 
 function LandingPage() {
@@ -13,20 +13,16 @@ function LandingPage() {
           <div>Look for a theatre job or create one!</div>
         </div>
         <div className=""></div>
-        <div className="landing-buttons grid-landing-buttons grid-col-3 grid-col-span-4">
-          <div className="button-grid-2fr">
-            <NavLink to="/signup" className="">
-              Sign Up
-            </NavLink>
-          </div>
-          <div className="button-grid-2fr">
-            <NavLink to="/login" className="">
-              Login
-            </NavLink>
-          </div>
+        <div className="grid-landing-buttons grid-col-3 grid-col-span-4">
+          <NavLink to="/signup" className="button-grid-2fr">
+            <div className="">Sign Up </div>
+          </NavLink>
+          <NavLink to="/login" className="button-grid-2fr">
+            <div className="">Login</div>
+          </NavLink>
         </div>
         <div className="grid-col-span-4 grid-col-8 grid-row-2 outline">
-          <FeaturedProjects />
+          <ProjectsCarousel/>
         </div>
       </div>
     </div>
