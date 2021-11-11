@@ -7,5 +7,10 @@
   line-height: 1.8rem;
 }
 
-.landing-buttons {
+.carousel-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+  outline: auto;
 }
