@@ -8,8 +8,8 @@ function Footer() {
           <div className="grid-col-8">
             <div className="border-left">New to Berlin?</div>
           </div>
-          <div>
-            <div className="border-left">Want to invest?</div>
+          <div className="grid-col-span-2">
+            <div className="border-left ">Want to invest in Talent?</div>
           </div>
         </div>
       </div>
