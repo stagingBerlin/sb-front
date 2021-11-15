@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { authenticateUser } from '../helpers/authHelpers/apiCallsAuth';
-import { getJobs, getOwnProject } from '../helpers/apiCalls';
+import { getJobs, getOwnProjects } from '../helpers/apiCalls';
 
 export const UserContext = createContext()
 
@@ -35,11 +35,15 @@ export const UserContextProvider = ({children}) => {
             setJobs(res)
           }
         
-          const fetchOwnProjects = async ()=> {
-            const res = await getOwnProject()
+        const fetchOwnProjects = async ()=> {
+            const res = await getOwnProjects()
             if (!res.error) {
                 setOwnProjects(res)
-            } 
+                
+            } else {
+                console.log(res.error)            
+            }
+            
           } 
           
         fetchOwnProjects()

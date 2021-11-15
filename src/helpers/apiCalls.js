@@ -36,7 +36,7 @@ axios.defaults.withCredentials = true;
 
   export const createProject = async (data) => {
     try {
-      const res = await axios.post("/projects", data)
+      const res = await axios.post(`/projects`, data)
         return res.data;
     } catch(error){
       console.log(error)
@@ -47,7 +47,7 @@ axios.defaults.withCredentials = true;
   export const getOwnProjects = async () => {
 
     try {
-      const res = await axios.get(`/projects/ownProjects/`)
+      const res = await axios.get(`/projects/ownProjects`)
       return res.data
     } catch(error){
         console.log(error.response.data)

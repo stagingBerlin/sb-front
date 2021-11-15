@@ -11,7 +11,7 @@ const ProjectsOwn = () => {
         <div className="grid-container">
             <div className="grid-col-2 grid-col-span-3">
               <h2>My Projects</h2>
-                {ownProjects.length !== 0 ? (
+                {ownProjects && ownProjects.length !== 0 ? (
                     ownProjects.map(project=> (
                     <div key={project._id}>
                         <Link to={`/account/project/${project._id}`}>
