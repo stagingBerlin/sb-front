@@ -20,28 +20,32 @@ const AddProjectDetail = ({data, setData, jobId, setJobId, handleInput}) => {
     const handleSubmit = async (e) => {
 
         e.preventDefault()
+
         const jobId = jobs.filter( job => {
             return jobName.includes(job.title)
           }).map(item => item._id)
 
 
         try {
-            const res = await updateOwnProject( data._id, {...data, profession: jobId})
+
+            //! NEEDS FIX TMR
+            const res = await updateOwnProject( data._id, 
+                {...data, jobList: {job: jobId}} )
+
             setOwnProjects([...ownProjects, res])
-            setIsNewProject(true)
-  
             setTimeout(()=> {
-            setIsNewProject(false)
-            history.push('/account/project')}
-            , 1600)
+                history.push('/account/project')
+               // setIsNewProject(false)
+            }, 1600)
             
         } catch (error) {
            console.log(error)
         }
+      
       }
     
     const backToProject = () => {
-        return history.push('/account/dashboard')
+        return history.push('/account/project')
       }
   
 
@@ -53,38 +57,36 @@ const AddProjectDetail = ({data, setData, jobId, setJobId, handleInput}) => {
                 id="title"
                 name="title"
                 type="text"
-                //placeholder="Project Title"
-                value={data.title}
-                //onChange={handleInput}
+                onChange={handleInput}
+                defaultValue={data.title}
               />
               <label htmlFor="owner">Contact: </label>
               <input
                 id="owner"
                 name="owner"
                 type="text"
-                value={user.username}
-                disabled
+                defaultValue={user.username}
+                onChange={handleInput}
               />
               <label htmlFor="authorship">Concept: </label>
               <input
                 name="authorship"
                 type="text"
                 id="authorship"
-                value={user.name}
-                //onChange={handleInput}
+                defaultValue={user.name}
+                onChange={handleInput}
               />
              
               <textarea
                 name="description"
                 type="text"
-                value={data.description}
-                //onChange={handleInput}
-                //placeholder="Project description..."
+                defaultValue={data.description}
+                onChange={handleInput}
                 rows="8" 
                 cols="50"
               />
             
-              <h2> Project {data.title} is newly created. Please add important details to your project below.</h2>
+              <h2> Project {data.title} is newly created. Add important details to your project below.</h2>
 
               <label htmlFor="title">Required Roles: </label>
               <MultipleSelect

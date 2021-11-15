@@ -20,13 +20,13 @@ const EinzelViewOwnProject = (id) => {
                             return role.job.title
                         })}</p>
                         <p>Participants: {item.jobList.participant}</p>
-                        <p>Deadline:{item.deadline}</p>
-                        <p>Starting on: {item.starting} </p>
+                        <p>Deadline:{item.deadline?.substr(0, 10)}</p>
+                        <p>Starting on: {item.starting?.substr(0, 10)} </p>
                         <p>Contact: {user.username}</p>
                         <p>Project status: {item.isHiring ? 'Hiring now' : 'Not hiring'}</p>
                     </div>
                     ))}
-                <Link to="/account/project/edit" className="button-grid-2fr grid-col-2">EDIT</Link>
+                <Link to={`/account/project/edit`} className="button-grid-2fr grid-col-2">EDIT</Link>
             </div>
         </div>
     )
