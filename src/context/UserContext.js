@@ -18,7 +18,7 @@ export const UserContextProvider = ({children}) => {
                     setAuthIsDone(true);
                     return;
                 }
-                setUser();
+                console.log(res.error)
                 setAuthIsDone(true);
 
             } catch (error) {
