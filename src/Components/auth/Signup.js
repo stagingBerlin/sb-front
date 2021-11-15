@@ -64,57 +64,7 @@ export default function Signup() {
            <form className="form" onSubmit={handleSubmit}>
           <h2 className="form__heading">Sign Up </h2>
           <div className="form__content">
-            {/* <div className="avatar">
-              <label className="avatar__label" htmlFor="avatar">
-                <img
-                  className="avatar__img"
-                  width="100"
-                  height="100"
-                  src={
-                    avatar
-                      ? avatar
-                      : "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/320px-User-avatar.svg.png"
-                  }
-                  alt="avatar"
-                />
-              </label>
-              <input
-                id="avatar"
-                name="avatar"
-                className="avatar__file"
-                type="file"
-                accept="image/*"
-                onChange={(e) => handleInputFile(e)}
-              />
-            </div>
-            
-            <input
-              type="text"
-              name="firstname"
-              onChange={handleChange}
-              className="form__input"
-              placeholder="First Name"
-              value={signupData.firstname}
-            />
-            
-            <input
-              type="text"
-              name="lastname"
-              onChange={handleChange}
-              className="form__input"
-              placeholder="Last Name"
-              value={signupData.lastname}
-            />
-
-            <input
-              type="text"
-              name="username"
-              onChange={handleChange}
-              className="form__input"
-              placeholder="Username"
-              value={signupData.username}
-            /> */}
-            
+          
             <input
               type="email"
               name="email"
@@ -138,7 +88,6 @@ export default function Signup() {
               name="ishiring"
               onChange={(e)=>toggleChecked(e)}
               value=""
-              //checked={isHiring}
               defaultChecked
               className="form__input">
             </input>

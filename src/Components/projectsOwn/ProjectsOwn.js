@@ -15,7 +15,7 @@ const ProjectsOwn = () => {
                     ownProjects.map(project=> (
                     <div key={project._id}>
                         <Link to={`/account/project/${project._id}`}>
-                        <p>{project.title} by {project.authorship}</p>
+                            <p>{project.title} by {project.authorship}</p>
                         </Link>
                     </div>))
                 ) : (

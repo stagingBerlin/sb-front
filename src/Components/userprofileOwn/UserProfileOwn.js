@@ -1,6 +1,6 @@
 import React, {useState, useContext } from 'react'
 import { UserContext } from "../../context/UserContext"
-import { NavLink } from "react-router-dom"
+import { NavLink, Link } from "react-router-dom"
 import { styled } from '@mui/material/styles'
 import Badge from '@mui/material/Badge'
 import Avatar from '@mui/material/Avatar'
@@ -97,9 +97,12 @@ function UserProfileOwn() {
               {user.isHiring ? " Project Manager ∙ " : " "}
               {user.profession.map((job, i)=> job.title).join(" ∙ ")} </p>
               <p>Email: {user.email}</p>
-              <p>{user.isHiring ? "My Own Project:" : "Applied Projects:"}</p>
-              <p>My Networks: </p>
-              <NavLink to="/account/editprofile"  className="button-grid-2fr grid-col-2">EDIT</NavLink>     
+              <p>{user.isHiring ? 
+                <Link to="/account/project">My Own Projects</Link> 
+              : 
+                <Link to="#">"Applied Projects:"</Link>}</p>
+              <p>My Networks</p>
+              <Link to="/account/editprofile"  className="button-grid-2fr grid-col-2">EDIT</Link>     
            </div>
           
         </div>
