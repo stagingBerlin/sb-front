@@ -20,6 +20,7 @@ const MenuProps = {
 };
 
 function getStyles(job, jobName, theme) {
+
     return {
       fontWeight:
         jobName.indexOf(job) === -1
@@ -32,7 +33,7 @@ export default function MultipleSelect ({
     // props from EditUserProfile component
     jobName, 
     setJobName,
-    jobs, user
+    jobs, user,
 }) {
     const theme = useTheme();
   
