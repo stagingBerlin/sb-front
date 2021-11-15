@@ -69,6 +69,7 @@ axios.defaults.withCredentials = true;
   }
 
   export const updateOwnProject = async (id, data) => {
+    console.log(id);
     try {
       const res = await axios.put(`/projects/ownProjects/${id}`, data)
         return res.data

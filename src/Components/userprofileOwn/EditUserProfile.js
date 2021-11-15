@@ -16,15 +16,8 @@ function EditUserProfile() {
 
     const history = useHistory()
 
-    // hier we will store our selected job's ids
-    const [jobId, setJobId] = useState([])
-
-    // state for MultipleSelect Component sended as props
-    // names of jobs are going top be stored
-
     const profession = user.profession.map(item => item.title)
     const [jobName, setJobName] = useState(profession)
-  
 
     const avatarChange = (e) => {
       let fileSelected = e.target.files[0];
@@ -61,7 +54,13 @@ function EditUserProfile() {
       }
     
     const handleSubmit = async (e) => {
+
       e.preventDefault()
+      
+      const jobId = jobs.filter( job => {
+        return jobName.includes(job.title)
+      }).map(item => item._id)
+    
       try {
         // we send to the BE as arguments user id and complete data we want to update in the user
          const res = await updateUser( user._id , {...update, avatar: avatarPreview, profession: jobId})
@@ -147,9 +146,7 @@ function EditUserProfile() {
 
             <MultipleSelect
               jobName={jobName} 
-              setJobName={setJobName} 
-              jobId={jobId} 
-              setJobId={setJobId}
+              setJobName={setJobName}
               jobs={jobs} 
               setJobs={setJobs}
               user={user}

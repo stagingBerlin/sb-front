@@ -2,7 +2,8 @@ import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { useHistory} from 'react-router'
 import { createProject } from '../../helpers/apiCalls'
-import MultipleSelect from '../userprofileOwn/MultipleSelect'
+
+import AddProjectDetail from './AddProjectDetail'
 
 
 const CreateProjectsOwn = () => {
@@ -10,30 +11,15 @@ const CreateProjectsOwn = () => {
     const { user, setUser, jobs, setJobs, ownProjects, setOwnProjects } = useContext(UserContext)
     const [data, setData] = useState({
       title : "",
-      owner : user.name,
+      owner : user.username,
       authorship: user.name,
       description: "",
-      roles: [],
-      participants: []
     })
     const [isNewProject, setIsNewProject] = useState(false)
-    
-    const [jobId, setJobId] = useState([])
+
     const [jobName, setJobName] = useState([])
 
     const history = useHistory()
-
-    useEffect(() => {
-      
-        const tempArr = []
-        jobName.map(item => {
-          const findObj = jobs.find(job => job.title === item)
-          tempArr.push(findObj)
-        })
-        setJobId(tempArr)
-      
-    }, [jobName])
-
 
     const handleInput = (e) => {
       setData({ 
@@ -46,13 +32,11 @@ const CreateProjectsOwn = () => {
     const handleSubmit = async (e) => {
       e.preventDefault()
       try {
-          const res = await createProject({...data, roles: jobId})
+          const res = await createProject({data
+          })
           setOwnProjects([...ownProjects, res])
           setIsNewProject(true)
-          setTimeout(()=> {
-          setIsNewProject(false)
-          history.push('/account/project')}
-          , 1600)
+          setData(res)
           
       } catch (error) {
          console.log(error)
@@ -66,7 +50,18 @@ const CreateProjectsOwn = () => {
 
     return (
         <div>
-          {isNewProject ? <h2>New Project has been created!</h2> : (
+          {isNewProject ? (
+            <AddProjectDetail 
+              data={data}
+              setData={setData}
+              jobName={jobName}
+              setJobName={setJobName}
+              isNewProject={isNewProject}
+              setIsNewProject={setIsNewProject}
+              handleInput={handleInput}
+
+            />
+          ) : (
             <form id="pform" onSubmit={handleSubmit}>
               <label htmlFor="title">Title: </label>
               <input
@@ -92,15 +87,7 @@ const CreateProjectsOwn = () => {
                 defaultValue={user.name}
                 onChange={handleInput}
               />
-              <MultipleSelect
-                jobName={jobName} 
-                setJobName={setJobName} 
-                jobId={jobId} 
-                setJobId={setJobId}
-                jobs={jobs} 
-                setJobs={setJobs}
-                user={user}
-              />
+             
               <textarea
                 name="description"
                 type="text"
