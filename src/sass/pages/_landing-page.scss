@@ -11,6 +11,18 @@
   position: relative;
   height: 100%;
   width: 100%;
-  overflow: scroll;
-  outline: auto;
+  overflow: hidden;
+}
+.slider-click-right {
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.slider-click-left {
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }

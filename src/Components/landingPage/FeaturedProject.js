@@ -10,7 +10,6 @@ function FeaturedProject({content}) {
             backgroundRepeat:"no-repeat",
             backgroundPosition:"center"
           }}>
-            Featured
         </div>
     )
 }
