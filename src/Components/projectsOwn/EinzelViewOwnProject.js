@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const EinzelViewOwnProject = (id) => {
     const { user, setUser, jobs, setJobs, ownProjects, setOwnProjects } = useContext(UserContext)
-
+    console.log(ownProjects)
     return (
         <div className="grid-container">
             <div className="grid-col-2 grid-col-span-3">
@@ -16,18 +16,17 @@ const EinzelViewOwnProject = (id) => {
                         <h2>{item.title}</h2>
                         <p>Concept: {item.authorship}</p>
                         <p>Description: {item.description}</p>
-                        <p>Roles: {item.jobList.map(role=> {
+                        <p>Roles: {item.jobList.map(role => {
                             return role.job.title
                         })}</p>
                         <p>Participants: {item.jobList.participant}</p>
-                        <p>Deadline: </p>
-                        <p>Opening: </p>
-                        <p>Location: </p>
+                        <p>Deadline:{item.deadline?.substr(0, 10)}</p>
+                        <p>Starting on: {item.starting?.substr(0, 10)} </p>
                         <p>Contact: {user.username}</p>
-                        <p>Project status: {item.isHiring ? 'Active' : 'Inactive'}</p>
+                        <p>Project status: {item.isHiring ? 'Hiring now' : 'Not hiring'}</p>
                     </div>
                     ))}
-                <Link to="/account/project/edit" className="button-grid-2fr grid-col-2">EDIT</Link>
+                <Link to={`/account/project/edit`} className="button-grid-2fr grid-col-2">EDIT</Link>
             </div>
         </div>
     )

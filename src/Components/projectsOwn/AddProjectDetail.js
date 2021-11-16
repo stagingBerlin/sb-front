@@ -10,34 +10,42 @@ const AddProjectDetail = ({data, setData, jobId, setJobId, handleInput}) => {
     const { user, setUser, jobs, setJobs, ownProjects, setOwnProjects, isNewProject, setIsNewProject } = useContext(UserContext)
 
     const [jobName, setJobName] = useState([])
-    console.log(jobName);
+    const [isActive, setIsActive] = useState(true)
     const history = useHistory()
+
+    const toggleChecked = (e) => {
+        setIsActive(value => !value)
+      }
 
     const handleSubmit = async (e) => {
 
         e.preventDefault()
+
         const jobId = jobs.filter( job => {
             return jobName.includes(job.title)
           }).map(item => item._id)
 
 
         try {
-            const res = await updateOwnProject( data._id, {...data, profession: jobId})
+
+            //! NEEDS FIX TMR
+            const res = await updateOwnProject( data._id, 
+                {...data, jobList: {job: jobId}} )
+
             setOwnProjects([...ownProjects, res])
-            setIsNewProject(true)
-  
             setTimeout(()=> {
-            setIsNewProject(false)
-            history.push('/account/project')}
-            , 1600)
+                history.push('/account/project')
+               // setIsNewProject(false)
+            }, 1600)
             
         } catch (error) {
            console.log(error)
         }
+      
       }
     
     const backToProject = () => {
-        return history.push('/account/dashboard')
+        return history.push('/account/project')
       }
   
 
@@ -49,38 +57,36 @@ const AddProjectDetail = ({data, setData, jobId, setJobId, handleInput}) => {
                 id="title"
                 name="title"
                 type="text"
-                //placeholder="Project Title"
-                value={data.title}
-                //onChange={handleInput}
+                onChange={handleInput}
+                defaultValue={data.title}
               />
               <label htmlFor="owner">Contact: </label>
               <input
                 id="owner"
                 name="owner"
                 type="text"
-                value={user.username}
-                disabled
+                defaultValue={user.username}
+                onChange={handleInput}
               />
               <label htmlFor="authorship">Concept: </label>
               <input
                 name="authorship"
                 type="text"
                 id="authorship"
-                value={user.name}
-                //onChange={handleInput}
+                defaultValue={user.name}
+                onChange={handleInput}
               />
              
               <textarea
                 name="description"
                 type="text"
-                value={data.description}
-                //onChange={handleInput}
-                //placeholder="Project description..."
+                defaultValue={data.description}
+                onChange={handleInput}
                 rows="8" 
                 cols="50"
               />
             
-              <h2> Project {data.title} is newly created. Please add important details to your project.</h2>
+              <h2> Project {data.title} is newly created. Add important details to your project below.</h2>
 
               <label htmlFor="title">Required Roles: </label>
               <MultipleSelect
@@ -98,13 +104,22 @@ const AddProjectDetail = ({data, setData, jobId, setJobId, handleInput}) => {
                 cols="50"
               /><br/>
 
-                <label htmlFor="worker">Participants: </label>
+                <label htmlFor="participants">Participants: </label>
                 <input
-                    name="worker"
+                    name="participants"
                     type="text"
-                    id="worker"
+                    id="participants"
                     onChange={handleInput}
                 /><br/>
+
+
+                <label htmlFor="deadline">Deadline: </label>
+                <input
+                    name="deadline"
+                    type="date"
+                    id="deadline"
+                    onChange={handleInput}
+                />
 
                 <label htmlFor="starting">Starting on: </label>
                 <input
@@ -114,21 +129,24 @@ const AddProjectDetail = ({data, setData, jobId, setJobId, handleInput}) => {
                     onChange={handleInput}
                 />
 
-                <label htmlFor="opening">Opening: </label>
-                <input
-                    name="opening"
-                    type="date"
-                    id="opening"
-                    onChange={handleInput}
-                />
+                <input 
+                    type="radio"  
+                    name="isHiring"
+                    onChange={(e)=>toggleChecked(e)}
+                    defaultChecked
+                    value=""
+                    >
+                    </input>
+                    <label htmlFor="ishiring">Hiring Now</label>
 
-                <label htmlFor="worker">Participants: </label>
-                <input
-                    name="worker"
-                    type="text"
-                    id="worker"
-                    onChange={handleInput}
-                />
+                    <input 
+                    type="radio"  
+                    name="isHiring"
+                    onChange={(e)=>toggleChecked(e)}
+                    value=""
+                    >
+                    </input>
+                    <label htmlFor="ishiring">Not Hiring</label>
 
                 <input type="submit" value="Update" className="button-grid-2fr grid-col-2" onClick={handleSubmit} />
                 <input type="button" value="Cancel" className="button-grid-2fr grid-col-2" onClick={backToProject} />

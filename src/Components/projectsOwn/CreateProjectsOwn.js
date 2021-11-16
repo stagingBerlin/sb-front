@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../context/UserContext'
-import { useHistory} from 'react-router'
+import { useHistory, Link } from 'react-router-dom'
 import { createProject } from '../../helpers/apiCalls'
 
 import AddProjectDetail from './AddProjectDetail'
@@ -45,7 +45,7 @@ const CreateProjectsOwn = () => {
     console.log(isNewProject)
     
     const backToProject = () => {
-      return history.push('/account/dashboard')
+      return history.push('/account/project')
     }
 
     return (
@@ -98,7 +98,9 @@ const CreateProjectsOwn = () => {
                 cols="50"
               />
             
-            <input type="submit" value="Create" className="button-grid-2fr grid-col-2" onClick={handleSubmit} />
+            <Link to='/account/project/edit'> 
+              <input type="submit" value="Create" className="button-grid-2fr grid-col-2" onClick={handleSubmit} />
+            </Link> 
             <input type="button" value="Cancel" className="button-grid-2fr grid-col-2" onClick={backToProject} />
           </form>
           )}
