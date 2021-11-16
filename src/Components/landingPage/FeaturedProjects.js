@@ -1,9 +1,9 @@
 import { height } from "@mui/system";
-import React from "react";
+import React, { useContext } from "react";
 import FeaturedProject from "./FeaturedProject";
 
+
 function FeaturedProjects(props) {
-    console.log("translate", props.translate);
   return (
     <div
       style={{
@@ -15,8 +15,8 @@ function FeaturedProjects(props) {
         backgroundColor: "red",
       }}
     >
-      {props.testImages.map((item) => (
-        <FeaturedProject key={item} content={item}/>
+      {props.testImages.map((item, i) => (
+        <FeaturedProject key={item + i} content={item} />
       ))}
     </div>
   );
