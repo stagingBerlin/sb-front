@@ -25,18 +25,6 @@ export default function Signup() {
         })
       }
 
-    // const handleInputFile = (e) => {
-    //     const inputFile = e.target.files[0];
-    
-    //     const reader = new FileReader();
-    //     reader.onload = () => {
-    //       // console.log(reader);
-    //       // setAvatar(reader.result);
-    //     };
-    //     reader.readAsDataURL(inputFile);
-    //   };
-    
-
       const handleSubmit = async (e) => {
         e.preventDefault();
         const completeData = { ...signupData, isHiring: isHiring }

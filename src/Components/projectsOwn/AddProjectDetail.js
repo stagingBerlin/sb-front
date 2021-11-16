@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { useHistory} from 'react-router'
 import { createProject, updateOwnProject } from '../../helpers/apiCalls'
-import MultipleSelect from '../userprofileOwn/MultipleSelect'
+import SingleSelect from '../userprofileOwn/SingleSelect'
 import CreateProjectsOwn from './CreateProjectsOwn'
 
 const AddProjectDetail = ({data, setData, jobId, setJobId, handleInput}) => {
@@ -21,16 +21,11 @@ const AddProjectDetail = ({data, setData, jobId, setJobId, handleInput}) => {
 
         e.preventDefault()
 
-        const jobId = jobs.filter( job => {
-            return jobName.includes(job.title)
-          }).map(item => item._id)
-
-
         try {
 
             //! NEEDS FIX TMR
             const res = await updateOwnProject( data._id, 
-                {...data, jobList: {job: jobId}} )
+                {...data} )
 
             setOwnProjects([...ownProjects, res])
             setTimeout(()=> {
@@ -89,20 +84,15 @@ const AddProjectDetail = ({data, setData, jobId, setJobId, handleInput}) => {
               <h2> Project {data.title} is newly created. Add important details to your project below.</h2>
 
               <label htmlFor="title">Required Roles: </label>
-              <MultipleSelect
+              <SingleSelect
                     id="roles"
                     jobName={jobName} 
                     setJobName={setJobName} 
                     jobs={jobs} 
+                    data={data} 
+                    setData={setData}
+                   
                   />
-               <textarea
-                name="jobDescription"
-                type="text"
-                onChange={handleInput}
-                placeholder="Please provide a detailed job description..."
-                rows="2" 
-                cols="50"
-              /><br/>
 
                 <label htmlFor="participants">Participants: </label>
                 <input
@@ -135,9 +125,10 @@ const AddProjectDetail = ({data, setData, jobId, setJobId, handleInput}) => {
                     onChange={(e)=>toggleChecked(e)}
                     defaultChecked
                     value=""
+                    
                     >
                     </input>
-                    <label htmlFor="ishiring">Hiring Now</label>
+                    <label htmlFor="isHiring">Hiring Now</label>
 
                     <input 
                     type="radio"  
@@ -146,7 +137,7 @@ const AddProjectDetail = ({data, setData, jobId, setJobId, handleInput}) => {
                     value=""
                     >
                     </input>
-                    <label htmlFor="ishiring">Not Hiring</label>
+                    <label htmlFor="isHiring">Not Hiring</label>
 
                 <input type="submit" value="Update" className="button-grid-2fr grid-col-2" onClick={handleSubmit} />
                 <input type="button" value="Cancel" className="button-grid-2fr grid-col-2" onClick={backToProject} />

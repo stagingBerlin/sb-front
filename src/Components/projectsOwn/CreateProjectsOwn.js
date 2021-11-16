@@ -26,7 +26,7 @@ const CreateProjectsOwn = () => {
         ...data, 
         [e.target.name]: e.target.value
       })
-      console.log(e.target.value);
+ 
     }
 
     const handleSubmit = async (e) => {
