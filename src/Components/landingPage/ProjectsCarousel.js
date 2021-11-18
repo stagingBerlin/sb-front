@@ -1,3 +1,4 @@
+import { Slider } from "@mui/material";
 import { elementAcceptingRef } from "@mui/utils";
 import React, { useEffect, useRef, useState } from "react";
 import FeaturedProjects from "./FeaturedProjects";
@@ -29,7 +30,7 @@ function ProjectsCarousel() {
       translate: 0,
       activeIndex: 0,
     });
-  }
+  };
 
   const getCarouselWidth = () => {
     const newWidth = carouselRef.current.clientWidth;
@@ -42,8 +43,8 @@ function ProjectsCarousel() {
     window.addEventListener("resize", getCarouselWidth);
   }, []);
 
-// after resizing the window restarting the carousel at the beginning
-  
+  // after resizing the window restarting the carousel at the beginning
+
   useEffect(() => {
     window.addEventListener("resize", resizeCarousel);
   }, []);
@@ -85,6 +86,22 @@ function ProjectsCarousel() {
     });
   };
 
+  //-----------------autoplay
+
+  const autoPlayRef = useRef();
+
+  useEffect(() => {
+    autoPlayRef.current = nextSlide;
+  });
+
+  useEffect(() => {
+    const play = () => {
+      autoPlayRef.current();
+    };
+
+    const interval = setInterval(play, 4000);
+  }, []);
+
   return (
     <div className="carousel-container" ref={carouselRef}>
       <sliderContext.Provider
@@ -96,7 +113,7 @@ function ProjectsCarousel() {
           width={carouselWidth * testImages.length}
           testImages={testImages}
         />
-        <SliderClick />
+        {/* <SliderClick /> */}
       </sliderContext.Provider>
     </div>
   );
