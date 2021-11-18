@@ -9,6 +9,7 @@ import Navigation from './Components/Navigation'
 import UserDashboard from './Components/userDashboard/UserDashboard'
 import UserProfileOther from './Components/userProfileOther/UserProfileOther'
 import UserProfileOwn from './Components/userprofileOwn/UserProfileOwn'
+import ShowProjects from './Components/projectsOther/ShowProjects'
 import ProjectsOwn from './Components/projectsOwn/ProjectsOwn'
 import EditUserProfile from './Components/userprofileOwn/EditUserProfile'
 import CreateProjectsOwn from './Components/projectsOwn/CreateProjectsOwn'
@@ -16,7 +17,7 @@ import EinzelViewOwnProject from './Components/projectsOwn/EinzelViewOwnProject'
 import EditOwnProject from './Components/projectsOwn/EditOwnProject'
 import AddProjectDetail from './Components/projectsOwn/AddProjectDetail'
 import DrawerRight from './Components/DrawerRight'
-import ShowProjects from './Components/projectOther/ShowProjects'
+
 
 function App() {
   
