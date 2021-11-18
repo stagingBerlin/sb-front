@@ -9,18 +9,20 @@ import Navigation from './Components/Navigation'
 import UserDashboard from './Components/userDashboard/UserDashboard'
 import UserProfileOther from './Components/userProfileOther/UserProfileOther'
 import UserProfileOwn from './Components/userprofileOwn/UserProfileOwn'
-import ProjectSearch from './Components/projectSearch/ProjectSearch'
 import ProjectsOwn from './Components/projectsOwn/ProjectsOwn'
 import EditUserProfile from './Components/userprofileOwn/EditUserProfile'
 import CreateProjectsOwn from './Components/projectsOwn/CreateProjectsOwn'
 import EinzelViewOwnProject from './Components/projectsOwn/EinzelViewOwnProject'
 import EditOwnProject from './Components/projectsOwn/EditOwnProject'
 import AddProjectDetail from './Components/projectsOwn/AddProjectDetail'
+import DrawerRight from './Components/DrawerRight'
+import ShowProjects from './Components/projectOther/ShowProjects'
 
 function App() {
   
   return (
     <div className="App">
+      {/* <DrawerRight /> */}
         <Navigation/>
           <Switch>
             <Route path="/" exact component={LandingPage} />
@@ -30,7 +32,7 @@ function App() {
             
             <PrivateRoute exact path='/account/dashboard' component={UserDashboard} />
             <PrivateRoute exact path='/account/profile' component={UserProfileOwn} />
-            <PrivateRoute exact path='/account/search' component={ProjectSearch} />
+            <PrivateRoute exact path='/account/search' component={ShowProjects} />
             <PrivateRoute exact path='/account/project' component={ProjectsOwn} />
             <PrivateRoute exact path='/account/project/:id' component={({ match }) => <EinzelViewOwnProject id={match.params.id}/>} />
             <PrivateRoute exact path='/account/createproject' component={CreateProjectsOwn} />
