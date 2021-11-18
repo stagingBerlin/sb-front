@@ -9,7 +9,7 @@ export const UserContextProvider = ({children}) => {
     const [ user, setUser ] = useState()
     const [ authIsDone, setAuthIsDone ] = useState(false)
     const [ ownProjects, setOwnProjects] = useState([])
-    // hier we will store our fetched jobs from API
+    // here we will store our fetched jobs from API
     const [jobs, setJobs]= useState([])
 
     useEffect(()=> {

@@ -76,7 +76,7 @@ export default function Navigation() {
                   className="navigation__link"
                   activeStyle={activeStyle}
                 >
-                  Job Search
+                 Job Search
                 </NavLink>
               </li>
               <li className="navigation__item">
