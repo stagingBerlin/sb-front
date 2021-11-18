@@ -9,7 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
-  <UserContextProvider>
+  <UserContextProvider>  
     <Router>
       <App />
     </Router>
