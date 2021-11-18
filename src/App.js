@@ -17,13 +17,13 @@ import CreateProjectsOwn from './Components/projectsOwn/CreateProjectsOwn'
 import EinzelViewOwnProject from './Components/projectsOwn/EinzelViewOwnProject'
 import EditOwnProject from './Components/projectsOwn/EditOwnProject'
 import AddProjectDetail from './Components/projectsOwn/AddProjectDetail'
-
+import DrawerRight from './Components/DrawerRight'
 
 function App() {
   
   return (
     <div className="App">
-      {/* <DrawerRight /> */}
+      <DrawerRight />
         <Navigation/>
           <Switch>
             <Route path="/" exact component={LandingPage} />
