@@ -1,12 +1,10 @@
-import React, { useState, useContext, useEffect} from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
 
 const ProjectsOwn = () => {
-    const { user, setUser, ownProjects, setOwnProjects } = useContext(UserContext)
-    //const data = user._id
-   console.log(ownProjects);
-
+    const { ownProjects } = useContext(UserContext)
+    
     return (
         <div className="grid-container">
             <div className="grid-col-2 grid-col-span-3">
