@@ -9,22 +9,30 @@ const AddProjectDetail = ({data}) => {
   console.log(data._id);
   
   const history = useHistory()
-    const { jobs, ownProjects, setOwnProjects} = useContext(UserContext)
+    const { jobs } = useContext(UserContext)
 
-    const [ jobId, setJobId ] = useState("")
+    const [inputJob, setInputJob] = useState('');
+
+    const [ jobId, setJobId ] = useState('')
     const [ addJob, setAddJob ] = useState({
-      description :""
+      jobDescription :""
     })
 
     const [ jobList, setJobList ] = useState([])
 
-    const handleChange  = (e) => {
+
+    const handleChangeJob = (e) => {
+      setInputJob(e.target.value);
+      setJobId(e.target.value)
+    };
+
+    const handleChangeDescription  = (e) => {
       setAddJob({ 
         ...addJob, 
         [e.target.name]: e.target.value
       })
     }
-
+    
     const handleSubmit = async (e) => {
       e.preventDefault()
       try {
@@ -32,18 +40,25 @@ const AddProjectDetail = ({data}) => {
             ...addJob,
             job: jobId
           }
-          const resApi = await addJobToList(data._id, myBody)
-          console.log(resApi);
-          setJobList(resApi.jobList)
 
+          const resApi = await addJobToList(data._id, myBody)
+          
+          if(!resApi.error){
+            setJobList(resApi.jobList)
+            setAddJob({
+              jobDescription : ""
+            })
+            setInputJob("")
+            setJobId('')
+          }
+          else{
+            console.log(resApi.error);
+          }
         } catch (error) {
            console.log(error)
         }
-      
       }
 
-      console.log(jobList);
-    
     const backToProject = () => {
         return history.push('/account/project')
       }
@@ -56,17 +71,18 @@ const AddProjectDetail = ({data}) => {
 
             <BasicSelect
               jobs={jobs}
-              jobId={jobId}
-              setJobId={setJobId}
+              inputJob={inputJob}
+              handleChangeJob={handleChangeJob}
             />
 
             <textarea
-                name="description"
+                name="jobDescription"
                 type="text"
                 placeholder="Job description..."
                 rows="8" 
                 cols="50"
-                onChange={handleChange}
+                value={addJob.jobDescription}
+                onChange={handleChangeDescription}
               />
             <input type="submit" value="Add Job" className="button-grid-2fr grid-col-2" />
           
@@ -77,8 +93,8 @@ const AddProjectDetail = ({data}) => {
                 return (
                   
                   <div key={i}>
-                    <h4>{item.job.title}</h4>
-                    <p>Description: {item.description}</p>
+                    <h4>Job: {item.job.title}</h4>
+                    <p>Description: {item.jobDescription}</p>
                   </div>
                   
                 )

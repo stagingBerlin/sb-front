@@ -5,15 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function BasicSelect({jobs, setJobId}) {
-  const [inputJob, setInputJob] = useState('');
-
-  const handleChange = (e) => {
-    setInputJob(e.target.value);
-    setJobId(e.target.value)
-    
-  };
-
+export default function BasicSelect({jobs, inputJob, handleChangeJob}) {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -23,7 +15,7 @@ export default function BasicSelect({jobs, setJobId}) {
           id="demo-simple-select"
           value={inputJob}
           label="Job"
-          onChange={handleChange}
+          onChange={handleChangeJob}
         >
         {jobs.map((job, i) => 
           <MenuItem key={i} value={job._id} >
