@@ -11,13 +11,10 @@ const CreateProjectsOwn = () => {
     const { user, setUser, jobs, setJobs, ownProjects, setOwnProjects } = useContext(UserContext)
     const [data, setData] = useState({
       title : "",
-      owner : user.username,
       authorship: user.name,
       description: "",
     })
     const [isNewProject, setIsNewProject] = useState(false)
-
-    const [jobName, setJobName] = useState([])
 
     const history = useHistory()
 
@@ -32,8 +29,7 @@ const CreateProjectsOwn = () => {
     const handleSubmit = async (e) => {
       e.preventDefault()
       try {
-          const res = await createProject({data
-          })
+          const res = await createProject(data)
           setOwnProjects([...ownProjects, res])
           setIsNewProject(true)
           setData(res)
@@ -42,7 +38,6 @@ const CreateProjectsOwn = () => {
          console.log(error)
       }
     }
-    console.log(isNewProject)
     
     const backToProject = () => {
       return history.push('/account/project')
@@ -50,19 +45,8 @@ const CreateProjectsOwn = () => {
 
     return (
         <div>
-          {isNewProject ? (
-            <AddProjectDetail 
-              data={data}
-              setData={setData}
-              jobName={jobName}
-              setJobName={setJobName}
-              isNewProject={isNewProject}
-              setIsNewProject={setIsNewProject}
-              handleInput={handleInput}
 
-            />
-          ) : (
-            <form id="pform" onSubmit={handleSubmit}>
+<form id="pform" onSubmit={handleSubmit}>
               <label htmlFor="title">Title: </label>
               <input
                 id="title"
@@ -103,6 +87,17 @@ const CreateProjectsOwn = () => {
             </Link> 
             <input type="button" value="Cancel" className="button-grid-2fr grid-col-2" onClick={backToProject} />
           </form>
+
+
+          {isNewProject ? (
+            <AddProjectDetail 
+              data={data}
+              setData={setData}
+              isNewProject={isNewProject}
+              setIsNewProject={setIsNewProject}
+            />
+          ) : (
+            <></>
           )}
           
         </div>
