@@ -23,7 +23,7 @@ function App() {
   
   return (
     <div className="App">
-      <DrawerRight />
+      {/* <DrawerRight /> */}
         <Navigation/>
           <Switch>
             <Route path="/" exact component={LandingPage} />
