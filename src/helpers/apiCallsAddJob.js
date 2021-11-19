@@ -5,7 +5,7 @@ axios.defaults.withCredentials = true;
 
 export const addJobToList = async(id, body) => {
     try {
-        const res = await axios.put(`/projects/ownProjects/${id}`, body)
+        const res = await axios.post(`/projects/ownProjects/${id}/jobList`, body)
         return res.data
     } catch (error) {
         return error.response.data
