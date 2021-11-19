@@ -81,12 +81,12 @@ export default function Login() {
                 </Link>
               </div>
 
-              <div className='separator'>or with</div>
+              {/* <div className='separator'>or with</div>
 
               <div className="form__media">
                 <i className="fab fa-facebook-square form__media--facebook"></i>
                 <i className="fab fa-twitter-square form__media--twitter"></i>
-              </div>
+              </div> */}
             </div> 
         </form>
         </div>

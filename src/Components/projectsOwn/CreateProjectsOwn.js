@@ -14,6 +14,8 @@ const CreateProjectsOwn = () => {
       authorship: user.name,
       description: "",
     })
+    const [ newProject, setNewProject ] = useState()
+
     const [isNewProject, setIsNewProject] = useState(false)
 
     const history = useHistory()
@@ -30,50 +32,58 @@ const CreateProjectsOwn = () => {
       e.preventDefault()
       try {
           const res = await createProject(data)
+          if(res.error){
+            console.log(res.error);
+            return
+          }
+          setNewProject(res)
           setOwnProjects([...ownProjects, res])
           setIsNewProject(true)
-          setData(res)
+          setData({
+            title : "",
+            authorship: user.name,
+            description: ""
+          })
           
       } catch (error) {
          console.log(error)
       }
     }
-    
+   
+
     const backToProject = () => {
+      setNewProject()
       return history.push('/account/project')
+
     }
 
     return (
         <div>
 
-<form id="pform" onSubmit={handleSubmit}>
+          <form className="form" onSubmit={handleSubmit}>
               <label htmlFor="title">Title: </label>
               <input
                 id="title"
                 name="title"
                 type="text"
+                value={data.title}
                 placeholder="Project Title"
                 onChange={handleInput}
               />
-              <label htmlFor="owner">Contact: </label>
-              <input
-                id="owner"
-                name="owner"
-                type="text"
-                value={user.username}
-                disabled
-              />
+             
               <label htmlFor="authorship">Concept: </label>
               <input
                 name="authorship"
                 type="text"
                 id="authorship"
-                defaultValue={user.name}
+                defaultValue={data.authorship}
                 onChange={handleInput}
               />
              
               <textarea
                 name="description"
+                value={data.description}
+                style={{width:"100%"}}
                 type="text"
                 form="pform"
                 onChange={handleInput}
@@ -88,18 +98,13 @@ const CreateProjectsOwn = () => {
             <input type="button" value="Cancel" className="button-grid-2fr grid-col-2" onClick={backToProject} />
           </form>
 
-
           {isNewProject ? (
             <AddProjectDetail 
-              data={data}
-              setData={setData}
-              isNewProject={isNewProject}
-              setIsNewProject={setIsNewProject}
+              newProject={newProject}
             />
           ) : (
             <></>
           )}
-          
         </div>
     )
 }

@@ -1,17 +1,20 @@
 .button-primary {
-  background-color: $color-primary;
+  background-color: $background-col;
   border-radius: 0.8rem;
   padding: 1rem 2.5rem;
   font-weight: 600;
   line-height: 2rem;
-  color: #fafafa;
+  color: $color-black;
   font-size: 1.6rem;
-  border: none;
+  border: 1px solid $color-black;
 
   &:hover {
     cursor: pointer;
     background-color: $color-primary-dark;
     box-shadow: $box-shadow;
+    color: $color-white;
+    transition: 0.3s;
+    border: 1px solid transparent;
   }
 
   &:active {

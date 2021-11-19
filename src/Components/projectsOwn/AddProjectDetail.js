@@ -4,9 +4,9 @@ import { useHistory} from 'react-router'
 import { addJobToList } from '../../helpers/apiCallsAddJob'
 import BasicSelect from './BasicSelect.js'
 
-const AddProjectDetail = ({data}) => {
+const AddProjectDetail = ({newProject}) => {
 
-  console.log(data._id);
+  console.log(newProject._id);
   
   const history = useHistory()
     const { jobs } = useContext(UserContext)
@@ -15,7 +15,7 @@ const AddProjectDetail = ({data}) => {
 
     const [ jobId, setJobId ] = useState('')
     const [ addJob, setAddJob ] = useState({
-      jobDescription :""
+      jobDescription: ""
     })
 
     const [ jobList, setJobList ] = useState([])
@@ -41,7 +41,7 @@ const AddProjectDetail = ({data}) => {
             job: jobId
           }
 
-          const resApi = await addJobToList(data._id, myBody)
+          const resApi = await addJobToList(newProject._id, myBody)
           
           if(!resApi.error){
             setJobList(resApi.jobList)
@@ -66,8 +66,8 @@ const AddProjectDetail = ({data}) => {
 
     return (
         <>
-          <h2> Project {data.title} is newly created. Add jobs to this project.</h2>
-          <form onSubmit={handleSubmit}>
+          <h2> Project {newProject.title} is newly created. Add jobs to this project.</h2>
+          <form className="form" onSubmit={handleSubmit}>
 
             <BasicSelect
               jobs={jobs}
@@ -78,6 +78,7 @@ const AddProjectDetail = ({data}) => {
             <textarea
                 name="jobDescription"
                 type="text"
+                style={{width:"100%"}}
                 placeholder="Job description..."
                 rows="8" 
                 cols="50"

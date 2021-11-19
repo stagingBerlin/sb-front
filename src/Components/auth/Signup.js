@@ -104,11 +104,11 @@ export default function Signup() {
               value="Sign Up"
               className="button-primary form__buttonSubmit"
             />
-            <div className='separator'>or sign up with</div>
+            {/* <div className='separator'>or sign up with</div>
             <div className="form__media">
               <i className="fab fa-facebook-square form__media--facebook"></i>
               <i className="fab fa-twitter-square form__media--twitter"></i>
-            </div>
+            </div> */}
           </div>
         </form>
 
