@@ -5,7 +5,7 @@ import Signup from './Components/auth/Signup'
 import About from './Components/About'
 import Footer from './Components/Footer'
 import LandingPage from './Components/landingPage/LandingPage'
-import Navigation from './Components/Navigation'
+import Navigation from './Components/header/Navigation'
 import UserDashboard from './Components/userDashboard/UserDashboard'
 import UserProfileOther from './Components/userProfileOther/UserProfileOther'
 import UserProfileOwn from './Components/userprofileOwn/UserProfileOwn'
@@ -16,14 +16,12 @@ import CreateProjectsOwn from './Components/projectsOwn/CreateProjectsOwn'
 import EinzelViewOwnProject from './Components/projectsOwn/EinzelViewOwnProject'
 import EditOwnProject from './Components/projectsOwn/EditOwnProject'
 import AddProjectDetail from './Components/projectsOwn/AddProjectDetail'
-import DrawerRight from './Components/DrawerRight'
 
 
 function App() {
   
   return (
     <div className="App">
-      {/* <DrawerRight /> */}
         <Navigation/>
           <Switch>
             <Route path="/" exact component={LandingPage} />
