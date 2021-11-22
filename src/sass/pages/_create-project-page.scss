@@ -1,0 +1,22 @@
+.create-project-page {
+  display: flex;
+  justify-content: space-between;
+  min-height: 70vh;
+
+  &__form,
+  &__view {
+    width: 50%;
+    padding: 3rem;
+  }
+}
+
+.project-view {
+  background-image: linear-gradient(
+    to right,
+    rgba(235, 235, 234, 0.3),
+    rgba(235, 235, 234, 0.4)
+  );
+  border-radius: 0.6rem;
+  box-shadow: 0 1.5rem 4rem rgba($color-black, 0.1);
+  min-height: 60vh;
+}
