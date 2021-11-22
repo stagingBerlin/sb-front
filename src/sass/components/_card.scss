@@ -56,12 +56,31 @@
   &__description {
     &--heading {
       font-size: 1.5rem;
+
       margin-bottom: 0.7rem;
     }
 
     &--text {
       font-size: 1.6rem;
       line-height: 2.4rem;
+      color: $color-grey-dark-3;
     }
+  }
+
+  &__jobList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__jobContainer {
+    width: 48%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border: 1px solid $color-grey-dark-2;
+    border-radius: 0.5rem;
+  }
+  &__job-span {
+    margin-left: 2rem;
   }
 }

@@ -11,7 +11,7 @@ export default function ProjectView({
                 
                 <h4 className="card__heading">
                     <span className="card__heading-span">
-                        Your project now add it
+                        { newProject ? newProject.title : 'Create a project now!!!'}
                     </span>
                 </h4>
                 <div className="card__body">
@@ -19,16 +19,41 @@ export default function ProjectView({
                     
                     <h6 className="card__concept">
                         Concept:
-                        <span className="card__concept-span">Habid Badillo</span>
+                        <span className="card__concept-span">{ newProject ? newProject.authorship : "Who is the creator of this project?" }</span>
                     </h6>
                     
 
                     <div className="card__description">
                         <h2 className="card__description--heading">Description:</h2>
-                        <p className="card__description--text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta quibusdam tenetur, non delectus ea sit laborum cupiditate sint ipsa nisi illo, reprehenderit veritatis pariatur suscipit placeat quae voluptatum. Quisquam, consequatur? Architecto deserunt fugiat totam molestiae, fugit, amet dolor nemo ad minima at maiores! Excepturi hic non, dolorem voluptates a, tempore repudiandae beatae voluptatibus id veniam impedit fugit assumenda, voluptas quaerat enim nisi consequatur ullam officia eveniet eligendi quos repellendus quas quam! Rem velit, ea consequatur facilis, necessitatibus laboriosam, totam ipsum deserunt asperiores nulla repellat porro animi odit quisquam ex aut et. Explicabo fugiat minima iusto totam aspernatur repellendus molestias nostrum neque maxime quaerat at impedit, tenetur eius dignissimos id voluptatem! Doloribus deleniti fugiat officia quo modi repellendus quos numquam sunt? Nesciunt nihil aperiam fuga aspernatur. Omnis soluta vel, reprehenderit, dicta magni animi minima expedita sequi illo neque voluptates est nihil ipsa sint nobis aut quia et ex modi eligendi. Quisquam dolorem fugit, accusantium exercitationem perspiciatis error cumque harum maxime vel reprehenderit soluta expedita sunt porro doloribus ad quas, omnis minima adipisci atque. Deserunt, ratione. Sint aperiam, aliquam quibusdam voluptatibus est quam labore voluptas magni veniam aliquid vitae voluptatem vero nobis minus ullam, nulla maxime! Quisquam reiciendis atque blanditiis quidem explicabo.</p>
+                        <p className="card__description--text">
+                            { newProject ? newProject.description : 'Add a description to your Project' }
+                        </p>
                     </div>
 
-                    <div className="card__jobList"></div>
+                    <h2 className="card__description--heading">Job Offers:</h2>
+                    <div className="card__jobList">
+                        {
+                            newProject && newProject.jobList.length !== 0 ? 
+                            newProject.jobList.map((item, i)=> {
+                                return <>
+                                <div className="card__jobContainer" key={i}>
+                                    <h2 className="card__description--heading">
+                                        Job: <span className="card__job-span">{item.job.title}</span> 
+                                    </h2>
+                                    <h2 className="card__description--heading">Description:</h2>
+                                    <p className="card__description--text">
+                                        {item.jobDescription}
+                                    </p>
+                                </div>
+                                </>
+                            })
+                            :
+                            "No Offers for this project"
+                        }
+
+                        
+                        
+                    </div>
 
                 </div>
             </div>
