@@ -9,12 +9,6 @@ import Badge from '@mui/material/Badge'
 import Avatar from '@mui/material/Avatar'
 import { fontSize } from '@mui/system'
 
-const SmallAvatar = styled(Avatar)(({ theme }) => ({
-  width: 22,
-  height: 22,
-  border: `2px solid ${theme.palette.background.paper}`,
-}));
-
 function EditUserProfile() {
   
     const { user, setUser, jobs, setJobs } = useContext(UserContext)
