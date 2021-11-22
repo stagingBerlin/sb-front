@@ -21,6 +21,9 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import SearchIcon from '@mui/icons-material/Search'
 import PeopleIcon from '@mui/icons-material/People'
+import LogoutIcon from '@mui/icons-material/Logout';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 const drawerWidth = 180
 
@@ -46,13 +49,13 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['margin', 'width'], {
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
@@ -66,6 +69,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
+  
 }))
 //*****************************/
 
@@ -229,17 +233,19 @@ export default function Navigation() {
               </li>
             </>
           )}
-          <li>
+          { user ? (
+          <li className="navigation__item">
             <IconButton
               color="inherit"
               aria-label="open drawer"
-              edge="end"
+              edge="start"
               onClick={handleDrawerOpen}
-              sx={{ ...(open && { display: 'none' }) }}
+              // sx={{ ...(open && { display: 'none' }) }}
             >
               <MenuIcon />
             </IconButton>
           </li>
+          ) : null }
         </ul>
       </nav>
       <div className="deko-bars-container-nav">
@@ -251,8 +257,9 @@ export default function Navigation() {
         <div></div>
       </div>
 
-      {/**************** MuI ***************/}
-      <Drawer
+      {/**************** MuI Sidebar ***************/}
+      { user ? (
+        <Drawer
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -264,49 +271,68 @@ export default function Navigation() {
         anchor="right"
         open={open}
       >
-        <DrawerHeader>
+        <DrawerHeader style={{marginTop: '-14px'}}>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <MenuIcon /> : <MenuIcon />}
+            <MenuIcon /> 
           </IconButton>
         </DrawerHeader>
-        <Divider />
+        <Divider style={{marginTop: '-11px'}} />
 
         <List>
-
-        <Link to='/account/profile'><ListItem button >
+        <Link to='/account/profile' className="navigation__link"><ListItem button >
           <ListItemIcon > <AccountCircleIcon /> </ListItemIcon>
           <ListItemText > My Profile </ListItemText>
          </ListItem></Link>
 
-        <Link to='/account/dashboard'><ListItem button >
+        <Link to='/account/dashboard' className="navigation__link"><ListItem button >
           <ListItemIcon > <HomeIcon /> </ListItemIcon>
           <ListItemText > Dashboard </ListItemText>
          </ListItem></Link>
 
-        <Link to='/account/project'><ListItem button >
+        <Link to='/account/project' className="navigation__link"><ListItem button >
           <ListItemIcon > <DashboardIcon  /> </ListItemIcon>
           <ListItemText >My Projects</ListItemText>
          </ListItem></Link>
 
-        <Link to='/account/search'><ListItem button >
+        <Link to='/account/search' className="navigation__link"><ListItem button >
           <ListItemIcon > <SearchIcon /> </ListItemIcon>
           <ListItemText >Project Search</ListItemText>
          </ListItem></Link>
 
-        <Link to='/account/people'><ListItem button >
+        <Link to='/account/people' className="navigation__link"><ListItem button >
           <ListItemIcon > <PeopleIcon className="icons"/> </ListItemIcon>
           <ListItemText >My Networks</ListItemText>
          </ListItem></Link>
         </List>
 
         <Divider />
-        <List>
-        <div className="div_bottom">
-          <IconButton href="mailto:stagingBerlin@gmail.com" ><EmailIcon /></IconButton>
-          <IconButton href="https://github.com/stagingBerlin" target="_blank" ><GitHubIcon fontSize="small"/></IconButton>
-          </div>
+        <List sx={{ 
+          display: 'flex',
+          justifyContent: 'space-around',
+          p: 1,
+          m: 1,
+          }}>
+        
+          <IconButton 
+              href="mailto:stagingBerlin@gmail.com" >
+              <EmailIcon />
+          </IconButton>
+          <IconButton 
+              href="https://github.com/stagingBerlin" 
+              target="_blank" >
+              <GitHubIcon />
+          </IconButton>
+          <IconButton
+              color="inherit"
+              edge="end"
+              onClick={handleClick}   
+          >
+              <LogoutIcon />
+          </IconButton>
+          
         </List>
       </Drawer>
+      ) : null }
       {/*********************************/}
 
       {outMsg ? <div className="outMsg">{outMsg.message}</div> : <></>}
