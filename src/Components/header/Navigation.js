@@ -22,8 +22,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard'
 import SearchIcon from '@mui/icons-material/Search'
 import PeopleIcon from '@mui/icons-material/People'
 import LogoutIcon from '@mui/icons-material/Logout';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
 const drawerWidth = 180
 
@@ -159,7 +158,7 @@ export default function Navigation() {
                   className="navigation__link"
                   activeStyle={activeStyle}
                 >
-                 Job Search
+                 Project Search
                 </NavLink>
               </li>
               <li className="navigation__item">
@@ -300,10 +299,15 @@ export default function Navigation() {
          </ListItem></Link>
 
         <Link to='/account/people' className="navigation__link"><ListItem button >
-          <ListItemIcon > <PeopleIcon className="icons"/> </ListItemIcon>
+          <ListItemIcon > <PeopleIcon /> </ListItemIcon>
           <ListItemText >My Networks</ListItemText>
          </ListItem></Link>
         </List>
+
+        <Link to='/account/people' className="navigation__link"><ListItem button >
+          <ListItemIcon > <GroupAddIcon /> </ListItemIcon>
+          <ListItemText > Profile Search </ListItemText>
+         </ListItem></Link>
 
         <Divider />
         <List sx={{ 

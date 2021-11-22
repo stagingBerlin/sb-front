@@ -49,17 +49,18 @@ function ShowProjects() {
     }, [isMyRole])
 
     function filterByRole(){
-
       setIsMyRole(!isMyRole)
+    }
 
-      
+    function sortUrgent() {
+        
     }
     
 
     return (
         <div>
             <h1>All Projects</h1>
-            <label htmlFor="isMyRole">Filter projects containing my role(s)</label>
+            <label htmlFor="isMyRole">Show projects containing my role(s) only</label>
             <input 
             type="checkbox" 
             name="isMyRole"

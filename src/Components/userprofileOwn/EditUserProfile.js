@@ -3,6 +3,17 @@ import { useHistory, NavLink  } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
 import { updateUser } from '../../helpers/apiCalls'
 import MultipleSelect from './MultipleSelect'
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import { styled } from '@mui/material/styles'
+import Badge from '@mui/material/Badge'
+import Avatar from '@mui/material/Avatar'
+import { fontSize } from '@mui/system'
+
+const SmallAvatar = styled(Avatar)(({ theme }) => ({
+  width: 22,
+  height: 22,
+  border: `2px solid ${theme.palette.background.paper}`,
+}));
 
 function EditUserProfile() {
   
@@ -31,20 +42,6 @@ function EditUserProfile() {
         setAvatarPreview( fileReader.result )
       };
   };
-
-    // this method will find the selected job in the jobs array and store the ids in the jobId state
-    // const getJobIds = () => {
-    //   const tempArr = []
-    //   jobName.map(item => {
-    //     const findObj = jobs.find(job => job.title === item)
-    //     tempArr.push(findObj)
-    //   })
-    //   setJobId(tempArr)
-    // }
-
-    // useEffect(() => {
-    //   getJobIds()
-    // }, [jobName])
 
     const handleInput = (e) => {
         setUpdate({ 
@@ -90,6 +87,24 @@ function EditUserProfile() {
           <form onSubmit={handleSubmit}>
             <div className="avatar">
               <label className="avatar__label" htmlFor="avatar">
+                {/* <img
+                  className="avatar__img"
+                  width="100"
+                  height="100"
+                  src={
+                        avatarPreview
+                      ? avatarPreview
+                      : user.avatar
+                  }
+                  alt="avatar"
+                /> */}
+                <Badge
+                overlap="circular"
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                badgeContent={
+                <AddCircleIcon style={{marginRight: '25', color: 'white'}} />
+                }
+                >
                 <img
                   className="avatar__img"
                   width="100"
@@ -101,6 +116,7 @@ function EditUserProfile() {
                   }
                   alt="avatar"
                 />
+              </Badge>
               </label>
               <input
                 id="avatar"
@@ -110,7 +126,8 @@ function EditUserProfile() {
                 accept="image/*"
                 onChange={(e) => avatarChange(e)}
               /> 
-            </div>
+              </div>
+              
               <input
                 type="button"
                 onClick={delAvatar}
