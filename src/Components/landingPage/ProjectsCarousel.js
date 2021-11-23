@@ -19,7 +19,7 @@ function ProjectsCarousel() {
     translate: 0,
     transition: 0.45,
   });
-  
+
   // finding width of carousel container to get the value for transition
 
   const carouselRef = useRef();
@@ -51,6 +51,27 @@ function ProjectsCarousel() {
 
   useEffect(() => {
     window.addEventListener("resize", resizeCarousel);
+  }, []);
+
+  // pillar width
+
+  const pillarRef = useRef();
+  const [pillarWidth, setPillarWidth] = useState();
+
+  const getPillarWidth = () => {
+    if (!pillarRef.current) {
+      return;
+    }
+    const newWidth = pillarRef.current.clientWidth;
+    setPillarWidth(newWidth);
+  };
+
+  useEffect(() => {
+    getPillarWidth();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", getPillarWidth);
   }, []);
 
   // destructuring values
@@ -107,18 +128,46 @@ function ProjectsCarousel() {
   }, []);
 
   return (
-    <div className="carousel-container" ref={carouselRef}>
-      <sliderContext.Provider
-        value={{ carouselWidth, indexState, setIndex, nextSlide, prevSlide }}
-      >
-        <FeaturedProjects
-          translate={translate}
-          transition={transition}
-          width={carouselWidth * testImages.length}
-          testImages={testImages}
-        />
-        {/* <SliderClick /> */}
-      </sliderContext.Provider>
+    <div className="pillarframe">
+      <div className="carousel-container" ref={carouselRef}>
+        <sliderContext.Provider
+          value={{ carouselWidth, indexState, setIndex, nextSlide, prevSlide, pillarWidth }}
+        >
+          <FeaturedProjects
+            translate={translate}
+            transition={transition}
+            width={carouselWidth * testImages.length}
+            testImages={testImages}
+          />
+          {/* <SliderClick /> */}
+        </sliderContext.Provider>
+      </div>{" "}
+      <img
+      style={{
+        left: `0px`,
+        height: "45vh",
+        position: "absolute",
+        zIndex: "10",
+        top: "0px"
+      }}
+        src="/img/pillar.png"
+        alt=""
+        srcset=""
+        ref={pillarRef}
+      />
+      <img
+      style={{
+        right: `0px`,
+        height: "45vh",
+        position: "absolute",
+        zIndex: "10",
+        top: "0px"
+      }}
+        src="/img/pillar.png"
+        alt=""
+        srcset=""
+        ref={pillarRef}
+      />
     </div>
   );
 }

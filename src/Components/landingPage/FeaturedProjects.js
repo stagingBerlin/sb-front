@@ -13,7 +13,6 @@ function FeaturedProjects(props) {
         height: "fit-content",
         width: `${props.width}px`,
         display: "flex",
-        backgroundColor: "red",
       }}
     >
       {props.testImages.map((item, i) => (

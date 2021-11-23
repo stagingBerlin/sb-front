@@ -1,31 +1,35 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
+import sliderContext from "./sliderContext";
 
 function ProjectCard({ content }) {
-  const pillarRef = useRef();
-  const [pillarWidth, setPillarWidth] = useState();
+  // const pillarRef = useRef();
+  // const [pillarWidth, setPillarWidth] = useState();
 
-  const getPillarWidth = () => {
-    if (!pillarRef.current) {
-      return;
-    }
-    const newWidth = pillarRef.current.clientWidth;
-    setPillarWidth(newWidth);
-  };
+  // const getPillarWidth = () => {
+  //   if (!pillarRef.current) {
+  //     return;
+  //   }
+  //   const newWidth = pillarRef.current.clientWidth;
+  //   setPillarWidth(newWidth);
+  // };
 
-  useEffect(() => {
-    getPillarWidth();
-  }, []);
+  // useEffect(() => {
+  //   getPillarWidth();
+  // }, []);
 
-  useEffect(() => {
-    window.addEventListener("resize", getPillarWidth);
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("resize", getPillarWidth);
+  // }, []);
+
+  const { pillarWidth } =
+    useContext(sliderContext);
 
   return (
     <div className="projectCard-container">
       <div
         className="projectCard-Img"
         style={{
-          height: "35vh",
+          height: "45vh",
           width: "100%",
           backgroundImage: `url(${content})`,
           backgroundSize: "cover",
@@ -40,10 +44,10 @@ function ProjectCard({ content }) {
         className="pillar"
         style={{
           height: "100%",
-          left: `-${pillarWidth * 0.5}px`,
+          left: `0px`,
         }}
       >
-        <img src="/img/pillar.png" alt="" srcset="" ref={pillarRef} />
+        <img src="/img/pillar.png" alt="" srcset=""/>
       </div>
     </div>
   );
