@@ -55,12 +55,11 @@ function UserProfileOwn() {
     return (
         <div className="grid-container">
         
-           <div className="grid-col-2 grid-col-span-3">
-              <h2>{user.username}'s profile</h2>
+           <div className="grid-col-2 grid-col-span-4" style={{ marginTop: '3rem' }}>
+              <h1 style={{marginBottom: '1rem'}}>{user.username}'s Profile</h1>
               
               <Stack direction="row" spacing={2}>
-              {user.isHiring ? (
-               
+              {user.isHiring  || user.ownedProject?.length !== 0 ? (
                 <Badge
                     overlap="circular"
                     anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
@@ -92,19 +91,21 @@ function UserProfileOwn() {
               </Stack>
               
                {/* <img src={user.avatar} width="50%" style={{"borderRadius": "50%"}} alt="profile" /> */}
-              <p>Name: {user.name ?? ""}</p>
-              <p>Roles: 
-              {user.isHiring ? " Project Manager ∙ " : " "}
-              {user.profession.map((job, i)=> job.title).join(" ∙ ")} </p>
-              <p>Email: {user.email}</p>
-              <p>{user.isHiring ? 
-                <Link to="/account/project">My Own Projects</Link> 
-              : 
-                <Link to="#">"Applied Projects:"</Link>}</p>
-              <p>My Networks</p>
-              <Link to="/account/editprofile"  className="button-grid-2fr grid-col-2">EDIT</Link>     
+              <div style={{ margin: '1rem' }}>
+                <h3>Name: {user.name ?? ""}</h3>
+                <h3>Roles: 
+                {user.isHiring || user.ownedProject?.length !== 0 ? " Project Manager ∙ " : ""}
+                {user.profession.map((job, i)=> job.title).join(" ∙ ")} </h3>
+                <h3>Email: {user.email}</h3>
+                <h3> {user.isHiring ? 
+                  <Link to="/account/project">My Own Projects</Link> 
+                : 
+                  <Link to="#">Applied Projects:</Link>}</h3>
+                <h3>My Networks</h3>
+              </div>
+              <Link to="/account/editprofile"  className="button-grid-2fr">EDIT</Link>     
+             
            </div>
-          
         </div>
     )
 }

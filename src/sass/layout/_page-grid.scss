@@ -81,10 +81,24 @@
 .grid-col-span-3 {
   grid-column-end: span 3;
 }
+.grid-col-span-4 {
+  grid-column-end: span 4;
+}
 .grid-col-span-5 {
   grid-column-end: span 5;
 }
 .grid-col-span-10 {
   grid-column-end: span 10;
+}
+
+.grid-temp-col {
+	grid-template-columns: repeat(4, auto); /*Creates 4 columns, each 100px in width*/
+	
+}
+
+#project-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
 }
 
