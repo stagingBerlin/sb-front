@@ -270,7 +270,7 @@ export default function Navigation() {
         anchor="right"
         open={open}
       >
-        <DrawerHeader style={{marginTop: '-14px'}}>
+        <DrawerHeader style={{marginTop: '-2.1rem'}}>
           <IconButton onClick={handleDrawerClose}>
             <MenuIcon /> 
           </IconButton>

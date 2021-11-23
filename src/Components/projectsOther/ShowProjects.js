@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { getProjects } from '../../helpers/apiCalls'
 import { Link } from "react-router-dom";
-import { flexbox, width } from '@mui/system';
 
 function ShowProjects() {
     const { user, setUser, jobs, setJobs, ownProjects, setOwnProjects } = useContext(UserContext)
@@ -42,7 +41,6 @@ function ShowProjects() {
           }
       
         })
-            console.log(filtered)
             setViewProject(filtered)
             
         } else {
@@ -50,11 +48,16 @@ function ShowProjects() {
         }
     }, [isMyRole])
 
-    console.log(isNewest)
     useEffect(() => {
-        if (isNewest) {
+        if (isMyRole && isNewest) {
          
-            const newest = projects.sort((x,y)=> +new Date(y.createdAt) - +new Date(x.createdAt))
+            const newest = viewProject.sort((x,y)=> y.createdAt.localeCompare(x.createdAt))
+            
+            console.log(newest)
+            setViewProject(newest)
+            
+        } else if (!isMyRole && isNewest) {
+            const newest = projects.sort((x,y)=> y.createdAt.localeCompare(x.createdAt))
       
             console.log(newest)
             setViewProject(newest)
@@ -71,39 +74,43 @@ function ShowProjects() {
     function sortNewest() {
         setIsNewest(!isNewest)
     }
-    
-
+    console.log(viewProject);
     return (
+          <>
             <div className="grid-container">
-                <div className="grid-col-2 grid-col-span-4">
+                <div className="grid-col-2 grid-col-span-4" style={{marginTop: "3rem"}}>
                     <h1>All Projects</h1>
                     <div>
-                    <label htmlFor="isMyRole">Show projects containing my role(s) only</label>
-                    <input 
-                    type="checkbox" 
-                    name="isMyRole"
-                    checked={isMyRole}
-                    onChange={filterByRole}
-                    />
-            
-                    <label htmlFor="newest">Newest Project First</label>
-                    <input 
-                    type="checkbox" 
-                    name="isNewest"
-                    checked={isNewest}
-                    onChange={sortNewest}
-                     />
+                        <label htmlFor="isMyRole">Show projects containing my   role(s) only</label>
+                        <input 
+                        type="checkbox" 
+                        name="isMyRole"
+                        checked={isMyRole}
+                        onChange={filterByRole}
+                        />
+
+                        <label htmlFor="isNewest">Newest Project First</label>
+                        <input 
+                        type="checkbox" 
+                        name="isNewest"
+                        checked={isNewest}
+                        onChange={sortNewest}
+                         />
+                    </div>
                 </div>
-                {viewProject.map((project, i)=> (
-                    <div style={{flexWrap: 'wrap', width: '100%'}}>
-                        <Link to="/account/search" key={i} >
-                            <h3>{project.title} by {project.authorship}</h3>
-                            <img src={project.images[0]} width="20%" ></img>
+                
+                <div className="grid-col-2 grid-col-span-10" id="project-grid">
+                  {viewProject.map((project, i)=> (
+                    <div style={{ marginTop: "3rem" }} key={i}>
+                        <Link to="/account/search" >
+                            <img src={project.images[0]} width="100%" style={{borderRadius: "4px"}} ></img>
+                            <h2>{project.title} by {project.authorship}</h2>
                         </Link>
                     </div>
-                ))}
+                  ))}
                 </div>
-            </div>     
+              </div>   
+            </> 
             )
            
 }

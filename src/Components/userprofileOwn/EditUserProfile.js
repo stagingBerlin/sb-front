@@ -133,7 +133,6 @@ function EditUserProfile() {
                 id="name"
                 name="name"
                 type="text"
-                //value={update.name}
                 placeholder={user.name}
                 onChange={handleInput}
               />
@@ -150,7 +149,6 @@ function EditUserProfile() {
                 name="username"
                 type="text"
                 id="username"
-                //value={update.username}
                 placeholder={user.username}
                 onChange={handleInput}
               />
