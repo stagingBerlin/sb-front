@@ -16,7 +16,7 @@ import CreateProjectsOwn from './Components/projectsOwn/CreateProjectsOwn'
 import EinzelViewOwnProject from './Components/projectsOwn/EinzelViewOwnProject'
 import EditOwnProject from './Components/projectsOwn/EditOwnProject'
 import AddProjectDetail from './Components/projectsOwn/AddProjectDetail'
-
+import EinzelProjectOther from './Components/projectsOther/EinzelProjectOther'
 
 function App() {
   
@@ -34,6 +34,7 @@ function App() {
             <PrivateRoute exact path='/account/search' component={ShowProjects} />
             <PrivateRoute exact path='/account/project' component={ProjectsOwn} />
             <PrivateRoute exact path='/account/project/:id' component={({ match }) => <EinzelViewOwnProject id={match.params.id}/>} />
+            <PrivateRoute exact path='/account/allprojects/:id' component={({ match }) => <EinzelProjectOther id={match.params.id}/>} />
             <PrivateRoute exact path='/account/createproject' component={CreateProjectsOwn} />
             <PrivateRoute exact path='/account/project/edit' component={EditOwnProject} />
             <PrivateRoute exact path='/account/people' component={UserProfileOther} />
