@@ -1,6 +1,6 @@
 .button-primary {
   background-color: $background-col;
-  border-radius: 0.8rem;
+  // border-radius: 0.8rem;
   padding: 1rem 2.5rem;
   font-weight: 600;
   line-height: 2rem;
@@ -10,11 +10,11 @@
 
   &:hover {
     cursor: pointer;
-    background-color: $color-primary-dark;
-    box-shadow: $box-shadow;
-    color: $color-white;
-    transition: 0.3s;
-    border: 1px solid transparent;
+    background-color:$nav-footer-border-col;
+    // box-shadow: $box-shadow;
+    // color: $color-white;
+    transition: 0.5s;
+    // border: 1px solid transparent;
   }
 
   &:active {

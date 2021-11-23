@@ -19,6 +19,7 @@ function ProjectsCarousel() {
     translate: 0,
     transition: 0.45,
   });
+  
   // finding width of carousel container to get the value for transition
 
   const carouselRef = useRef();

@@ -52,9 +52,15 @@
 .grid-col-span-4 {
   grid-column-end: span 4;
 }
+
+.grid-row-1 {
+  grid-row-start: 1;
+}
 .grid-row-2 {
   grid-row-start: 2;
 }
+
+
 
 
 .grid-row-end-10{
@@ -81,3 +87,4 @@
 .grid-col-span-10 {
   grid-column-end: span 10;
 }
+
