@@ -309,7 +309,7 @@ export default function Navigation() {
           <ListItemText > Profile Search </ListItemText>
          </ListItem></Link>
 
-        <Divider stye={{marginTop: '2rem'}} />
+        <Divider/>
         <List sx={{ 
           display: 'flex',
           justifyContent: 'space-around',

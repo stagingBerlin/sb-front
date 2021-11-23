@@ -3,8 +3,12 @@ import { UserContext } from "../../context/UserContext";
 import { NavLink, Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
-import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
+import Avatar from '@mui/material/Avatar';
+import AvatarGroup from '@mui/material/AvatarGroup';
+import profile1 from '../../img/profile1.png'
+import blue from '../../img/blue.png'
+import favicon2 from '../../img/favicon2.png'
 
 /**************************** MUI FEATURES ****************************/
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -114,6 +118,14 @@ function UserProfileOwn() {
             )}
           </h3>
           <h3>My Networks</h3>
+          <AvatarGroup max={4} sx={{ '& .MuiAvatar-root': { width: 24, height: 24, fontSize: 15 } }}>
+              <Avatar alt="first" src={profile1} />
+              <Avatar alt="second" src={blue} />
+              <Avatar alt="third" src={favicon2} />
+              <Avatar alt="fourth" src={profile1} />
+              <Avatar alt="fifth" src={blue} />
+              <Avatar alt="fifth" src={blue} />
+          </AvatarGroup>
         </div>
         </div>
         <Link to="/account/editprofile" className="button-link-short">
