@@ -4,14 +4,16 @@ import { useHistory, Link } from 'react-router-dom'
 import { createProject } from '../../helpers/apiCalls'
 
 import AddProjectDetail from './AddProjectDetail'
+import ProjectView from './ProjectView'
+
 
 
 const CreateProjectsOwn = () => {
 
-    const { user, setUser, jobs, setJobs, ownProjects, setOwnProjects } = useContext(UserContext)
+    const { ownProjects, setOwnProjects } = useContext(UserContext)
     const [data, setData] = useState({
       title : "",
-      authorship: user.name,
+      authorship: "",
       description: "",
     })
     const [ newProject, setNewProject ] = useState()
@@ -41,7 +43,7 @@ const CreateProjectsOwn = () => {
           setIsNewProject(true)
           setData({
             title : "",
-            authorship: user.name,
+            authorship: "",
             description: ""
           })
           
@@ -54,58 +56,99 @@ const CreateProjectsOwn = () => {
     const backToProject = () => {
       setNewProject()
       return history.push('/account/project')
-
     }
 
     return (
-        <div>
+      // pages styles
+      <div className="create-project-page">
+        <div className="create-project-page__form">
 
-          <form className="form" onSubmit={handleSubmit}>
-              <label htmlFor="title">Title: </label>
-              <input
-                id="title"
-                name="title"
-                type="text"
-                value={data.title}
-                placeholder="Project Title"
-                onChange={handleInput}
-              />
-             
-              <label htmlFor="authorship">Concept: </label>
-              <input
-                name="authorship"
-                type="text"
-                id="authorship"
-                defaultValue={data.authorship}
-                onChange={handleInput}
-              />
-             
-              <textarea
-                name="description"
-                value={data.description}
-                style={{width:"100%"}}
-                type="text"
-                form="pform"
-                onChange={handleInput}
-                placeholder="Project description..."
-                rows="8" 
-                cols="50"
-              />
-            
-            <Link to='/account/project/edit'> 
-              <input type="submit" value="Create" className="button-grid-2fr grid-col-2" onClick={handleSubmit} />
-            </Link> 
-            <input type="button" value="Cancel" className="button-grid-2fr grid-col-2" onClick={backToProject} />
-          </form>
+          {/* components styles create-project-form */}
+          <div className="create-project-form">
 
-          {isNewProject ? (
-            <AddProjectDetail 
-              newProject={newProject}
-            />
-          ) : (
-            <></>
-          )}
+            {
+              !isNewProject ? 
+            <form className="create-project-form__project" onSubmit={handleSubmit}>
+                <div className="create-project-form__group"> 
+                  <input
+                    id="title"
+                    name="title"
+                    className="create-project-form__input"
+                    type="text"
+                    // value={data.title}
+                    placeholder="Title"
+                    onChange={handleInput}
+                  />
+                  <label 
+                    htmlFor="title"
+                    className="create-project-form__label"
+                  >Title</label>
+                  
+                </div>
+
+                <div className="create-project-form__group">
+                  <input
+                    id="authorship"
+                    name="authorship"
+                    placeholder="Concept"
+                    className="create-project-form__input"
+                    type="text"
+                    // defaultValue={data.authorship}
+                    onChange={handleInput}
+                  />
+                  <label 
+                    htmlFor="authorship" 
+                    className="create-project-form__label"
+                  >Concept</label>
+                </div>
+              
+                <div className="create-project-form__group">
+                  <textarea
+                    id="description"
+                    name="description"
+                    className="create-project-form__input"
+                    value={data.description}
+                    style={{width:"100%"}}
+                    type="text"
+                    form="pform"
+                    onChange={handleInput}
+                    placeholder="Project description..."
+                    rows="8" 
+                    cols="50"
+                  />
+                  <label 
+                    htmlFor="description"
+                    className="create-project-form__label"
+                  >Project description...</label>
+                </div>
+
+              <div className="create-project-form__buttons-container">
+                <input type="button" value="Cancel" className="button-primary" onClick={backToProject} />
+                <input type="submit" value="Create" className="button-primary" onClick={handleSubmit} />
+              </div>
+            </form>
+            : <></>
+            }
+
+            {isNewProject ? (
+              <AddProjectDetail 
+                newProject={newProject}
+                setNewProject={setNewProject}
+              />
+            ) : (
+              <></>
+            )}
+          </div>
+
         </div>
+
+        <div className="create-project-page__view">
+          <ProjectView 
+            newProject={newProject}
+            setNewProject={setNewProject}
+          />
+        </div>
+      </div>
     )
 }
 

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 function LandingPage() {
   return (
-    <div className="content-margin-top">
+    <div className="landingPage-container">
       <div className="grid-container">
         <div className="grid-col-2 grid-col-span-5">
           <div className="hero-text-large margin-bttm-l">STAGING BERLIN</div>
@@ -20,7 +20,8 @@ function LandingPage() {
             <div className="">Login</div>
           </NavLink>
         </div>
-        <div className="grid-col-span-4 grid-col-8 grid-row-2 grid-row-end-10">
+        <div className="grid-col-span-4 grid-col-8 grid-row-1 grid-row-end-10">
+          <img className="pillarFront" src="./img/pillar.png" alt="" srcset=""/>
           <ProjectsCarousel/>
         </div>
       </div>

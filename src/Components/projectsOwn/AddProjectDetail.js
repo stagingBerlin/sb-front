@@ -4,7 +4,10 @@ import { useHistory} from 'react-router'
 import { addJobToList } from '../../helpers/apiCallsAddJob'
 import BasicSelect from './BasicSelect.js'
 
-const AddProjectDetail = ({newProject}) => {
+const AddProjectDetail = ({
+  newProject,
+  setNewProject
+}) => {
 
   console.log(newProject._id);
   
@@ -44,7 +47,7 @@ const AddProjectDetail = ({newProject}) => {
           const resApi = await addJobToList(newProject._id, myBody)
           
           if(!resApi.error){
-            setJobList(resApi.jobList)
+            setNewProject(resApi)
             setAddJob({
               jobDescription : ""
             })
@@ -66,44 +69,44 @@ const AddProjectDetail = ({newProject}) => {
 
     return (
         <>
-          <h2> Project {newProject.title} is newly created. Add jobs to this project.</h2>
-          <form className="form" onSubmit={handleSubmit}>
+          <form className="crete-project-form" onSubmit={handleSubmit}>
+            <div className="create-project-form__group">
+              <h2 style={{textAlign: 'center', fontSize:'1.7rem', marginBottom:"3.5rem"}}>Offer a job in your project! Choose a Job and add a description:</h2>
+            </div>
 
-            <BasicSelect
-              jobs={jobs}
-              inputJob={inputJob}
-              handleChangeJob={handleChangeJob}
-            />
-
-            <textarea
-                name="jobDescription"
-                type="text"
-                style={{width:"100%"}}
-                placeholder="Job description..."
-                rows="8" 
-                cols="50"
-                value={addJob.jobDescription}
-                onChange={handleChangeDescription}
+            <div className="create-project-form__group">
+              <BasicSelect
+                jobs={jobs}
+                inputJob={inputJob}
+                handleChangeJob={handleChangeJob}
               />
-            <input type="submit" value="Add Job" className="button-grid-2fr grid-col-2" />
+            </div>
+
+            <div className="create-project-form__group">
+              <textarea
+                  id="jobDescription"
+                  name="jobDescription"
+                  type="text"
+                  className="create-project-form__input"
+                  style={{width:"100%"}}
+                  placeholder="Job description..."
+                  rows="8" 
+                  cols="50"
+                  value={addJob.jobDescription}
+                  onChange={handleChangeDescription}
+                />
+              <label 
+                htmlFor="jobDescription"
+                className="create-project-form__label"
+              >Job description...</label>
+
+            </div>
+
+            <div className="create-project-form__buttons-container">
+              <input type="submit" value="Add Job" className="button-primary" />
+            </div>
           
           </form>  
-          <div>
-            {
-              jobList.map((item, i)=> {
-                return (
-                  
-                  <div key={i}>
-                    <h4>Job: {item.job.title}</h4>
-                    <p>Description: {item.jobDescription}</p>
-                  </div>
-                  
-                )
-              })
-            }
-
-          </div> 
-
         </>
     )
 }

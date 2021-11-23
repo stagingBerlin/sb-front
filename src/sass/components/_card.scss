@@ -1,0 +1,100 @@
+.card {
+  position: relative;
+
+  &__picture {
+    // background-color: red;
+    background-image: url("https://images.unsplash.com/photo-1503095396549-807759245b35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1771&q=80");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 23rem;
+    background-blend-mode: screen;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+
+  &__updateTitle {
+    position: absolute;
+    top: 9.5rem;
+    right: 1.2rem;
+    z-index: 1000;
+  }
+
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: right;
+    color: $color-white;
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+    width: 75%;
+  }
+
+  &__heading-span {
+    padding: 1rem 1.5rem;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-black, 0.3),
+      rgba($color-black, 0.8)
+    );
+  }
+
+  &__body {
+    padding: 1rem 2.5rem;
+  }
+
+  &__body > *:not(:last-child) {
+    margin-bottom: 4rem;
+  }
+
+  &__section > *:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+
+  &__text {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    letter-spacing: 0.05rem;
+    color: $color-grey-dark-3;
+  }
+
+  &__jobList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__jobContainer > *:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+  &__jobContainer {
+    width: 48%;
+    padding: 1rem;
+    margin: 2.5rem 0;
+    border: 1px solid #ededed;
+    border-radius: 0.5rem;
+    box-shadow: $box-shadow;
+  }
+
+  &__inputUpdateTitle {
+    border: $color-black;
+    font-family: inherit;
+    outline: none;
+    width: 100%;
+    color: $color-white;
+    padding: 1rem 1.5rem;
+    font-size: 2rem;
+    font-weight: 300;
+    background-image: linear-gradient(
+      to right bottom,
+      rgba($color-black, 0.3),
+      rgba($color-black, 0.8)
+    );
+  }
+}

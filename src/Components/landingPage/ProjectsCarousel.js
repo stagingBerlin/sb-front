@@ -19,6 +19,7 @@ function ProjectsCarousel() {
     translate: 0,
     transition: 0.45,
   });
+  
   // finding width of carousel container to get the value for transition
 
   const carouselRef = useRef();
@@ -33,6 +34,9 @@ function ProjectsCarousel() {
   };
 
   const getCarouselWidth = () => {
+    if (!carouselRef.current) {
+      return;
+    }
     const newWidth = carouselRef.current.clientWidth;
     setCarouselWidth(newWidth);
   };
