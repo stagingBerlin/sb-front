@@ -2,7 +2,7 @@ import React from 'react'
 
 function FeaturedProject({content}) {
     return (
-        <div style={{
+        <div className="" style={{
             height: '100%',
             width: '100%',
             backgroundImage: `url(${content})`,
