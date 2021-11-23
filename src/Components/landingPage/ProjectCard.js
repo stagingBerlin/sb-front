@@ -5,6 +5,9 @@ function ProjectCard({ content }) {
   const [pillarWidth, setPillarWidth] = useState();
 
   const getPillarWidth = () => {
+    if (!pillarRef.current) {
+      return;
+    }
     const newWidth = pillarRef.current.clientWidth;
     setPillarWidth(newWidth);
   };
@@ -16,7 +19,6 @@ function ProjectCard({ content }) {
   useEffect(() => {
     window.addEventListener("resize", getPillarWidth);
   }, []);
-
 
   return (
     <div className="projectCard-container">
@@ -34,11 +36,14 @@ function ProjectCard({ content }) {
       <div> This is the title</div>
       <div>Short Intro</div>
       <div> by Owner</div>
-      <div className="pillar"  style={{
+      <div
+        className="pillar"
+        style={{
           height: "100%",
-          left: `-${pillarWidth * 0.5}px`
-        }}>
-        <img src="/img/pillar.png" alt="" srcset="" ref={pillarRef}/>
+          left: `-${pillarWidth * 0.5}px`,
+        }}
+      >
+        <img src="/img/pillar.png" alt="" srcset="" ref={pillarRef} />
       </div>
     </div>
   );

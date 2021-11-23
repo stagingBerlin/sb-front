@@ -34,6 +34,9 @@ function ProjectsCarousel() {
   };
 
   const getCarouselWidth = () => {
+    if (!carouselRef.current) {
+      return;
+    }
     const newWidth = carouselRef.current.clientWidth;
     setCarouselWidth(newWidth);
   };
