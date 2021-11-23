@@ -19,9 +19,11 @@
 
 .carousel-container {
   position: relative;
-  height: 100%;
+  height: fit-content;
   width: 100%;
   overflow: hidden;
+  // @include gradient-bottom;
+  background-color: black;
 }
 .slider-click-right {
   height: 100%;
@@ -52,8 +54,12 @@
   }
 }
 
-.pillarFront{
-  height: 45vh;
-  position: absolute;
-  z-index: 3;
+.pillarframe{
+  position: relative;
+ 
+}
+
+.logo-frame{
+  width: 100%;
+
 }
