@@ -21,3 +21,49 @@
     text-decoration: none;
   }
 }
+
+.button-link {
+  color: #494a49;
+    &:hover {
+        cursor: pointer;
+        background-color: $color-primary-dark;
+        color: $color-black;
+        transition: 0.25s;
+        font-weight: bolder;
+      }
+    &:visited {
+        color: #919191;
+        &:hover {
+          cursor: pointer;
+          background-color: $color-primary-light;
+          color: $color-black;
+          transition: 0.25s;
+          font-weight: bolder;
+        }
+      }
+    a {
+        text-decoration: none;
+      }
+}
+
+.button-link-short {
+  color: $grid-border-color;
+  font-family: $L10-Reg;
+  padding: 1% 6%;
+  border-radius: 2px;
+  border: $button-border;
+  text-decoration: none;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2%;
+    &:hover {
+        cursor: pointer;
+        background-color: $grid-border-color;
+        color: $background-col;
+        transition: 0.25s;
+        font-weight: bolder;
+      } 
+    
+}

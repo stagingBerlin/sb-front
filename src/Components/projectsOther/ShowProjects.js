@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
 import { getProjects } from "../../helpers/apiCalls";
 import { Link } from "react-router-dom";
+import Button from '@mui/material/Button';
 
 function ShowProjects() {
   const { user, setUser, jobs, setJobs, ownProjects, setOwnProjects } =
@@ -118,16 +119,17 @@ function ShowProjects() {
 
         <div className="grid-col-2 grid-col-span-10" id="project-grid">
           {viewProject.map((project, i) => (
-            <div style={{ marginTop: "3rem" }} key={i}>
-              <Link to={`/account/allprojects/${project._id}`}>
+            <div style={{ marginTop: "3rem" }} key={i} >
+              <Link style={{ textDecoration: 'none' }} to={`/account/allprojects/${project._id}`} className="button-link" >
                 <img
                   src={project.images[0]}
                   width="100%"
                   style={{ borderRadius: "4px" }}
-                ></img>
-                <h2>
+                >
+                </img>
+                <h3 style={{ textAlign: 'center' }} >
                   {project.title} by {project.authorship}
-                </h2>
+                </h3>
               </Link>
             </div>
           ))}
