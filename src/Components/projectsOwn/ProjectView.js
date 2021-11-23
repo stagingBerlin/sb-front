@@ -8,7 +8,7 @@ export default function ProjectView({
     setNewProject
 }) {
 
-    const [ newTitle, setNewTitle ] = useState(newProject.title)
+    const [ newTitle, setNewTitle ] = useState()
     const [ showInpTitle, setShowImpTitle ] = useState(false)
 
     const update = async () => {
