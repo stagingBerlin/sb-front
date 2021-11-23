@@ -10,7 +10,7 @@ import ProjectView from './ProjectView'
 
 const CreateProjectsOwn = () => {
 
-    const { user, setUser, jobs, setJobs, ownProjects, setOwnProjects } = useContext(UserContext)
+    const { ownProjects, setOwnProjects } = useContext(UserContext)
     const [data, setData] = useState({
       title : "",
       authorship: "",

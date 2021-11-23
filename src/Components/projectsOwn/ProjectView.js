@@ -1,64 +1,130 @@
-import React from 'react'
+import React, { useState } from 'react'
+import UpdateButton from '../utilities/UpdateButton'
+import { updateOwnProject } from '../../helpers/apiCalls.js'
+
 
 export default function ProjectView({
     newProject,
     setNewProject
 }) {
+
+    const [ newTitle, setNewTitle ] = useState(newProject.title)
+    const [ showInpTitle, setShowImpTitle ] = useState(false)
+
+    const update = async () => {
+        try {
+            const newResp = await updateOwnProject(newProject._id, {title: newTitle})
+            setNewProject(newResp)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleTitle = (e) => {
+        if(showInpTitle){  
+            update(); 
+        }
+        setShowImpTitle(!showInpTitle) 
+    }
+
+    
     return (
         <div className="project-view">
             <div className="card">
                 <div className="card__picture"></div>
+                <div className="card__updateTitle">
+                    {
+                        newProject ? 
+                        <UpdateButton
+                            color="white"
+                            fontSize="2.5" // fontSize in rem
+                            transformScale="1.2"
+                            // colorHover
+                            handleClick={handleTitle}
+                        />
+                        :
+                        <></>
+                    }
+                    
+                </div>
                 
                 <h4 className="card__heading">
+
+                {
+                    showInpTitle ?
+                    <input 
+                        className="card__inputUpdateTitle"
+                        type="text" 
+                        onChange={(e) => setNewTitle(e.target.value)} 
+                        value={newTitle}
+                    />
+                        :
                     <span className="card__heading-span">
-                        { newProject ? newProject.title : 'Create a project now!!!'}
+                        { 
+                            newProject ? 
+                            newProject.title 
+                            : 
+                            'Add in the form the title of your project.'
+                        }
                     </span>
+                    
+                }
                 </h4>
+
                 <div className="card__body">
 
-                    
-                    <h6 className="card__concept">
-                        Concept:
-                        <span className="card__concept-span">{ newProject ? newProject.authorship : "Who is the creator of this project?" }</span>
-                    </h6>
-                    
-
-                    <div className="card__description">
-                        <h2 className="card__description--heading">Description:</h2>
-                        <p className="card__description--text">
-                            { newProject ? newProject.description : 'Add a description to your Project' }
+                    <div className="card__section">
+                        <div className="separator">CONCEPT</div>
+                        <p className="card__text">
+                            { 
+                                newProject ? 
+                                newProject.authorship 
+                                : 
+                                "Who owns the intellectual property of this project?, add it in the form please." 
+                            }
                         </p>
                     </div>
 
-                    <h2 className="card__description--heading">Job Offers:</h2>
-                    <div className="card__jobList">
+                    <div className="card__section">
+                        <div className="separator">DESCRIPTION</div>
+                        <p className="card__text">
+                            { 
+                                newProject ? 
+                                newProject.description 
+                                : 
+                                'Add a description about your Project, use the form please.' 
+                            }
+                        </p>
+                    </div>
+
+                    <div className="card__section">
+                        <div className="separator">JOB OFFERS</div>
+                        <div className="card__jobList">
                         {
                             newProject && newProject.jobList.length !== 0 ? 
                             newProject.jobList.map((item, i)=> {
                                 return <>
                                 <div className="card__jobContainer" key={i}>
-                                    <h2 className="card__description--heading">
-                                        Job: <span className="card__job-span">{item.job.title}</span> 
-                                    </h2>
-                                    <h2 className="card__description--heading">Description:</h2>
-                                    <p className="card__description--text">
-                                        {item.jobDescription}
-                                    </p>
+                                    <div className="card__section">
+                                        <div className="separator">Job</div>
+                                        <p className="card__text">{item.job.title}</p>
+                                    </div>
+                                    <div className="card__section">
+                                        <div className="separator">description</div>
+                                        <p className="card__text">{item.jobDescription}</p>
+                                    </div>
                                 </div>
                                 </>
                             })
                             :
-                            "No Offers for this project"
+                            <p className="card__text">
+                                After you added Title, Concept and description, add some job offers to your project.
+                            </p>   
                         }
-
-                        
-                        
-                    </div>
-
+                        </div>
+                    </div>                    
                 </div>
             </div>
-
-
         </div>
     )
 }
