@@ -270,12 +270,12 @@ export default function Navigation() {
         anchor="right"
         open={open}
       >
-        <DrawerHeader style={{marginTop: '-2.1rem'}}>
+        <DrawerHeader style={{marginTop: '-1.8rem'}}>
           <IconButton onClick={handleDrawerClose}>
             <MenuIcon /> 
           </IconButton>
         </DrawerHeader>
-        <Divider style={{marginTop: '-11px'}} />
+        {/* <Divider style={{marginTop: '-11px'}} /> */}
 
         <List>
         <Link to='/account/profile' className="navigation__link"><ListItem button >
@@ -304,12 +304,12 @@ export default function Navigation() {
          </ListItem></Link>
         </List>
 
-        <Link to='/account/people' className="navigation__link"><ListItem button >
+        <Link to='/account/people' className="navigation__link" ><ListItem button >
           <ListItemIcon > <GroupAddIcon /> </ListItemIcon>
           <ListItemText > Profile Search </ListItemText>
          </ListItem></Link>
 
-        <Divider />
+        <Divider/>
         <List sx={{ 
           display: 'flex',
           justifyContent: 'space-around',
