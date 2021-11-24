@@ -8,29 +8,10 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 function ShowProjects() {
-  const { user, setUser, jobs, setJobs, ownProjects, setOwnProjects } =
+  const { user, projects, setProjects, viewProject, setViewProject } =
     useContext(UserContext);
-  const [viewProject, setViewProject] = useState([]);
-  const [projects, setProjects] = useState([]);
   const [isMyRole, setIsMyRole] = useState(false);
   const [showWhat, setShowWhat] = useState("none");
-
-  useEffect(() => {
-    const allProjects = async () => {
-      try {
-        const res = await getProjects();
-
-        if (!res.error) {
-          setProjects(res);
-          setViewProject(res);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    allProjects();
-  }, []);
   
   useEffect(() => {
     const myRole = user.profession.map((role) => role.title);

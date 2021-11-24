@@ -74,6 +74,10 @@ export const UserContextProvider = ({ children }) => {
         setJobs,
         ownProjects,
         setOwnProjects,
+        projects,
+        setProjects,
+        viewProject,
+        setViewProject
       }}
     >
       {children}
