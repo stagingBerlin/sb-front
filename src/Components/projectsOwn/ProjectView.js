@@ -1,30 +1,90 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import UpdateButton from '../utilities/UpdateButton'
 import { updateOwnProject } from '../../helpers/apiCalls.js'
 
+const mountedStyle = { 
+    animation: "0.8s slideIn", 
+    // animationTimingFunction: "linear" 
+};
+const unmountedStyle = {
+  animation: "0.8s slideOut",
+//   animationTimingFunction: "linear", 
+  animationFillMode: "forwards"
+};
+
+const mountedTextArea = { 
+    webkitAnimation: "text-focus-in .8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
+	animation: "text-focus-in .8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both"
+};
+const unmountedTextArea = {
+    webkitAnimation: "text-blur-out 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
+    animation: "text-blur-out 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both"
+};
 
 export default function ProjectView({
     newProject,
     setNewProject
 }) {
+    
+    const [ newTitle, setNewTitle ] = useState({title: newProject ? newProject.title : ""})
+    const [ newAuthorship, setNewAuthorship ] = useState({authorship:  newProject ? newProject.authorship : ""})
+    const [ newDescription, setNewDescription ] = useState({description: newProject ? newProject.description : ""})
 
-    const [ newTitle, setNewTitle ] = useState()
-    const [ showInpTitle, setShowImpTitle ] = useState(false)
+    useEffect(()=> {
+        setNewTitle({title: newProject ? newProject.title : ""})
+        setNewAuthorship({authorship:  newProject ? newProject.authorship : ""})
+        setNewDescription({description: newProject ? newProject.description : ""})
+    }, [ newProject ]);
+    
+    const [ isTitleMounted, setIsTitleMounted ] = useState(false);
+    const [ showInputTitle, setShowInputTitle ] = useState(false);
 
-    const update = async () => {
+    const [ isAuthorshipMounted, setIsAuthorshipMounted ] = useState(false);
+    const [ showInputAuthorship, setShowInputAuthorship ] = useState(false);
+    
+    const [ isDescriptionMounted, setIsDescriptionMounted ] = useState(false);
+    const [ showInputDescription, setShowInputDescription ] = useState(false);
+
+
+
+    const update = async (inputValue) => {
         try {
-            const newResp = await updateOwnProject(newProject._id, {title: newTitle})
+            const newResp = await updateOwnProject(newProject._id, inputValue)
+            if(newResp.error){
+                console.log(newResp.error);
+                return;
+            }
             setNewProject(newResp)
         } catch (error) {
             console.log(error);
         }
     }
 
-    const handleTitle = (e) => {
-        if(showInpTitle){  
-            update(); 
+    const updateTitle = () => {
+        if(showInputTitle){  
+            update(newTitle); 
+            setNewTitle({title: ""})
         }
-        setShowImpTitle(!showInpTitle) 
+        setIsTitleMounted(!isTitleMounted)
+        if(!showInputTitle) setShowInputTitle(true);
+    }
+
+    const updateAuthorship = () => {
+        if(showInputAuthorship){  
+            update(newAuthorship); 
+            setNewAuthorship({authorship: ""})
+        }
+        setIsAuthorshipMounted(!isAuthorshipMounted)
+        if(!showInputAuthorship) setShowInputAuthorship(true);
+    }
+
+    const updateDescription = () => {
+        if(showInputDescription){  
+            update(newDescription); 
+            setNewDescription({description: ""})
+        }
+        setIsDescriptionMounted(!isDescriptionMounted)
+        if(!showInputDescription) setShowInputDescription(true);
     }
 
     
@@ -37,10 +97,10 @@ export default function ProjectView({
                         newProject ? 
                         <UpdateButton
                             color="white"
-                            fontSize="2.5" // fontSize in rem
+                            fontSize="2" // fontSize in rem
                             transformScale="1.2"
                             // colorHover
-                            handleClick={handleTitle}
+                            handleClick={updateTitle}
                         />
                         :
                         <></>
@@ -51,12 +111,15 @@ export default function ProjectView({
                 <h4 className="card__heading">
 
                 {
-                    showInpTitle ?
+                    showInputTitle ?
                     <input 
+                        autoFocus
                         className="card__inputUpdateTitle"
                         type="text" 
-                        onChange={(e) => setNewTitle(e.target.value)} 
-                        value={newTitle}
+                        onChange={(e) => setNewTitle({title : e.target.value})} 
+                        value={newTitle.title}
+                        style={isTitleMounted ? mountedStyle : unmountedStyle}
+                        onAnimationEnd={() => { if (!isTitleMounted) setShowInputTitle(false)}}
                     />
                         :
                     <span className="card__heading-span">
@@ -75,26 +138,83 @@ export default function ProjectView({
 
                     <div className="card__section">
                         <div className="separator">CONCEPT</div>
-                        <p className="card__text">
-                            { 
-                                newProject ? 
-                                newProject.authorship 
-                                : 
-                                "Who owns the intellectual property of this project?, add it in the form please." 
-                            }
-                        </p>
+                        <div className="card__updateAuthorship">
+                        {
+                            newProject ?
+                            <UpdateButton
+                                color="#333"
+                                fontSize="1.8" // fontSize in rem
+                                transformScale="1.2"
+                                // colorHover
+                                handleClick={updateAuthorship}
+                            />
+                            :
+                            <></>
+                        }
+                        </div>
+
+                        { 
+                            showInputAuthorship ?
+                            <input 
+                                type="text"
+                                className="card__inputBody"
+                                autoFocus
+                                onChange={(e) => setNewAuthorship({authorship: e.target.value})}
+                                value={newAuthorship.authorship}
+                                style={isAuthorshipMounted ? mountedStyle : unmountedStyle}
+                                onAnimationEnd={() => { if (!isAuthorshipMounted) setShowInputAuthorship(false)}}
+                            />
+                            :
+                            <p className="card__text">
+                                { 
+                                    newProject ? 
+                                    newProject.authorship 
+                                    : 
+                                    "Who owns the intellectual property of this project?, add it in the form please." 
+                                }
+                            </p>
+                        }
                     </div>
 
                     <div className="card__section">
                         <div className="separator">DESCRIPTION</div>
-                        <p className="card__text">
-                            { 
-                                newProject ? 
-                                newProject.description 
-                                : 
-                                'Add a description about your Project, use the form please.' 
-                            }
-                        </p>
+                        <div className="card__updateDescription">
+                        {
+                            newProject ?
+                            <UpdateButton
+                                color="#333"
+                                fontSize="1.8" // fontSize in rem
+                                transformScale="1.2"
+                                // colorHover
+                                handleClick={updateDescription}
+                            />
+                            :
+                            <></>
+                        }
+                        </div>
+
+                        {
+                            showInputDescription ?
+                            <textarea 
+                                rows="20" 
+                                cols="50"
+                                className="card__inputBody"
+                                autoFocus
+                                onChange={(e) => setNewDescription({description: e.target.value})}
+                                value={newDescription.description}
+                                style={isDescriptionMounted ? mountedTextArea : unmountedTextArea}
+                                onAnimationEnd={() => { if (!isDescriptionMounted) setShowInputDescription(false)}}
+                            />
+                            :
+                            <p className="card__text">
+                                { 
+                                    newProject ? 
+                                    newProject.description 
+                                    : 
+                                    'Add a description about your Project, use the form please.' 
+                                }
+                            </p>
+                        }
                     </div>
 
                     <div className="card__section">
