@@ -21,7 +21,7 @@ const AddProjectDetail = ({
       jobDescription: ""
     })
 
-    const [ jobList, setJobList ] = useState([])
+    // const [ jobList, setJobList ] = useState([])
 
 
     const handleChangeJob = (e) => {
