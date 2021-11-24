@@ -4,7 +4,6 @@ import { getProjects } from "../../helpers/apiCalls";
 import { Link } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
@@ -32,8 +31,7 @@ function ShowProjects() {
     };
     allProjects();
   }, []);
-  console.log(showWhat);
-
+  
   useEffect(() => {
     const myRole = user.profession.map((role) => role.title);
 
@@ -76,13 +74,13 @@ function ShowProjects() {
       setViewProject(newest);
     } else if (!isMyRole && showWhat === "urgent") {
       const urgent = [...projects].sort((x, y) => {
-        console.log(new Date(y.deadline));
+       
         return new Date(x.deadline) - new Date(y.deadline);
       });
       setViewProject([...urgent]);
     } else {
       setViewProject(projects);
-      console.log(viewProject);
+    
     }
   }, [isMyRole, showWhat]);
 
@@ -136,10 +134,13 @@ function ShowProjects() {
         <div className="grid-col-2 grid-col-span-10" id="project-grid">
           {viewProject.map((project, i) => (
             <div style={{ marginTop: "3rem" }} key={i}>
+              {/* <EinzelProjectOther /> */}
               <Link
                 style={{ textDecoration: "none" }}
                 to={`/account/allprojects/${project._id}`}
+                state={{ viewProject: [] }}
                 className="button-link"
+              
               >
                 <img
                   src={project.images[0]}
@@ -159,5 +160,4 @@ function ShowProjects() {
 }
 
 export default ShowProjects;
-// sort push splice
-// filter find map
+
