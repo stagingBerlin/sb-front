@@ -1,12 +1,9 @@
-
-
-.landingPage-container{
+.landingPage-container {
   min-height: 85vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 
 .hero-text-large {
   font-size: 7rem;
@@ -39,27 +36,72 @@
   left: 0px;
 }
 
-.projectCard-container{
+.projectCard-container {
   width: 100%;
   height: 45vh;
   position: relative;
+  outline: royalblue;
 }
 
-.pillar{
+.fade {
+  height: 100%;
+  width: 100%;
+  background: black;
+  opacity: 1;
+  animation: fadin 10s ease-in-out;
+  animation-iteration-count: infinite;
   position: absolute;
-  top: 0px; 
+  top: 0;
+  // transition: transform 2s;
+}
+
+@keyframes fadin {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.pillar {
+  position: absolute;
+  top: 0px;
   z-index: 2;
   img {
     height: 100%;
   }
 }
 
-.pillarframe{
+.pillarframe {
   position: relative;
- 
 }
 
-.logo-frame{
+.logo-frame {
   width: 100%;
+  margin-bottom: -2px;
+}
 
+.curtain-container {
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  position: absolute;
+  overflow: hidden;
+}
+
+.curtain {
+  position: absolute;
+  transition: transform 2s;
+  transition-timing-function: ease-in-out;
+}
+
+.curtain-container:hover .curtain {
+  transform: translateY(-110%);
 }

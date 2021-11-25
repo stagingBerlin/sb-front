@@ -18,6 +18,10 @@
   @include grid(10);
 }
 
+.grid-edit-profile {
+  @include grid(6);
+}
+
 .grid-landing-buttons {
   @include grid(4);
 }
@@ -48,6 +52,10 @@
 }
 .grid-col-9 {
   grid-column-start: 9;
+}
+
+.grid-col-span-6 {
+  grid-column-end: span 6;
 }
 .grid-col-span-5 {
   grid-column-end: span 5;

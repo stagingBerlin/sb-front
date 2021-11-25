@@ -1,6 +1,7 @@
 import React from "react";
 import ProjectsCarousel from "./ProjectsCarousel";
 import { NavLink } from "react-router-dom";
+import Curtain from "./Curtain";
 
 function LandingPage() {
   return (
@@ -20,12 +21,13 @@ function LandingPage() {
             <div className="">Login</div>
           </NavLink>
         </div>
+
         <div className="grid-col-span-4 grid-col-8 grid-row-1 grid-row-end-10  ">
           <img className="logo-frame" src="/img/toplogo.svg" alt="" />
           <div className="deko-bars-container-footer">
-            <div className="bar border-left-nav border-top-nav border-right-nav"></div>
+            <div className="bar border-left-nav  border-right-nav"></div>
             <div className="bar border-left-nav border-right-nav"></div>
-            <div className="bar border-left-nav border-right-nav"></div>
+            <div className="bar border-left-nav border-right-nav border-bottom-nav"></div>
           </div>
           <ProjectsCarousel />
           <div className="deko-bars-container-footer">
