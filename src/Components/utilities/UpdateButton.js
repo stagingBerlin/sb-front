@@ -10,13 +10,14 @@ export default function UpdateButton({
 
     const [ fontColor, setFontColor ] = useState(color)
     const [scale, setScale] = useState()
+    
 
     const style = {
         cursor: 'pointer',
         color: fontColor,
         fontSize: `${fontSize}rem`,
         transform: scale,
-        transition: `0.5s`
+        transition: `0.5s`,
     }
 
     const handleMouseEnter = () => {
@@ -32,7 +33,8 @@ export default function UpdateButton({
     return (
         <i 
             className="far fa-edit"
-            style={style} onClick={handleClick}
+            style={style} 
+            onClick={handleClick}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         />
