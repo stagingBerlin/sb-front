@@ -43,6 +43,12 @@
     align-items: center;
   }
 
+  @include respond(tab-port) {
+    &__list > *:not(:last-child) {
+      display: none;
+    }
+  }
+
   &__link,
   &:link,
   &:visited {

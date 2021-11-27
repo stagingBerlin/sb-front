@@ -1,0 +1,79 @@
+.input-select-user {
+  width: 100%;
+
+  border-radius: 0.6rem;
+  position: relative;
+
+  &__input {
+    font-size: 1.7rem;
+    font-family: inherit;
+    color: $color-white;
+    padding: 1.5rem 2rem;
+    border-radius: 0.6rem;
+    border: none;
+
+    background-color: #5c6369;
+    border-bottom: 3px solid transparent;
+    width: 100%;
+    display: block;
+    transition: all 0.3s;
+    z-index: 1000;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+      //   border-bottom: 3px solid $color-green-fluorescent;
+    }
+
+    &::-webkit-input-placeholder {
+      color: inherit;
+      letter-spacing: 0.1rem;
+    }
+  }
+
+  &__menu {
+    width: 100%;
+    // padding: 1.5rem;
+    position: absolute;
+    letter-spacing: 0.1rem;
+    background-color: #343a3f;
+    border-radius: 0.6rem;
+    overflow: scroll;
+    max-height: 50rem;
+
+    z-index: 1000;
+  }
+
+  &__counter {
+    font-size: 1.5rem;
+    text-align: end;
+    padding: 1rem 2.5rem;
+    position: sticky;
+    top: 0;
+    background-color: #343a3f;
+  }
+
+  &__user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    letter-spacing: 0.2rem;
+    &:hover {
+      cursor: pointer;
+      background-color: #52575c;
+    }
+
+    @include respond(tab-port) {
+      padding: 1rem;
+    }
+  }
+
+  &__user p {
+    margin-right: auto;
+    padding-left: 2rem;
+    @include respond(tab-port) {
+      padding-left: 0.5rem;
+    }
+  }
+}

@@ -11,3 +11,12 @@ export const addJobToList = async(id, body) => {
         return error.response.data
     }
 }
+
+export const updateItemJobList = async (projectId, jobItemId, body) => {
+    try {
+        const res = await axios.put(`/projects/ownProjects/${projectId}/jobList/${jobItemId}`, body)
+        return res.data
+    } catch (error) {
+        return error.response.data
+    }
+}

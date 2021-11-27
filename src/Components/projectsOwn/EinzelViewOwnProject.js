@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const EinzelViewOwnProject = (id) => {
     const { user, setUser, jobs, setJobs, ownProjects, setOwnProjects } = useContext(UserContext)
-    
+    console.log(ownProjects)
     return (
         <div className="grid-container">
             <div className="grid-col-2 grid-col-span-3">

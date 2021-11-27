@@ -9,24 +9,19 @@ const AddProjectDetail = ({
   setNewProject
 }) => {
 
-  console.log(newProject._id);
+  // console.log(newProject._id);
   
   const history = useHistory()
     const { jobs } = useContext(UserContext)
 
     const [inputJob, setInputJob] = useState('');
 
-    const [ jobId, setJobId ] = useState('')
     const [ addJob, setAddJob ] = useState({
       jobDescription: ""
     })
 
-    // const [ jobList, setJobList ] = useState([])
-
-
     const handleChangeJob = (e) => {
       setInputJob(e.target.value);
-      setJobId(e.target.value)
     };
 
     const handleChangeDescription  = (e) => {
@@ -41,7 +36,7 @@ const AddProjectDetail = ({
       try {
           const myBody = {
             ...addJob,
-            job: jobId
+            job: inputJob
           }
 
           const resApi = await addJobToList(newProject._id, myBody)
@@ -52,7 +47,6 @@ const AddProjectDetail = ({
               jobDescription : ""
             })
             setInputJob("")
-            setJobId('')
           }
           else{
             console.log(resApi.error);
