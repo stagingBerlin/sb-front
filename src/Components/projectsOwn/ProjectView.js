@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import UpdateButton from '../utilities/UpdateButton'
 import { updateOwnProject } from '../../helpers/apiCalls.js'
-
-const mountedStyle = { 
-    animation: "0.8s slideIn", 
-    // animationTimingFunction: "linear" 
-};
-const unmountedStyle = {
-  animation: "0.8s slideOut",
-//   animationTimingFunction: "linear", 
-  animationFillMode: "forwards"
-};
+import JobOfferCard from './JobOfferCard'
+import DeleteButton from '../utilities/DeleteButton'
+import AvatarImg from '../utilities/AvatarImg'
+import UpdateButton from '../utilities/UpdateButton'
+import AddButton from '../utilities/AddButton'
+import InputSelectUser from '../utilities/InputSelectUser'
 
 const mountedTextArea = { 
-    webkitAnimation: "text-focus-in .8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
+    WebkitAnimation: "text-focus-in .8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
 	animation: "text-focus-in .8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both"
 };
 const unmountedTextArea = {
-    webkitAnimation: "text-blur-out 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
+    WebkitAnimation: "text-blur-out 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
     animation: "text-blur-out 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both"
 };
 
@@ -25,15 +20,19 @@ export default function ProjectView({
     newProject,
     setNewProject
 }) {
-    
+
     const [ newTitle, setNewTitle ] = useState({title: newProject ? newProject.title : ""})
     const [ newAuthorship, setNewAuthorship ] = useState({authorship:  newProject ? newProject.authorship : ""})
     const [ newDescription, setNewDescription ] = useState({description: newProject ? newProject.description : ""})
+
+    const [ jobOffers, setJobOffers ] = useState([])
 
     useEffect(()=> {
         setNewTitle({title: newProject ? newProject.title : ""})
         setNewAuthorship({authorship:  newProject ? newProject.authorship : ""})
         setNewDescription({description: newProject ? newProject.description : ""})
+
+        setJobOffers(newProject ? newProject.jobList : [])
     }, [ newProject ]);
     
     const [ isTitleMounted, setIsTitleMounted ] = useState(false);
@@ -44,8 +43,6 @@ export default function ProjectView({
     
     const [ isDescriptionMounted, setIsDescriptionMounted ] = useState(false);
     const [ showInputDescription, setShowInputDescription ] = useState(false);
-
-
 
     const update = async (inputValue) => {
         try {
@@ -87,6 +84,23 @@ export default function ProjectView({
         if(!showInputDescription) setShowInputDescription(true);
     }
 
+    // console.log(jobOffers);
+    const displayJobs = () => {
+        return jobOffers
+        // .sort((a, b) => a.job.title.localeCompare(b.job.title))
+        .map(item => 
+            <JobOfferCard 
+                key={item._id}
+                jobOfferId={item._id}
+                title={item.job.title}
+                jobId={item.job._id}
+                jobDescription={item.jobDescription}
+                participant={item.participant}
+                newProjectId={newProject._id}
+                setNewProject={setNewProject}
+            />
+        )
+    }
     
     return (
         <div className="project-view">
@@ -105,7 +119,6 @@ export default function ProjectView({
                         :
                         <></>
                     }
-                    
                 </div>
                 
                 <h4 className="card__heading">
@@ -118,7 +131,7 @@ export default function ProjectView({
                         type="text" 
                         onChange={(e) => setNewTitle({title : e.target.value})} 
                         value={newTitle.title}
-                        style={isTitleMounted ? mountedStyle : unmountedStyle}
+                        style={isTitleMounted ? mountedTextArea : unmountedTextArea}
                         onAnimationEnd={() => { if (!isTitleMounted) setShowInputTitle(false)}}
                     />
                         :
@@ -145,7 +158,7 @@ export default function ProjectView({
                                 color="#333"
                                 fontSize="1.8" // fontSize in rem
                                 transformScale="1.2"
-                                // colorHover
+                                // colorHover="black"
                                 handleClick={updateAuthorship}
                             />
                             :
@@ -161,7 +174,7 @@ export default function ProjectView({
                                 autoFocus
                                 onChange={(e) => setNewAuthorship({authorship: e.target.value})}
                                 value={newAuthorship.authorship}
-                                style={isAuthorshipMounted ? mountedStyle : unmountedStyle}
+                                style={isAuthorshipMounted ? mountedTextArea : unmountedTextArea}
                                 onAnimationEnd={() => { if (!isAuthorshipMounted) setShowInputAuthorship(false)}}
                             />
                             :
@@ -220,27 +233,107 @@ export default function ProjectView({
                     <div className="card__section">
                         <div className="separator">JOB OFFERS</div>
                         <div className="card__jobList">
+
+
+
                         {
-                            newProject && newProject.jobList.length !== 0 ? 
-                            newProject.jobList.map((item, i)=> {
-                                return <>
-                                <div className="card__jobContainer" key={i}>
-                                    <div className="card__section">
-                                        <div className="separator">Job</div>
-                                        <p className="card__text">{item.job.title}</p>
-                                    </div>
-                                    <div className="card__section">
-                                        <div className="separator">description</div>
-                                        <p className="card__text">{item.jobDescription}</p>
-                                    </div>
-                                </div>
-                                </>
-                            })
+                            jobOffers.length !== 0 ? 
+                            displayJobs()
                             :
                             <p className="card__text">
                                 After you added Title, Concept and description, add some job offers to your project.
                             </p>   
                         }
+
+
+
+                          
+                            <div className="job-card">
+                                <div className="job-card__info">
+                                    <div className="job-card__updateJob">
+                                        <UpdateButton
+                                            fontSize="1.5" 
+                                            transformScale="1.2"
+                                            color="#333"
+                                        />
+                                        <h1 className="job-card__heading">Photographer</h1>
+                                    </div>
+                                    <div className="job-card__updateDescription">
+                                        <UpdateButton
+                                            fontSize="1.5" 
+                                            transformScale="1.2"
+                                            color="#333"
+                                        />
+                                        <p className="job-card__text">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium iure commodi, quidem molestias eos perferendis ullam totam tempore animi ut sit, corrupti tempora perspiciatis dolor doloremque neque accusamus reprehenderit recusandae assumenda molestiae ex beatae fugiat porro. Cumque reiciendis pariatur optio alias libero deleniti at incidunt ab inventore voluptates! Laborum, est!
+                                            
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo nam aliquam consequuntur? Molestias sed harum alias at quam odio non, accusamus libero illo repellat quisquam, deserunt asperiores nam velit tenetur!
+                                        </p>
+                                    </div>
+
+                                    
+                                </div>
+                                <div className="job-card__avatar">
+                                    <div className="job-card__trash">
+                                        <DeleteButton
+                                            fontSize="2" 
+                                            transformScale="1.2"
+                                            color="white"
+                                        />
+                                    </div>
+                                    <div className="job-card__participant">
+                                        <div className="job-card__participant--input">
+                                            <h1>Choose Participant</h1>
+                                            <button>Cancel</button>
+                                            <InputSelectUser />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="job-card">
+                                <div className="job-card__info">
+                                    <div className="job-card__updateJob">
+                                        <UpdateButton
+                                            fontSize="1.5" 
+                                            transformScale="1.2"
+                                            color="#333"
+                                        />
+                                        <h1 className="job-card__heading">Photographer</h1>
+                                    </div>
+                                    <div className="job-card__updateDescription">
+                                        <UpdateButton
+                                            fontSize="1.5" 
+                                            transformScale="1.2"
+                                            color="#333"
+                                        />
+                                        <p className="job-card__text">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium iure commodi, quidem molestias eos perferendis ullam totam tempore animi ut sit, corrupti tempora perspiciatis dolor doloremque neque accusamus reprehenderit recusandae assumenda molestiae ex beatae fugiat porro. Cumque reiciendis pariatur optio alias libero deleniti at incidunt ab inventore voluptates! Laborum, est!
+                                            
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo nam aliquam consequuntur? Molestias sed harum alias at quam odio non, accusamus libero illo repellat quisquam, deserunt asperiores nam velit tenetur!
+                                        </p>
+                                    </div>
+
+                                    
+                                </div>
+                                <div className="job-card__avatar">
+                                    <div className="job-card__trash">
+                                        <DeleteButton
+                                            fontSize="2" 
+                                            transformScale="1.2"
+                                            color="white"
+                                        />
+                                    </div>
+                                    <div className="job-card__participant">
+                                        <div className="job-card__participant--avatar">
+                                            <AvatarImg 
+                                                large="15"
+                                                image={'http://placeimg.com/640/480/people'}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  
+                        
                         </div>
                     </div>                    
                 </div>

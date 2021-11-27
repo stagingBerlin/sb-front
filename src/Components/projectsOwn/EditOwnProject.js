@@ -1,7 +1,7 @@
 import React from 'react'
 // import { useHistory, Link  } from 'react-router-dom'
 // import { updateOwnProject } from '../../helpers/apiCalls'
-import { UserContext } from '../../context/UserContext'
+// import { UserContext } from '../../context/UserContext'
 
 const EditOwnProject = () => {
 

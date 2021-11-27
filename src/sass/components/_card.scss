@@ -91,30 +91,18 @@
     color: $color-grey-dark-3;
   }
 
-  &__jobList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  &__jobContainer > *:not(:last-child) {
-    margin-bottom: 2rem;
-  }
-  &__jobContainer {
-    width: 48%;
-    padding: 1rem;
-    margin: 2.5rem 0;
-    border: 1px solid #ededed;
-    border-radius: 0.5rem;
-    box-shadow: $box-shadow;
-  }
+  //   &__jobList {
+  // display: flex;
+  // flex-wrap: wrap;
+  // justify-content: space-between;
+  //   }
 
   &__inputUpdateTitle {
     background-color: transparent;
     border: $color-black;
     font-family: inherit;
     outline: none;
-    width: 100%;
+    width: 60%;
     color: $color-white;
     padding: 1rem 1.5rem;
     font-size: 2rem;
@@ -124,8 +112,6 @@
       rgba($color-black, 0.3),
       rgba($color-black, 0.8)
     );
-
-    // animation: 0.8s slideOut;
   }
 
   &__inputBody {

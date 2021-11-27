@@ -25,6 +25,16 @@ axios.defaults.withCredentials = true;
 
   }
 
+  // get All the users in the Data Base
+  export const getUsers = async ()=> {
+    try {
+      const res = await axios.get(`/users`)
+      return res.data
+    } catch (error) {
+      return error.response.data
+    }
+  }
+
   export const updateUser = async (id, data) => {
     try {
       const res = await axios.put(`/users/${id}`, data)
