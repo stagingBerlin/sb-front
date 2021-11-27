@@ -1,33 +1,35 @@
-import { getThemeProps } from '@mui/system'
-import React, { useState, useContext, useEffect } from 'react'
-import { UserContext } from '../../context/UserContext'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import ProjectView from './ProjectView'
+import { getOwnProject } from '../../helpers/apiCalls'
 
-const EinzelViewOwnProject = (id) => {
-    const { user, setUser, jobs, setJobs, ownProjects, setOwnProjects } = useContext(UserContext)
-    console.log(ownProjects)
+const EinzelViewOwnProject = ({id}) => {
+
+    const [ projectToShow, setProjectToShow ] = useState()
+
+    const getViewProject = async () => {
+        try {
+            const projectApi = await getOwnProject(id)
+            if(projectApi.error){
+                console.log(projectApi.error);
+                return
+            }
+            setProjectToShow(projectApi)            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        getViewProject()
+        // eslint-disable-next-line
+    }, [])
+
     return (
-        <div className="grid-container">
-            <div className="grid-col-2 grid-col-span-3">
-                {ownProjects && ownProjects
-                .filter(project => project._id === id.id)
-                .map(item=> (
-                    <div key={item._id}>
-                        <h2>{item.title}</h2>
-                        <p>Concept: {item.authorship}</p>
-                        <p>Description: {item.description}</p>
-                        <p>Roles: {item.jobList.map(role => {
-                            return role.job.title
-                        })}</p>
-                        <p>Participants: {item.jobList.participant}</p>
-                        <p>Deadline:{item.deadline?.substr(0, 10)}</p>
-                        <p>Starting on: {item.starting?.substr(0, 10)} </p>
-                        <p>Contact: {user.username}</p>
-                        <p>Project status: {item.isHiring ? 'Hiring now' : 'Not hiring'}</p>
-                    </div>
-                    ))}
-                <Link to={`/account/project/edit`} className="button-grid-2fr grid-col-2">EDIT</Link>
-            </div>
+        <div style={{padding:".7rem"}}>
+            <ProjectView
+                newProject={projectToShow}
+                setNewProject={setProjectToShow}
+             />
         </div>
     )
 }

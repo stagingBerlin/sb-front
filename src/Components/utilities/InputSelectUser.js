@@ -1,18 +1,16 @@
-import React, { useContext, useState } from 'react'
-import { UserContext } from '../../context/UserContext'
+import React, { useState } from 'react'
 import AvatarImg from './AvatarImg'
 
 
-export default function InputSelectUser() {
-    const { usersdb } = useContext(UserContext)
-
+export default function InputSelectUser({
+    usersToChoose = [], // array of users to filter
+    getId // event onClick to extract id of user
+}) {
+    // console.log(usersToChoose);
+    
     const [ searchUser, setSearchUser ] = useState("")
     
-    const getId = e => {
-        // console.log(e.target.id);
-        console.log(e.currentTarget.id);
-    }
-    const filteredUser = usersdb.filter(user => {
+    const filteredUser = usersToChoose.filter(user => {
         return (
             user.name.toLowerCase().indexOf(searchUser.toLowerCase()) !== -1
             || 

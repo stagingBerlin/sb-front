@@ -6,7 +6,7 @@ import UpdateButton from '../utilities/UpdateButton'
 import AddButton from '../utilities/AddButton'
 import InputSelectUser from '../utilities/InputSelectUser'
 import BasicSelect from './BasicSelect'
-import { updateItemJobList } from '../../helpers/apiCallsAddJob'
+import { updateItemJobList,  deleteItemJobList, addParticipant } from '../../helpers/apiCallsAddJob'
 
 
 const mountedTextArea = { 
@@ -42,16 +42,21 @@ export default function JobOfferCard({
     const [ newJob, setNewJob ] = useState({ job: "" })
 
     const [ newJobDescription, setNewJobDescription ] = useState({jobDescription: jobDescription})
+    const [ newParticipant, setNewParticipant ] = useState(participant)
 
     useEffect(()=> {
         setNewJobDescription({jobDescription: jobDescription})
-    }, [jobDescription])
-    
+        setNewParticipant(participant)
+    }, [jobDescription, participant])
+    // console.log(newParticipant);
+
     const [ showSelectJob, setShowSelectJob ] = useState(false)
     const [ isJobSelectMounted, setIsJobSelectMounted ] = useState(false);
 
     const [ showJobDescription, setShowJobDescription ] = useState(false)
     const [ isJobDescriptionMounted, setIsJobDescriptionMounted ] = useState(false);
+
+    const [ showAction, setShowAction ] = useState(participant ? "avatar" : "add")
     
     // event to get jobId from BasicSelect component
     const handleChangeJob = (e) => {
@@ -62,7 +67,6 @@ export default function JobOfferCard({
     const updateSlots = async (newData) => {
         try {
             const resApi = await updateItemJobList(newProjectId, jobOfferId, newData)
-            console.log(resApi);
             if(resApi.error) {
                 console.log(resApi.error);
                 return
@@ -73,6 +77,32 @@ export default function JobOfferCard({
         }
     }
 
+    const deleteJob = async () => {
+        try {
+            const deleted = await deleteItemJobList(newProjectId, jobOfferId)
+            // console.log(deleted);
+            if(deleted.error) {
+                console.log(deleted.error);
+                return
+            }
+            setNewProject(deleted)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const hireParticipant = async (participantId) => {
+        try {
+            const newParticipant = await addParticipant(newProjectId, jobOfferId, participantId)
+            if(newParticipant.error) {
+                console.log(newParticipant.error);
+                return
+            }
+            setNewProject(newParticipant)
+        } catch (error) {
+            console.log(error);
+        }
+    }
     
     const updateJob = () =>{
         if(showSelectJob){
@@ -90,6 +120,23 @@ export default function JobOfferCard({
         }
         setIsJobDescriptionMounted(!isJobDescriptionMounted)
         if(!showJobDescription) setShowJobDescription(true);
+    }
+
+    const handleDeleteJob = () => {
+        deleteJob()
+    }
+
+    const addButtonEvent = (e) => {
+        setShowAction("input")
+    }
+
+    const cancelAndBacktoAdd = () => {
+        setShowAction("add")
+    }
+
+    const handleParticipantId = (e) => {
+        hireParticipant(e.currentTarget.id)
+        setShowAction("avatar")
     }
 
     return (
@@ -152,19 +199,42 @@ export default function JobOfferCard({
                         fontSize="2" 
                         transformScale="1.2"
                         color="white"
+                        handleClick={handleDeleteJob}
                     />
                 </div>
                 <div className="job-card__participant">
-                    <div className="job-card__participant--add">
-                        <AddButton
-                            fontSize="7" 
-                            transformScale="1.1"
-                            color="white"
-                            colorHover="#48fb47"
-                        />
+                        {
+                            showAction === "add" ?
+                            <div className="job-card__participant--add">
+                                <AddButton
+                                    fontSize="7" 
+                                    transformScale="1.1"
+                                    color="white"
+                                    colorHover="#48fb47"
+                                    handleClick={addButtonEvent}
+                                />
+                            </div>
+                            :
+                            showAction === "input" ?
+                            <div className="job-card__participant--input">
+                                    <h1>Choose Participant</h1>
+                                    <button onClick={cancelAndBacktoAdd}>Cancel</button>
+                                    <InputSelectUser 
+                                        usersToChoose={filterByJob}
+                                        getId={handleParticipantId}
+                                    />
+                            </div>
+                            :
+                            <div className="job-card__participant--avatar">
+                                <AvatarImg 
+                                    large="15"
+                                    image={newParticipant.avatar}
+                                />
+                            </div>
+                        }
                     </div>
-                </div>
             </div>
         </div>  
     )
 }
+
