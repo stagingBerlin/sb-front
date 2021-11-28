@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from '../../context/UserContext'
-import { useHistory} from 'react-router'
+// import { useHistory} from 'react-router'
 import { addJobToList } from '../../helpers/apiCallsAddJob'
 import BasicSelect from './BasicSelect.js'
 
@@ -11,7 +11,7 @@ const AddProjectDetail = ({
 
   // console.log(newProject._id);
   
-  const history = useHistory()
+  // const history = useHistory()
     const { jobs } = useContext(UserContext)
 
     const [inputJob, setInputJob] = useState('');
@@ -56,9 +56,9 @@ const AddProjectDetail = ({
         }
       }
 
-    const backToProject = () => {
-        return history.push('/account/project')
-      }
+    // const backToProject = () => {
+    //     return history.push('/account/project')
+    //   }
   
 
     return (
