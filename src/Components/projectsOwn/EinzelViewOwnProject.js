@@ -5,7 +5,6 @@ import { getOwnProject } from '../../helpers/apiCalls'
 const EinzelViewOwnProject = ({id}) => {
 
     const [ projectToShow, setProjectToShow ] = useState()
-
     const getViewProject = async () => {
         try {
             const projectApi = await getOwnProject(id)
