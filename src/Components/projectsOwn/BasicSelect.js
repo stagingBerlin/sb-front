@@ -5,6 +5,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
+
+
 export default function BasicSelect({jobs, inputJob, handleChangeJob}) {
   return (
     <Box sx={{ minWidth: 120 }}>
@@ -22,6 +24,6 @@ export default function BasicSelect({jobs, inputJob, handleChangeJob}) {
           {job.title}</MenuItem>)}
         </Select>
       </FormControl>
-    </Box>
+    </Box> 
   );
 }

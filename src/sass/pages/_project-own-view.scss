@@ -1,0 +1,6 @@
+.project-own-view {
+  padding: 3rem 6rem 25rem;
+  @include respond(tab-port) {
+    padding: 3rem 0 25rem;
+  }
+}

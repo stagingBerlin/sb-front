@@ -8,7 +8,6 @@
   box-shadow: 0 1.5rem 4rem rgba($color-black, 0.1);
 
   &__picture {
-    // background-color: red;
     background-image: url("https://images.unsplash.com/photo-1503095396549-807759245b35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1771&q=80");
     background-size: cover;
     background-position: center;
@@ -91,11 +90,16 @@
     color: $color-grey-dark-3;
   }
 
-  //   &__jobList {
-  // display: flex;
-  // flex-wrap: wrap;
-  // justify-content: space-between;
-  //   }
+  &__jobList > *:not(:last-child) {
+    margin-bottom: 4rem;
+  }
+
+  &__jobList {
+    &--add-job {
+      display: flex;
+      justify-content: end;
+    }
+  }
 
   &__inputUpdateTitle {
     background-color: transparent;
