@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function AddButton({
+export default function AddJobButton({
     color,
     fontSize,
     colorHover = color,
@@ -11,18 +11,22 @@ export default function AddButton({
     const [ fontColor, setFontColor ] = useState(color)
     const [scale, setScale] = useState()
 
-
     const styleContainer = {
+
         cursor: 'pointer',
         borderRadius: ".5rem",
         border: `2px solid ${fontColor}`,
         transform: scale,
         transition: `0.5s`,
-        padding:  "1.5rem",
+        padding:  "1rem",
         color: fontColor,
         textAlign: "center",
-        width: "17.5rem",
-        height: "14rem"
+        width: "16rem",
+        height: "7rem",
+        display:"flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        letterSpacing: "0.04rem"
     }
 
     const styleIcon = {
@@ -30,10 +34,9 @@ export default function AddButton({
     }
 
     const styleHeading = {
-        marginTop: ".9rem",
+        // marginRight: ".9rem",
     }
 
-    
     const handleMouseEnter = () => {
         setFontColor(colorHover)
         setScale(`scale(${transformScale})`)
@@ -44,19 +47,22 @@ export default function AddButton({
         setScale()
     }
 
+
     return (
-        <div 
+        <div
             style={styleContainer}
             onClick={handleClick}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
+        <h1
+            style={styleHeading}
+        >Add a Job</h1>
             <i 
-                className="fas fa-user-plus"
+                className="fas fa-plus"
                 style={styleIcon}   
+
             />
-            <h1 
-            style={styleHeading}>Add Participant</h1>
         </div>
     )
 }

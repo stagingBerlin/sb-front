@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { updateOwnProject } from '../../helpers/apiCalls.js'
 import JobOfferCard from './JobOfferCard'
 import UpdateButton from '../utilities/UpdateButton'
+import AddJobButton from '../utilities/AddJobButton'
+import AddProjectDetail from './AddProjectDetail'
 
 const mountedTextArea = { 
     WebkitAnimation: "text-focus-in .8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
@@ -16,6 +18,9 @@ export default function ProjectView({
     newProject,
     setNewProject
 }) {
+    console.log(newProject);
+
+    const [ showCreateJob, setShowCreteJob ] = useState(false)
 
     const [ newTitle, setNewTitle ] = useState({title: newProject ? newProject.title : ""})
     const [ newAuthorship, setNewAuthorship ] = useState({authorship:  newProject ? newProject.authorship : ""})
@@ -82,6 +87,11 @@ export default function ProjectView({
         if(!showInputDescription) setShowInputDescription(true);
     }
 
+    const handlePopup = (e) => {
+        e.preventDefault();
+        setShowCreteJob(true)
+    }
+
     // console.log(jobOffers);
     const displayJobs = () => {
         return jobOffers
@@ -102,6 +112,21 @@ export default function ProjectView({
     
     return (
         <div className="project-view">
+            {
+                showCreateJob ?
+                <div className="popup">
+                    <div className="create-project-form">
+                        <AddProjectDetail 
+                            newProject={newProject}
+                            setNewProject={setNewProject}
+                            setShowCreteJob={setShowCreteJob}
+                        />
+                    </div>
+                </div>
+                :
+                <></>
+
+            }
             <div className="card">
                 <div className="card__picture"></div>
                 <div className="card__updateTitle">
@@ -176,14 +201,14 @@ export default function ProjectView({
                                 onAnimationEnd={() => { if (!isAuthorshipMounted) setShowInputAuthorship(false)}}
                             />
                             :
-                            <p className="card__text">
+                            <h1 className="job-card__heading">
                                 { 
                                     newProject ? 
                                     newProject.authorship 
                                     : 
                                     "Who owns the intellectual property of this project?, add it in the form please." 
                                 }
-                            </p>
+                            </h1>
                         }
                     </div>
 
@@ -231,6 +256,16 @@ export default function ProjectView({
                     <div className="card__section">
                         <div className="separator">JOB OFFERS</div>
                         <div className="card__jobList">
+                            <div className="card__jobList--add-job">
+                                <AddJobButton 
+                                    fontSize="3.5" 
+                                    transformScale="1.1"
+                                    color="black"
+                                    colorHover="#48fb47"
+                                    handleClick={handlePopup}
+                                />
+                            </div>
+
                         {
                             jobOffers.length !== 0 ? 
                             displayJobs()

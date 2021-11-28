@@ -1,19 +1,17 @@
 import React, { useState, useContext } from 'react'
 import { UserContext } from '../../context/UserContext'
-// import { useHistory} from 'react-router'
 import { addJobToList } from '../../helpers/apiCallsAddJob'
 import BasicSelect from './BasicSelect.js'
 
 const AddProjectDetail = ({
   newProject,
-  setNewProject
+  setNewProject,
+  setShowCreteJob
 }) => {
 
-  // console.log(newProject._id);
+ 
+  const { jobs } = useContext(UserContext)
   
-  // const history = useHistory()
-    const { jobs } = useContext(UserContext)
-
     const [inputJob, setInputJob] = useState('');
 
     const [ addJob, setAddJob ] = useState({
@@ -47,6 +45,7 @@ const AddProjectDetail = ({
               jobDescription : ""
             })
             setInputJob("")
+            setShowCreteJob(false)
           }
           else{
             console.log(resApi.error);
@@ -56,11 +55,10 @@ const AddProjectDetail = ({
         }
       }
 
-    // const backToProject = () => {
-    //     return history.push('/account/project')
-    //   }
-  
-
+      const handlePopup = () => {
+        setShowCreteJob(false)
+      }
+    
     return (
         <>
           <form className="crete-project-form" onSubmit={handleSubmit}>
@@ -69,12 +67,30 @@ const AddProjectDetail = ({
             </div>
 
             <div className="create-project-form__group">
+              <label htmlFor="job-select">Choose Job:</label>
+              <select 
+                type="select" 
+                name="jobs"
+                id="job-select"
+                value={inputJob}
+                onChange={handleChangeJob}
+              >
+                <option>--Please choose a job--</option>
+                {
+                  jobs.map((job) => 
+                  <option key={job._id} value={job._id}>{job.title}</option>)
+                }
+              </select>
+            </div>
+
+            {/* <div className="create-project-form__group">
+
               <BasicSelect
                 jobs={jobs}
                 inputJob={inputJob}
                 handleChangeJob={handleChangeJob}
               />
-            </div>
+            </div> */}
 
             <div className="create-project-form__group">
               <textarea
@@ -97,6 +113,7 @@ const AddProjectDetail = ({
             </div>
 
             <div className="create-project-form__buttons-container">
+              <input type="button"  value="Cancel" onClick={handlePopup} className="button-primary" />
               <input type="submit" value="Add Job" className="button-primary" />
             </div>
           

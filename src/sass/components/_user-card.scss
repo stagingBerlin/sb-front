@@ -1,0 +1,21 @@
+.user-card {
+  border-radius: 0.5rem;
+  //   border: 1px solid $color-white;
+  color: $color-white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  & > *:not(:last-child) {
+    margin-bottom: 0.8rem;
+  }
+
+  &__info {
+    text-align: center;
+    letter-spacing: 0.06rem;
+  }
+
+  &__info span {
+    margin-left: 0.7rem;
+  }
+}

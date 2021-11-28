@@ -2,11 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { useHistory, Link } from 'react-router-dom'
 import { createProject } from '../../helpers/apiCalls'
-
-import AddProjectDetail from './AddProjectDetail'
 import ProjectView from './ProjectView'
-
-
 
 const CreateProjectsOwn = () => {
 
@@ -17,8 +13,7 @@ const CreateProjectsOwn = () => {
       description: "",
     })
     const [ newProject, setNewProject ] = useState()
-
-    const [isNewProject, setIsNewProject] = useState(false)
+    const [ showCreateForm, setShowCreateForm ] = useState(true)
 
     const history = useHistory()
 
@@ -40,7 +35,7 @@ const CreateProjectsOwn = () => {
           }
           setNewProject(res)
           setOwnProjects([...ownProjects, res])
-          setIsNewProject(true)
+          setShowCreateForm(false)
           setData({
             title : "",
             authorship: "",
@@ -60,15 +55,13 @@ const CreateProjectsOwn = () => {
 
     return (
       // pages styles
-      <div className="create-project-page">
-        <div className="create-project-page__form">
-
-          {/* components styles create-project-form */}
-          <div className="create-project-form">
-
-            {
-              !isNewProject ? 
-            <form className="create-project-form__project" onSubmit={handleSubmit}>
+      <div className="project-own-view">
+       {
+         showCreateForm ?
+        <div className="popup">
+        <div className="create-project-form">
+        <h1 className="create-project-form__heading">Create a Project</h1>
+        <form className="create-project-form__project" onSubmit={handleSubmit}>
                 <div className="create-project-form__group"> 
                   <input
                     id="title"
@@ -127,27 +120,15 @@ const CreateProjectsOwn = () => {
                 <input type="submit" value="Create" className="button-primary" onClick={handleSubmit} />
               </div>
             </form>
-            : <></>
-            }
-
-            {isNewProject ? (
-              <AddProjectDetail 
-                newProject={newProject}
-                setNewProject={setNewProject}
-              />
-            ) : (
-              <></>
-            )}
-          </div>
-
         </div>
-
-        <div className="create-project-page__view">
+        </div>
+        : <></>
+       }
           <ProjectView 
             newProject={newProject}
             setNewProject={setNewProject}
           />
-        </div>
+        
       </div>
     )
 }

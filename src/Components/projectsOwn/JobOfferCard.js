@@ -36,6 +36,7 @@ export default function JobOfferCard({
         const filteredUser = user.profession.filter(job => job.title === title) 
         return filteredUser.length !== 0
     })
+    // console.log(filterByJob);
 
     // state to handle job Id in  BasicSelect component
     const [inputJob, setInputJob] = useState(jobId);
@@ -93,12 +94,13 @@ export default function JobOfferCard({
 
     const hireParticipant = async (participantId) => {
         try {
-            const newParticipant = await addParticipant(newProjectId, jobOfferId, participantId)
-            if(newParticipant.error) {
-                console.log(newParticipant.error);
+            const newParticipantDB = await addParticipant(newProjectId, jobOfferId, participantId)
+            console.log(newParticipantDB);
+            if(newParticipantDB.error) {
+                console.log(newParticipantDB.error);
                 return
             }
-            setNewProject(newParticipant)
+            setNewProject(newParticipantDB)
         } catch (error) {
             console.log(error);
         }
@@ -139,6 +141,7 @@ export default function JobOfferCard({
         setShowAction("avatar")
     }
 
+// console.log(newParticipant);
     return (
         <div className="job-card">
             <div className="job-card__info">
@@ -196,9 +199,10 @@ export default function JobOfferCard({
             <div className="job-card__avatar">
                 <div className="job-card__trash">
                     <DeleteButton
-                        fontSize="2" 
+                        fontSize="2.4" 
                         transformScale="1.2"
-                        color="white"
+                        color="#93291e" 
+                        colorHover="#ed213a"
                         handleClick={handleDeleteJob}
                     />
                 </div>
@@ -217,8 +221,10 @@ export default function JobOfferCard({
                             :
                             showAction === "input" ?
                             <div className="job-card__participant--input">
-                                    <h1>Choose Participant</h1>
-                                    <button onClick={cancelAndBacktoAdd}>Cancel</button>
+                                    <h1 className="job-card__heading">Choose Participant</h1>
+                                    <div className="job-card__participant--cancel">
+                                        <button className="button-primary button-primary--cancel" onClick={cancelAndBacktoAdd}>Cancel</button>
+                                    </div>
                                     <InputSelectUser 
                                         usersToChoose={filterByJob}
                                         getId={handleParticipantId}
@@ -226,10 +232,28 @@ export default function JobOfferCard({
                             </div>
                             :
                             <div className="job-card__participant--avatar">
-                                <AvatarImg 
-                                    large="15"
-                                    image={newParticipant.avatar}
-                                />
+                                <div className="user-card">
+                                    <AvatarImg 
+                                        large="12"
+                                        image={newParticipant.avatar}
+                                    />
+                                    <div className="user-card__info">
+                                        <h2>Username: <span>{newParticipant.username}</span></h2>
+                                        <h2>Name: <span>{newParticipant.name}</span></h2>
+                                        <h2>Profession: <span>{title}</span></h2>
+                                        <h2>Other Professions:</h2>
+                                            {
+                                                !newParticipant ? 
+                                                <></>
+                                                :
+                                                newParticipant.profession.filter(item => item.title !== title)
+                                                .map(item => {
+                                                    console.log(item._id)
+                                                    return <h2 key={item._id} >{item.title}</h2>
+                                                })
+                                            }
+                                    </div>
+                                </div>
                             </div>
                         }
                     </div>

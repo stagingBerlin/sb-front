@@ -24,7 +24,7 @@ const EinzelViewOwnProject = ({id}) => {
     }, [])
 
     return (
-        <div style={{padding:".7rem"}}>
+        <div className="project-own-view">
             <ProjectView
                 newProject={projectToShow}
                 setNewProject={setProjectToShow}
