@@ -14,6 +14,26 @@ export const UserContextProvider = ({ children }) => {
   // here we will store our fetched jobs from API
   const [jobs, setJobs] = useState([]);
 
+  // array of users in data base
+  const [ usersdb, setUsersdb] = useState([]);
+
+
+  const getAllUsers = async () => {
+    try {
+      const users = await getUsers()
+      if(users.error){
+        console.log(users.error);
+        return
+      }
+
+      setUsersdb(users)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+
   useEffect(() => {
     const auth = async () => {
       try {
@@ -57,6 +77,7 @@ export const UserContextProvider = ({ children }) => {
         console.log(error);
       }
     };
+    getAllUsers()
     allProjects();
     fetchOwnProjects();
     getJobsApi();
@@ -77,7 +98,8 @@ export const UserContextProvider = ({ children }) => {
         projects,
         setProjects,
         viewProject,
-        setViewProject
+        setViewProject,
+        usersdb, setUsersdb
       }}
     >
       {children}
