@@ -82,7 +82,7 @@ export const UserContextProvider = ({ children }) => {
     fetchOwnProjects();
     getJobsApi();
     auth();
-  }, []);
+  }, [user]);
 
   return (
     <UserContext.Provider
