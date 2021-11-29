@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { authenticateUser } from '../helpers/authHelpers/apiCallsAuth';
-import { getJobs, getOwnProjects, getUsers } from '../helpers/apiCalls';
+import { getJobs, getOwnProjects, getUsers, getProjects } from '../helpers/apiCalls';
 
 
 export const UserContext = createContext();
