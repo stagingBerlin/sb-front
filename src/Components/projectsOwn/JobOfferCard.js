@@ -248,7 +248,6 @@ export default function JobOfferCard({
                                                 :
                                                 newParticipant.profession.filter(item => item.title !== title)
                                                 .map(item => {
-                                                    console.log(item._id)
                                                     return <h2 key={item._id} >{item.title}</h2>
                                                 })
                                             }
