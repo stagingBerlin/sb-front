@@ -32,14 +32,6 @@ import axios from './axios-config'
     }
   }
 
-  export const updateUser = async (id, data) => {
-    try {
-      const res = await axios.put(`/users/${id}`, data)
-        return res.data
-    } catch(error){
-      return error
-    }
-  }
 
   export const getProjects = async () => {
     try {
@@ -102,3 +94,12 @@ import axios from './axios-config'
     }
   }
 
+
+  export const updateUser = async (id, data) => {
+    try {
+      const res = await axios.put(`/users/${id}`, data)
+        return res.data
+    } catch(error){
+      return error
+    }
+  }
