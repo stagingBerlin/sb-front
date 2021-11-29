@@ -18,7 +18,7 @@ export default function ProjectView({
     newProject,
     setNewProject
 }) {
-    console.log(newProject);
+    // console.log(newProject);
 
     const [ showCreateJob, setShowCreteJob ] = useState(false)
 
