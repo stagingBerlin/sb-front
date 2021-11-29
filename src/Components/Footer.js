@@ -5,11 +5,11 @@ function Footer() {
     <div className="footer">
       <div className="grid-container ">
         <div className="grid-footer grid-col-span-10 border-top grid-col-2">
-          <div className="grid-col-8">
-            <div className="border-left">New to Berlin?</div>
+          <div className="grid-col-7 grid-col-span-2">
+            <div className=" footer-link border-left">New to Berlin?</div>
           </div>
           <div className="grid-col-span-2">
-            <div className="border-left ">Want to invest in Talent?</div>
+            <div className="footer-link border-left ">Want to invest in Talent?</div>
           </div>
         </div>
       </div>

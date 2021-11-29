@@ -10,7 +10,7 @@
 
   &:hover {
     cursor: pointer;
-    background-color:$nav-footer-border-col;
+    background-color: $nav-footer-border-col;
     // box-shadow: $box-shadow;
     // color: $color-white;
     transition: 0.5s;
@@ -19,5 +19,23 @@
 
   &:active {
     transform: translateY(2px);
+  }
+
+  &--cancel {
+    background: #ed213a; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+      to right,
+      #93291e,
+      #ed213a
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+      to right,
+      #93291e,
+      #ed213a
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border: 1px solid #93291e;
+    border-radius: 0.6rem;
+    color: inherit;
+    letter-spacing: 0.05rem;
   }
 }

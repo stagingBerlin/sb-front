@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 
-export default function UpdateButton({
+export default function DeleteButton({
     color,
     fontSize,
     colorHover = color,
@@ -29,10 +29,11 @@ export default function UpdateButton({
         setFontColor(color)
         setScale()
     }
+    // <i class="far fa-trash-alt"></i>
 
     return (
         <i 
-            className="far fa-edit"
+            className="far fa-trash-alt"
             style={style} 
             onClick={handleClick}
             onMouseEnter={handleMouseEnter}

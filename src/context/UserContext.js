@@ -1,7 +1,7 @@
-import React, { createContext, useState, useEffect } from "react";
-import { authenticateUser } from "../helpers/authHelpers/apiCallsAuth";
-import { getJobs, getOwnProjects } from "../helpers/apiCalls";
-import { getProjects } from "../helpers/apiCalls";
+import React, { createContext, useState, useEffect } from 'react';
+import { authenticateUser } from '../helpers/authHelpers/apiCallsAuth';
+import { getJobs, getOwnProjects, getUsers } from '../helpers/apiCalls';
+
 
 export const UserContext = createContext();
 
@@ -83,4 +83,5 @@ export const UserContextProvider = ({ children }) => {
       {children}
     </UserContext.Provider>
   );
+
 };

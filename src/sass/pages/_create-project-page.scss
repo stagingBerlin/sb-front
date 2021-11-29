@@ -1,25 +1,3 @@
-.create-project-page {
-  display: flex;
-  justify-content: space-between;
-  min-height: 200vh;
-
-  &__form {
-    padding: 3rem;
-    width: 40%;
-  }
-  &__view {
-    width: 60%;
-    padding: 3rem;
-  }
-}
-
 .project-view {
-  background-image: linear-gradient(
-    to right,
-    rgba(235, 235, 234, 0.3),
-    rgba(235, 235, 234, 0.4)
-  );
   border-radius: 0.6rem;
-  box-shadow: 0 1.5rem 4rem rgba($color-black, 0.1);
-  min-height: 62.5vh;
 }

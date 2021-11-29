@@ -1,50 +1,85 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
+import sliderContext from "./sliderContext";
+import Curtain from "./Curtain";
+import { Opacity } from "@mui/icons-material";
 
 function ProjectCard({ content }) {
-  const pillarRef = useRef();
-  const [pillarWidth, setPillarWidth] = useState();
+  // const [opacityState, setOpacity] = useState(0);
 
-  const getPillarWidth = () => {
-    if (!pillarRef.current) {
-      return;
-    }
-    const newWidth = pillarRef.current.clientWidth;
-    setPillarWidth(newWidth);
-  };
+  // const fadein = () => {
+  //   if (opacityState == 1) {
+  //     return setOpacity(0);
+  //   } else {
+  //     return setOpacity(1);
+  //   }
+  // };
 
-  useEffect(() => {
-    getPillarWidth();
-  }, []);
+  // const autoPlayRef = useRef();
 
-  useEffect(() => {
-    window.addEventListener("resize", getPillarWidth);
-  }, []);
+  // useEffect(() => {
+  //   autoPlayRef.current = fadein;
+  // });
+
+  // useEffect(() => {
+  //   const play = () => {
+  //     autoPlayRef.current();
+  //   };
+  //   const interval = setInterval(play, 4000);
+  // }, []);
+
+  // const pillarRef = useRef();
+  // const [pillarWidth, setPillarWidth] = useState();
+
+  // const getPillarWidth = () => {
+  //   if (!pillarRef.current) {
+  //     return;
+  //   }
+  //   const newWidth = pillarRef.current.clientWidth;
+  //   setPillarWidth(newWidth);
+  // };
+
+  // useEffect(() => {
+  //   getPillarWidth();
+  // }, []);
+
+  // useEffect(() => {
+  //   window.addEventListener("resize", getPillarWidth);
+  // }, []);
+
+  const { pillarWidth } = useContext(sliderContext);
 
   return (
     <div className="projectCard-container">
-      <div
-        className="projectCard-Img"
-        style={{
-          height: "35vh",
-          width: "100%",
-          backgroundImage: `url(${content})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "top",
-        }}
-      ></div>
-      <div> This is the title</div>
-      <div>Short Intro</div>
-      <div> by Owner</div>
-      <div
+      <div>
+        <div
+          className="fade"
+          // style={{
+          //   opacity: `${opacityState}`,
+          //   transition: `transform 5s`,
+          // }}
+        ></div>
+        <div
+          className="projectCard-Img"
+          style={{
+            height: "45vh",
+            width: "100%",
+            backgroundImage: `url(${content})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "top",
+          }}
+        ></div>
+      </div>
+
+      {/* <div
         className="pillar"
         style={{
           height: "100%",
-          left: `-${pillarWidth * 0.5}px`,
+          left: `0px`,
         }}
       >
-        <img src="/img/pillar.png" alt="" srcset="" ref={pillarRef} />
-      </div>
+        <img src="/img/pillar.png" alt="" srcset="" />
+      </div> */}
     </div>
   );
 }

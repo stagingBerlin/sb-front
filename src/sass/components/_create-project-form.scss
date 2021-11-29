@@ -1,23 +1,30 @@
 .create-project-form {
-  //   background-color: #ebebea;
-
-  background-image: linear-gradient(
-    to right,
-    rgba(235, 235, 234, 0.3),
-    rgba(235, 235, 234, 0.4)
-  );
+  background-color: #ebebea;
+  // height: 70%;
+  width: 60%;
   border-radius: 0.6rem;
   box-shadow: 0 1.5rem 4rem rgba($color-black, 0.1);
   padding: 2rem;
 
-  //   &__project {
-  //   }
+  @include respond(tab-port) {
+    // height: 70%;
+    width: 90%;
+  }
 
-  //   &__jobList {
-  //   }
+  @include respond(phone) {
+    // height: 70%;
+    width: 100%;
+  }
+
+  &__heading {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 2.5rem;
+    letter-spacing: 0.1rem;
+  }
 
   &__group:not(:last-child) {
-    margin-bottom: 2rem;
+    margin-bottom: 3.5rem;
   }
 
   &__label {

@@ -1,35 +1,132 @@
-import React, { useState } from 'react'
-import UpdateButton from '../utilities/UpdateButton'
+import React, { useState, useEffect } from 'react'
 import { updateOwnProject } from '../../helpers/apiCalls.js'
+import JobOfferCard from './JobOfferCard'
+import UpdateButton from '../utilities/UpdateButton'
+import AddJobButton from '../utilities/AddJobButton'
+import AddProjectDetail from './AddProjectDetail'
 
+const mountedTextArea = { 
+    WebkitAnimation: "text-focus-in .8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
+	animation: "text-focus-in .8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both"
+};
+const unmountedTextArea = {
+    WebkitAnimation: "text-blur-out 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
+    animation: "text-blur-out 1s cubic-bezier(0.550, 0.085, 0.680, 0.530) both"
+};
 
 export default function ProjectView({
     newProject,
     setNewProject
 }) {
+    console.log(newProject);
 
-    const [ newTitle, setNewTitle ] = useState()
-    const [ showInpTitle, setShowImpTitle ] = useState(false)
+    const [ showCreateJob, setShowCreteJob ] = useState(false)
 
-    const update = async () => {
+    const [ newTitle, setNewTitle ] = useState({title: newProject ? newProject.title : ""})
+    const [ newAuthorship, setNewAuthorship ] = useState({authorship:  newProject ? newProject.authorship : ""})
+    const [ newDescription, setNewDescription ] = useState({description: newProject ? newProject.description : ""})
+
+    const [ jobOffers, setJobOffers ] = useState([])
+
+    useEffect(()=> {
+        setNewTitle({title: newProject ? newProject.title : ""})
+        setNewAuthorship({authorship:  newProject ? newProject.authorship : ""})
+        setNewDescription({description: newProject ? newProject.description : ""})
+
+        setJobOffers(newProject ? newProject.jobList : [])
+    }, [ newProject ]);
+    
+    const [ isTitleMounted, setIsTitleMounted ] = useState(false);
+    const [ showInputTitle, setShowInputTitle ] = useState(false);
+
+    const [ isAuthorshipMounted, setIsAuthorshipMounted ] = useState(false);
+    const [ showInputAuthorship, setShowInputAuthorship ] = useState(false);
+    
+    const [ isDescriptionMounted, setIsDescriptionMounted ] = useState(false);
+    const [ showInputDescription, setShowInputDescription ] = useState(false);
+
+    const update = async (inputValue) => {
         try {
-            const newResp = await updateOwnProject(newProject._id, {title: newTitle})
+            const newResp = await updateOwnProject(newProject._id, inputValue)
+            console.log(newResp);
+            if(newResp.error){
+                console.log(newResp.error);
+                return;
+            }
+
             setNewProject(newResp)
         } catch (error) {
             console.log(error);
         }
     }
 
-    const handleTitle = (e) => {
-        if(showInpTitle){  
-            update(); 
+    const updateTitle = () => {
+        if(showInputTitle){  
+            update(newTitle); 
+            setNewTitle({title: ""})
         }
-        setShowImpTitle(!showInpTitle) 
+        setIsTitleMounted(!isTitleMounted)
+        if(!showInputTitle) setShowInputTitle(true);
     }
 
+    const updateAuthorship = () => {
+        if(showInputAuthorship){  
+            update(newAuthorship); 
+            setNewAuthorship({authorship: ""})
+        }
+        setIsAuthorshipMounted(!isAuthorshipMounted)
+        if(!showInputAuthorship) setShowInputAuthorship(true);
+    }
+
+    const updateDescription = () => {
+        if(showInputDescription){  
+            update(newDescription); 
+            setNewDescription({description: ""})
+        }
+        setIsDescriptionMounted(!isDescriptionMounted)
+        if(!showInputDescription) setShowInputDescription(true);
+    }
+
+    const handlePopup = (e) => {
+        e.preventDefault();
+        setShowCreteJob(true)
+    }
+
+    // console.log(jobOffers);
+    const displayJobs = () => {
+        return jobOffers
+        // .sort((a, b) => a.job.title.localeCompare(b.job.title))
+        .map(item => 
+            <JobOfferCard 
+                key={item._id}
+                jobOfferId={item._id}
+                title={item.job.title}
+                jobId={item.job._id}
+                jobDescription={item.jobDescription}
+                participant={item.participant ? item.participant : ""}
+                newProjectId={newProject._id}
+                setNewProject={setNewProject}
+            />
+        )
+    }
     
     return (
         <div className="project-view">
+            {
+                showCreateJob ?
+                <div className="popup">
+                    <div className="create-project-form">
+                        <AddProjectDetail 
+                            newProject={newProject}
+                            setNewProject={setNewProject}
+                            setShowCreteJob={setShowCreteJob}
+                        />
+                    </div>
+                </div>
+                :
+                <></>
+
+            }
             <div className="card">
                 <div className="card__picture"></div>
                 <div className="card__updateTitle">
@@ -37,26 +134,28 @@ export default function ProjectView({
                         newProject ? 
                         <UpdateButton
                             color="white"
-                            fontSize="2.5" // fontSize in rem
+                            fontSize="2" // fontSize in rem
                             transformScale="1.2"
                             // colorHover
-                            handleClick={handleTitle}
+                            handleClick={updateTitle}
                         />
                         :
                         <></>
                     }
-                    
                 </div>
                 
                 <h4 className="card__heading">
 
                 {
-                    showInpTitle ?
+                    showInputTitle ?
                     <input 
+                        autoFocus
                         className="card__inputUpdateTitle"
                         type="text" 
-                        onChange={(e) => setNewTitle(e.target.value)} 
-                        value={newTitle}
+                        onChange={(e) => setNewTitle({title : e.target.value})} 
+                        value={newTitle.title}
+                        style={isTitleMounted ? mountedTextArea : unmountedTextArea}
+                        onAnimationEnd={() => { if (!isTitleMounted) setShowInputTitle(false)}}
                     />
                         :
                     <span className="card__heading-span">
@@ -75,47 +174,101 @@ export default function ProjectView({
 
                     <div className="card__section">
                         <div className="separator">CONCEPT</div>
-                        <p className="card__text">
-                            { 
-                                newProject ? 
-                                newProject.authorship 
-                                : 
-                                "Who owns the intellectual property of this project?, add it in the form please." 
-                            }
-                        </p>
+                        <div className="card__updateAuthorship">
+                        {
+                            newProject ?
+                            <UpdateButton
+                                color="#333"
+                                fontSize="1.8" // fontSize in rem
+                                transformScale="1.2"
+                                // colorHover="black"
+                                handleClick={updateAuthorship}
+                            />
+                            :
+                            <></>
+                        }
+                        </div>
+
+                        { 
+                            showInputAuthorship ?
+                            <input 
+                                type="text"
+                                className="card__inputBody"
+                                autoFocus
+                                onChange={(e) => setNewAuthorship({authorship: e.target.value})}
+                                value={newAuthorship.authorship}
+                                style={isAuthorshipMounted ? mountedTextArea : unmountedTextArea}
+                                onAnimationEnd={() => { if (!isAuthorshipMounted) setShowInputAuthorship(false)}}
+                            />
+                            :
+                            <h1 className="job-card__heading">
+                                { 
+                                    newProject ? 
+                                    newProject.authorship 
+                                    : 
+                                    "Who owns the intellectual property of this project?, add it in the form please." 
+                                }
+                            </h1>
+                        }
                     </div>
 
                     <div className="card__section">
                         <div className="separator">DESCRIPTION</div>
-                        <p className="card__text">
-                            { 
-                                newProject ? 
-                                newProject.description 
-                                : 
-                                'Add a description about your Project, use the form please.' 
-                            }
-                        </p>
+                        <div className="card__updateDescription">
+                        {
+                            newProject ?
+                            <UpdateButton
+                                color="#333"
+                                fontSize="1.8" // fontSize in rem
+                                transformScale="1.2"
+                                // colorHover
+                                handleClick={updateDescription}
+                            />
+                            :
+                            <></>
+                        }
+                        </div>
+
+                        {
+                            showInputDescription ?
+                            <textarea 
+                                rows="20" 
+                                cols="50"
+                                className="card__inputBody"
+                                autoFocus
+                                onChange={(e) => setNewDescription({description: e.target.value})}
+                                value={newDescription.description}
+                                style={isDescriptionMounted ? mountedTextArea : unmountedTextArea}
+                                onAnimationEnd={() => { if (!isDescriptionMounted) setShowInputDescription(false)}}
+                            />
+                            :
+                            <p className="card__text">
+                                { 
+                                    newProject ? 
+                                    newProject.description 
+                                    : 
+                                    'Add a description about your Project, use the form please.' 
+                                }
+                            </p>
+                        }
                     </div>
 
                     <div className="card__section">
                         <div className="separator">JOB OFFERS</div>
                         <div className="card__jobList">
+                            <div className="card__jobList--add-job">
+                                <AddJobButton 
+                                    fontSize="3.5" 
+                                    transformScale="1.1"
+                                    color="black"
+                                    colorHover="#48fb47"
+                                    handleClick={handlePopup}
+                                />
+                            </div>
+
                         {
-                            newProject && newProject.jobList.length !== 0 ? 
-                            newProject.jobList.map((item, i)=> {
-                                return <>
-                                <div className="card__jobContainer" key={i}>
-                                    <div className="card__section">
-                                        <div className="separator">Job</div>
-                                        <p className="card__text">{item.job.title}</p>
-                                    </div>
-                                    <div className="card__section">
-                                        <div className="separator">description</div>
-                                        <p className="card__text">{item.jobDescription}</p>
-                                    </div>
-                                </div>
-                                </>
-                            })
+                            jobOffers.length !== 0 ? 
+                            displayJobs()
                             :
                             <p className="card__text">
                                 After you added Title, Concept and description, add some job offers to your project.
@@ -128,6 +281,4 @@ export default function ProjectView({
         </div>
     )
 }
-
-// Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum amet atque culpa sunt sint recusandae natus reprehenderit incidunt odit et aperiam, nam modi quae vel facere mollitia id non repellat? Aperiam, temporibus perspiciatis cumque sed, veritatis ullam suscipit cum quis laboriosam voluptate deserunt expedita laudantium delectus explicabo quas blanditiis quasi minus eius sint! Dolore assumenda natus vitae voluptas laboriosam hic, eius tempora in molestias alias, vero cum voluptate nesciunt, autem necessitatibus delectus. Distinctio libero, molestias aperiam omnis ad, autem voluptatem, accusantium harum pariatur velit officiis voluptates vitae nulla excepturi consequatur quis possimus. Consectetur, cumque harum. Dignissimos cumque magni qui eaque veritatis ipsam sequi sint minus laborum totam odio in consequatur maxime tenetur nemo, perferendis, saepe voluptatem quasi dolor? Quos eos quam, sint facere ut quibusdam illum minus. Eos, magnam itaque illo quaerat magni accusamus ducimus, consequuntur hic distinctio ipsum voluptates a maxime quis temporibus error totam cupiditate amet deleniti. Facere autem quia accusamus, quibusdam, cupiditate deserunt veniam culpa distinctio nihil temporibus tempore ea. Perspiciatis odio molestiae voluptatibus distinctio excepturi ratione iure reprehenderit cum recusandae quia sint ea fuga itaque pariatur labore asperiores, vero nobis laborum, in harum illum soluta, eligendi blanditiis! Nesciunt, libero aliquam optio repudiandae officiis unde. Aliquam, qui!
 
