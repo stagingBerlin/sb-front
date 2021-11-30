@@ -1,10 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../context/UserContext";
-import { Link, useLocation } from "react-router-dom";
+// import { Link, useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import { Hidden } from "@mui/material";
+import Link from "@mui/material/Link";
+
 
 //******** MUI ********//
 const style = {
@@ -37,12 +39,16 @@ const EinzelProjectOther = (id) => {
   const handleClose = () => {
     setOpen(false);
   };
+
   //*********************/
 
   return (
     <>
-      <div className="grid-container" style={{ overflow: "hidden" }} height="auto">
-        <div className="grid-col-6 grid-col-span-8">
+      <div className="grid-container">
+        <div
+          className="grid-col-7 grid-col-span-8"
+          style={{ height: "auto", paddingBottom: "1rem" }}
+        >
           {viewProject &&
             viewProject
               .filter((p) => p._id === id.id)
@@ -52,21 +58,37 @@ const EinzelProjectOther = (id) => {
                     style={{
                       display: "flex",
                       justifyContent: "space-between",
-                      margin: "2rem 0 1rem",
+                      margin: "2rem 0 0.5rem",
                     }}
                   >
                     <h2>{item.title}</h2>
-                    <h3>Concept by {item.authorship}</h3>
+                    <h3 style={{ color: "#525254" }}>
+                      Concept by {item.authorship}
+                    </h3>
                   </div>
-                  <div >
-                    <img src={item.images} width="auto"></img>
-                    <p style={{ padding: "1rem 0" }}>Description: {item.description.substr(1, 400)}...<Button onClick={handleBookmark}> Bookmark </Button><Button onClick={handleBookmark}> Share </Button></p>
+                  <div>
+                    <img
+                      src={item.images}
+                      style={{ borderRadius: "4px", width: "auto" }}
+                    ></img>
+                    <p style={{ padding: "1rem 0" }}>
+                      Description:{" "}
+                      <Link underline="hover">
+                        <span style={{ color: "#686b69" }}>
+                          {item.description.substr(1, 320)}...
+                        </span>
+                      </Link>
+                      <Button onClick={handleBookmark} >Bookmark </Button>
+                      <Button onClick={handleBookmark} > Share </Button>
+                    </p>
+
                     <p>
                       Roles:{" "}
                       {item.jobList.map((role) => (
                         <Button onClick={handleOpen}> {role.job.title} </Button>
                       ))}{" "}
-                      (click each role to read descriptions & apply)
+                      (click roles for details & apply)
+
                       <Modal
                         hideBackdrop
                         open={open}

@@ -86,7 +86,7 @@ function EditUserProfile() {
 
   return (
     <div className="grid-container">
-      <form onSubmit={handleSubmit} className="form grid-col-5 grid-col-span-4">
+      <form onSubmit={handleSubmit} className="form grid-col-5 grid-col-span-4 grid-row-6">
         <div className="avatar">
           <label className="avatar__label" htmlFor="avatar">
             <Badge

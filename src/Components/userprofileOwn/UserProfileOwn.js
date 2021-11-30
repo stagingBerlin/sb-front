@@ -58,7 +58,7 @@ function UserProfileOwn() {
   return (
     <div className="grid-container">
       <div
-        className="grid-row-2 grid-col-5 grid-col-span-4"
+        className="grid-row-6 grid-col-5 grid-col-span-4"
         style={{ marginTop: "3rem" }}
       >
         <h1 style={{ marginBottom: "1rem", textAlign: "center" }}>
