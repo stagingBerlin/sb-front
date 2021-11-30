@@ -4,9 +4,9 @@ import { UserContext } from "../../context/UserContext";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import { Hidden } from "@mui/material";
 import Link from "@mui/material/Link";
-
+import { createNotification } from "../../helpers/apiCalls";
+import TextField from '@mui/material/TextField';
 
 //******** MUI ********//
 const style = {
@@ -25,10 +25,23 @@ const style = {
 //*********************/
 
 const EinzelProjectOther = (id) => {
-  const { user, projects, setProjects, viewProject, setViewProject } =
+  const { user, projects, setProjects, viewProject, setViewProject, ownProjects } =
     useContext(UserContext);
+  const [initialMessage, setInitialMessage] = useState("")
+  console.log(viewProject)
 
-  const handleApply = () => {};
+  const handleApply = async (userId) => {
+    const data = {projectId: id.id, toUser: userId, initialMessage: initialMessage};
+    console.log(data)
+    try {
+     const res = await createNotification(data)
+     console.log(res);
+    }
+    catch(error) {
+      console.log(error)
+    }
+  };
+  
   const handleBookmark = () => {};
 
   //******** MUI ********//
@@ -78,38 +91,44 @@ const EinzelProjectOther = (id) => {
                           {item.description.substr(1, 320)}...
                         </span>
                       </Link>
-                      <Button onClick={handleBookmark} >Bookmark </Button>
-                      <Button onClick={handleBookmark} > Share </Button>
+                      <Button onClick={handleBookmark}>Bookmark </Button>
+                      <Button onClick={handleBookmark}> Share </Button>
                     </p>
 
                     <p>
                       Roles:{" "}
                       {item.jobList.map((role) => (
-                        <Button onClick={handleOpen}> {role.job.title} </Button>
-                      ))}{" "}
-                      (click roles for details & apply)
-
-                      <Modal
-                        hideBackdrop
-                        open={open}
-                        onClose={handleClose}
-                        aria-labelledby="child-modal-title"
-                        aria-describedby="child-modal-description"
-                      >
-                        <Box sx={{ ...style, width: 400 }}>
-                          {item.jobList.map((role) => (
-                            <>
+                        <>
+                          <Button onClick={handleOpen}>
+                            {role.job.title}
+                          </Button>
+                          <Modal
+                            hideBackdrop
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="child-modal-title"
+                            aria-describedby="child-modal-description"
+                          >
+                            <Box sx={{ ...style, width: 400 }}>
                               <h3 id="child-modal-title">
                                 {" "}
                                 {role.jobDescription}
                               </h3>
-                            </>
-                          ))}
-
-                          <Button onClick={handleApply}>Apply</Button>
-                          <Button onClick={handleClose}>Close</Button>
-                        </Box>
-                      </Modal>
+                              
+                              <Button onClick={()=> handleApply(item.owner._id)}>
+                              <TextField  
+                              id="standard-basic" 
+                              label="Introduce yourself."
+                              defaultValue="Hire me..." 
+                              variant="standard"
+                              onChange={(e)=>setInitialMessage(e.target.value)}
+                               />Apply</Button>
+                              <Button onClick={handleClose}>Close</Button>
+                            </Box>
+                          </Modal>
+                        </>
+                      ))}{" "}
+                      (click roles for details & apply)
                     </p>
                     <p>Participants: {item.jobList.participant}</p>
                     <p>Deadline: {item.deadline?.substr(0, 10)} </p>

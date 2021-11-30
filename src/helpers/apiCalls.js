@@ -103,3 +103,12 @@ import axios from './axios-config'
       return error
     }
   }
+
+  export const createNotification = async (data) => {
+    try {
+      const res = await axios.post(`/notifications/`, data)
+        return res.data
+    } catch(error){
+      return error
+    }
+  }
