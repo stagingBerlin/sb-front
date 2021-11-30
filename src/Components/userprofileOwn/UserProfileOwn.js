@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import Stack from "@mui/material/Stack";
@@ -9,6 +9,7 @@ import AvatarGroup from "@mui/material/AvatarGroup";
 import profile1 from "../../img/profile1.png";
 import profile2 from "../../img/profile2.png";
 import blue from "../../img/bluelogo.png";
+import NotificationsBox from './NotificationsBox'
 
 /**************************** MUI FEATURES ****************************/
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -56,10 +57,12 @@ function UserProfileOwn() {
   const { user } = useContext(UserContext);
 
   return (
-    <div className="grid-container">
+    <>
+    <div 
+      className="grid-container"
+    >
       <div
         className="grid-row-6 grid-col-5 grid-col-span-4"
-        style={{ marginTop: "3rem" }}
       >
         <h1 style={{ marginBottom: "1rem", textAlign: "center" }}>
           {user.username}'s Profile
@@ -138,6 +141,8 @@ function UserProfileOwn() {
         </Link>
       </div>
     </div>
+    <NotificationsBox />
+    </>
   );
 }
 
