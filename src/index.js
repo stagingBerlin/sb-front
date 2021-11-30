@@ -8,6 +8,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+console.log(process.env.REACT_APP_API_BASE);
+
 ReactDOM.render(
   <UserContextProvider>  
     <Router>

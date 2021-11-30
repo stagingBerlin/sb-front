@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import { Hidden } from "@mui/material";
 import Link from "@mui/material/Link";
 
+
 //******** MUI ********//
 const style = {
   position: "absolute",
@@ -80,12 +81,14 @@ const EinzelProjectOther = (id) => {
                       <Button onClick={handleBookmark} >Bookmark </Button>
                       <Button onClick={handleBookmark} > Share </Button>
                     </p>
+
                     <p>
                       Roles:{" "}
                       {item.jobList.map((role) => (
                         <Button onClick={handleOpen}> {role.job.title} </Button>
                       ))}{" "}
                       (click roles for details & apply)
+
                       <Modal
                         hideBackdrop
                         open={open}
