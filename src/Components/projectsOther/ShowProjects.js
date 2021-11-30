@@ -9,8 +9,12 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
+import Checkbox from '@mui/material/Checkbox';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 //* ////////////////// MUI ///////////////////////////
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -150,7 +154,11 @@ function ShowProjects() {
         >
           <h1>All Projects</h1>
           <div style={{ display: "flex" }}>
-            <div style={{ width: "100%" }}>
+          <div style={{ width: "100%" }}>
+          <FormControlLabel control={<Checkbox color="success" checked={isMyRole}
+                onChange={filterByRole} />} label="Show projects containing my role(s) only" />
+         </div>
+            {/* <div style={{ width: "100%" }}>
               <label htmlFor="isMyRole" style={{ marginRight: ".5%" }}>
                 Show projects containing my role(s) only
               </label>
@@ -161,7 +169,7 @@ function ShowProjects() {
                 onChange={filterByRole}
                 style={{ marginRight: "2%" }}
               />
-            </div>
+            </div> */}
             <FormControl sx={{ m: -1, minWidth: 80, height: 20 }} size="small">
               <InputLabel id="demo-simple-select-helper-label">
                 Sort by
