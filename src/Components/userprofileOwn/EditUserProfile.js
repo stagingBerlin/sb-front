@@ -1,13 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
-import { useHistory, NavLink } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { updateUser } from "../../helpers/apiCalls";
 import MultipleSelect from "./MultipleSelect";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { styled } from "@mui/material/styles";
+// import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
-import Avatar from "@mui/material/Avatar";
-import { fontSize } from "@mui/system";
+// import Avatar from "@mui/material/Avatar";
+// import { fontSize } from "@mui/system";
 
 function EditUserProfile() {
   const { user, setUser, jobs, setJobs } = useContext(UserContext);
