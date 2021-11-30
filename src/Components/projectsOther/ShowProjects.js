@@ -158,18 +158,6 @@ function ShowProjects() {
           <FormControlLabel control={<Checkbox color="success" checked={isMyRole}
                 onChange={filterByRole} />} label="Show projects containing my role(s) only" />
          </div>
-            {/* <div style={{ width: "100%" }}>
-              <label htmlFor="isMyRole" style={{ marginRight: ".5%" }}>
-                Show projects containing my role(s) only
-              </label>
-              <input
-                type="checkbox"
-                name="isMyRole"
-                checked={isMyRole}
-                onChange={filterByRole}
-                style={{ marginRight: "2%" }}
-              />
-            </div> */}
             <FormControl sx={{ m: -1, minWidth: 80, height: 20 }} size="small">
               <InputLabel id="demo-simple-select-helper-label">
                 Sort by
@@ -205,7 +193,7 @@ function ShowProjects() {
           <h2 className="grid-col-2 grid-col-span-10">{errorMsg}</h2>
         ) : null}
         <div className="grid-col-2 grid-col-span-10" id="project-grid">
-          {viewProject.map((project, i) => (
+          {viewProject && viewProject.map((project, i) => (
             <div style={{ marginTop: "3rem" }} key={i}>
               <Link
                 style={{ textDecoration: "none" }}

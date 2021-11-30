@@ -6,7 +6,9 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import { createNotification } from "../../helpers/apiCalls";
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 
 //******** MUI ********//
 const style = {
@@ -25,24 +27,37 @@ const style = {
 //*********************/
 
 const EinzelProjectOther = (id) => {
-  const { user, projects, setProjects, viewProject, setViewProject, ownProjects } =
+  const { user, projects, setProjects, viewProject, setViewProject } =
     useContext(UserContext);
-  const [initialMessage, setInitialMessage] = useState("")
-  console.log(viewProject)
 
+  const [initialMessage, setInitialMessage] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  
   const handleApply = async (userId) => {
-    const data = {projectId: id.id, toUser: userId, initialMessage: initialMessage};
-    console.log(data)
-    try {
-     const res = await createNotification(data)
-     console.log(res);
-    }
-    catch(error) {
-      console.log(error)
+    const data = {
+      projectId: id.id,
+      toUser: userId,
+      initialMessage: initialMessage,
+    };
+    const thisProject = (id) => projects.find((p) => p._id === id.id);
+    const roles = thisProject(id).jobList.map((role) => role.job.title);
+    const myRoles = user.profession.map((p)=> p.title);
+    const matchingRoles = roles.filter((r)=> myRoles.includes(r))
+    setErrorMsg("");
+  
+    if (matchingRoles.length !== 0) {
+      try {
+        const res = await createNotification(data);
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setErrorMsg(`No matching roles found. Check if the role suits your skills.`);
     }
   };
-  
-  const handleBookmark = () => {};
+
+  // const handleBookmark = () => {};
 
   //******** MUI ********//
   const [open, setOpen] = React.useState(false);
@@ -51,6 +66,7 @@ const EinzelProjectOther = (id) => {
   };
   const handleClose = () => {
     setOpen(false);
+    setErrorMsg("");
   };
 
   //*********************/
@@ -86,22 +102,18 @@ const EinzelProjectOther = (id) => {
                     ></img>
                     <p style={{ padding: "1rem 0" }}>
                       Description:{" "}
-                      <Link underline="hover">
-                        <span style={{ color: "#686b69" }}>
-                          {item.description.substr(1, 320)}...
-                        </span>
-                      </Link>
-                      <Button onClick={handleBookmark}>Bookmark </Button>
-                      <Button onClick={handleBookmark}> Share </Button>
+                      <span style={{ color: "#686b69" }}>
+                        {item.description}
+                      </span>
+                      {/* <Button onClick={handleBookmark}>Bookmark </Button>
+                      <Button onClick={handleBookmark}> Share </Button> */}
                     </p>
 
                     <p>
                       Roles:{" "}
                       {item.jobList.map((role) => (
                         <>
-                          <Button onClick={handleOpen}>
-                            {role.job.title}
-                          </Button>
+                          <Button onClick={handleOpen}>{role.job.title}</Button>
                           <Modal
                             hideBackdrop
                             open={open}
@@ -109,20 +121,42 @@ const EinzelProjectOther = (id) => {
                             aria-labelledby="child-modal-title"
                             aria-describedby="child-modal-description"
                           >
-                            <Box sx={{ ...style, width: 400 }}>
-                              <h3 id="child-modal-title">
-                                {" "}
+                            <Box
+                              sx={{
+                                ...style,
+                                width: 600,
+                                maxWidth: "100%",
+                              }}
+                              component="form"
+                              noValidate
+                              autoComplete="off"
+                            >
+                              <h3
+                                style={{ width: "100%", paddingBottom: "1.5rem" }}
+                              >
                                 {role.jobDescription}
                               </h3>
-                              
-                              <Button onClick={()=> handleApply(item.owner._id)}>
-                              <TextField  
-                              id="standard-basic" 
-                              label="Introduce yourself."
-                              defaultValue="Hire me..." 
-                              variant="standard"
-                              onChange={(e)=>setInitialMessage(e.target.value)}
-                               />Apply</Button>
+                              {errorMsg ? (
+                                <Stack sx={{ width: "100%" }} spacing={2}>
+                                  <Alert severity="error">{errorMsg}</Alert>
+                                </Stack>
+                              ) : null}
+                              <TextField
+                                id="standard-basic"
+                                placeholder="Leave a message to the project manager"
+                                label="Message to the project manager"
+                                defaultValue="Please let me join."
+                                variant="standard"
+                                fullWidth
+                                onChange={(e) =>
+                                  setInitialMessage(e.target.value)
+                                }
+                              />
+                              <Button
+                                onClick={() => handleApply(item.owner._id)}
+                              >
+                                Apply
+                              </Button>
                               <Button onClick={handleClose}>Close</Button>
                             </Box>
                           </Modal>
