@@ -17,6 +17,49 @@ export const UserContextProvider = ({ children }) => {
   // array of users in data base
   const [ usersdb, setUsersdb] = useState([]);
 
+  const auth = async () => {
+    try {
+      const res = await authenticateUser();
+
+      if (!res.error) {
+        setUser(res);
+        setAuthIsDone(true);
+        return;
+      }
+      setUser();
+      setAuthIsDone(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getJobsApi = async () => {
+    const res = await getJobs();
+    setJobs(res);
+  };
+
+  const fetchOwnProjects = async () => {
+    const res = await getOwnProjects();
+    if (!res.error) {
+      setOwnProjects(res);
+    } else {
+      console.log(res.error);
+    }
+  };
+  const allProjects = async () => {
+    try {
+      const res = await getProjects();
+
+      if (!res.error) {
+        setProjects(res);
+        setViewProject(res);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   const getAllUsers = async () => {
     try {
@@ -32,57 +75,19 @@ export const UserContextProvider = ({ children }) => {
     }
   }
 
-
+  useEffect(() => {
+    auth()
+    allProjects();
+    getJobsApi();
+  }, [])
 
   useEffect(() => {
-    const auth = async () => {
-      try {
-        const res = await authenticateUser();
-
-        if (!res.error) {
-          setUser(res);
-          setAuthIsDone(true);
-          return;
-        }
-        setUser();
-        setAuthIsDone(true);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    const getJobsApi = async () => {
-      const res = await getJobs();
-      setJobs(res);
-    };
-
-    const fetchOwnProjects = async () => {
-      const res = await getOwnProjects();
-      if (!res.error) {
-        setOwnProjects(res);
-      } else {
-        console.log(res.error);
-      }
-    };
-    const allProjects = async () => {
-      try {
-        const res = await getProjects();
-
-        if (!res.error) {
-          setProjects(res);
-          setViewProject(res);
-          return;
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getAllUsers()
     allProjects();
     fetchOwnProjects();
     getJobsApi();
-    auth();
-  }, []);
+  }, [ user ]);
+
 
   return (
     <UserContext.Provider
