@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-import { createNotification } from "../../helpers/apiCalls";
+import { createNotification, bookmarkIt } from "../../helpers/apiCalls";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
@@ -67,7 +67,20 @@ const EinzelProjectOther = (id) => {
     }
   };
 
-  const handleBookmark = () => {};
+  const handleBookmark = async () => {
+    const data = {
+      projectId: id.id
+    }
+
+    try {
+      const res = await bookmarkIt(data);
+      setUser(res);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+    
+  };
 
   //******** MUI ********//
   const [open, setOpen] = React.useState(false);
@@ -115,7 +128,7 @@ const EinzelProjectOther = (id) => {
                       <span style={{ color: "#686b69" }}>
                         {item.description}
                       </span>
-                      <Button onClick={handleBookmark}>Bookmark </Button>
+                      <Button onClick={handleBookmark}>Add to Bookmark </Button>
                       {/*<Button onClick={handleBookmark}> Share </Button> */}
                     </p>
 

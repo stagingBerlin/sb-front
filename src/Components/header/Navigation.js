@@ -23,6 +23,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import PeopleIcon from '@mui/icons-material/People'
 import LogoutIcon from '@mui/icons-material/Logout';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 const drawerWidth = 180
 
@@ -272,7 +273,7 @@ export default function Navigation() {
       >
         <DrawerHeader style={{marginTop: '-1.8rem'}}>
           <IconButton onClick={handleDrawerClose}>
-            <MenuIcon /> 
+            <MenuOpenIcon /> 
           </IconButton>
         </DrawerHeader>
         {/* <Divider style={{marginTop: '-11px'}} /> */}
