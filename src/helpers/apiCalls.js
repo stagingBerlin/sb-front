@@ -112,3 +112,13 @@ import axios from './axios-config'
       return error
     }
   }
+
+  export const bookmarkIt = async (data) => {
+
+    try {
+      const res = await axios.put(`/users/bookmark`, data)
+        return res.data
+    } catch(error){
+      return error
+    }
+  }
