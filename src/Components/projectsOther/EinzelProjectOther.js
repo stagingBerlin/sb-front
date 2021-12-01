@@ -27,10 +27,10 @@ const style = {
 //*********************/
 
 const EinzelProjectOther = (id) => {
-  const { user, projects, setProjects, viewProject, setViewProject } =
+  const { user, setUser, projects, setProjects, viewProject, setViewProject } =
     useContext(UserContext);
 
-  const [initialMessage, setInitialMessage] = useState("");
+  const [initialMessage, setInitialMessage] = useState("Please let me join.");
   const [errorMsg, setErrorMsg] = useState("");
 
   const handleApply = async (userId) => {
@@ -48,18 +48,21 @@ const EinzelProjectOther = (id) => {
 
     if (appliedProjects.includes(id.id)) {
       setErrorMsg(`You've already applied for this project.`);
-    }
-
-    if (matchingRoles.length === 0) {
-      setErrorMsg(
-        `No matching roles found. Check if the role suits your skills.`
-      );
+      
     } else {
-      try {
-        const res = await createNotification(data);
-        console.log(res);
-      } catch (error) {
-        console.log(error);
+      if (matchingRoles.length !== 0) {
+        try {
+          const res = await createNotification(data);
+          setUser(res);
+          console.log(res);
+        } catch (error) {
+          console.log(error);
+        }
+        
+      } else {
+        setErrorMsg(
+          `No matching roles found. Check if the role suits your skills.`
+        );
       }
     }
   };
@@ -77,7 +80,7 @@ const EinzelProjectOther = (id) => {
   };
 
   //*********************/
-
+ 
   return (
     <>
       <div className="grid-container">
@@ -112,7 +115,7 @@ const EinzelProjectOther = (id) => {
                       <span style={{ color: "#686b69" }}>
                         {item.description}
                       </span>
-                       <Button onClick={handleBookmark}>Bookmark </Button>
+                      <Button onClick={handleBookmark}>Bookmark </Button>
                       {/*<Button onClick={handleBookmark}> Share </Button> */}
                     </p>
 
@@ -153,9 +156,8 @@ const EinzelProjectOther = (id) => {
                               ) : null}
                               <TextField
                                 id="standard-basic"
-                                placeholder="Leave a message to the project manager"
                                 label="Message to the project manager"
-                                defaultValue="Please let me join."
+                                value={initialMessage}
                                 variant="standard"
                                 fullWidth
                                 onChange={(e) =>

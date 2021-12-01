@@ -63,7 +63,7 @@ function ShowProjects() {
   const [keyword, setKeyword] = useState("");
   const [showWhat, setShowWhat] = useState("none");
   const [errorMsg, setErrorMsg] = useState("");
-
+console.log(viewProject);
   useEffect(() => {
     const myRole = user.profession.map((role) => role.title);
 
@@ -147,10 +147,10 @@ function ShowProjects() {
 
   return (
     <>
-      <div className="grid-container">
+      <div className="grid-container" style={{  paddingBottom: "25rem" }}>
         <div
           className="grid-col-2 grid-col-span-10"
-          style={{ marginTop: "3rem" }}
+          
         >
           <h1>All Projects</h1>
           <div style={{ display: "flex" }}>

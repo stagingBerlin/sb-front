@@ -6,7 +6,7 @@ import ProjectView from './ProjectView'
 
 const CreateProjectsOwn = () => {
 
-    const { ownProjects, setOwnProjects } = useContext(UserContext)
+    const { ownProjects, setOwnProjects, projects, setProjects, viewProject, setViewProject } = useContext(UserContext)
     const [data, setData] = useState({
       title : "",
       authorship: "",
@@ -35,6 +35,8 @@ const CreateProjectsOwn = () => {
           }
           setNewProject(res)
           setOwnProjects([...ownProjects, res])
+          setProjects([...projects, res])
+          setViewProject([...viewProject, res])
           setShowCreateForm(false)
           setData({
             title : "",
