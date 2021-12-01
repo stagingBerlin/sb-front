@@ -1,0 +1,6 @@
+.project-own-other {
+    padding: 3rem 6rem 30rem;
+    @include respond(tab-port) {
+      padding: 3rem 0 25rem;
+    }
+  }
