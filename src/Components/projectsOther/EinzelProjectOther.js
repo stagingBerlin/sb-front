@@ -32,7 +32,7 @@ const EinzelProjectOther = (id) => {
 
   const [initialMessage, setInitialMessage] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  
+
   const handleApply = async (userId) => {
     const data = {
       projectId: id.id,
@@ -41,23 +41,30 @@ const EinzelProjectOther = (id) => {
     };
     const thisProject = (id) => projects.find((p) => p._id === id.id);
     const roles = thisProject(id).jobList.map((role) => role.job.title);
-    const myRoles = user.profession.map((p)=> p.title);
-    const matchingRoles = roles.filter((r)=> myRoles.includes(r))
+    const myRoles = user.profession.map((p) => p.title);
+    const matchingRoles = roles.filter((r) => myRoles.includes(r));
+    const appliedProjects = user.appliedProject.map((p) => p._id);
     setErrorMsg("");
-  
-    if (matchingRoles.length !== 0) {
+
+    if (appliedProjects.includes(id.id)) {
+      setErrorMsg(`You've already applied for this project.`);
+    }
+
+    if (matchingRoles.length === 0) {
+      setErrorMsg(
+        `No matching roles found. Check if the role suits your skills.`
+      );
+    } else {
       try {
         const res = await createNotification(data);
         console.log(res);
       } catch (error) {
         console.log(error);
       }
-    } else {
-      setErrorMsg(`No matching roles found. Check if the role suits your skills.`);
     }
   };
 
-  // const handleBookmark = () => {};
+  const handleBookmark = () => {};
 
   //******** MUI ********//
   const [open, setOpen] = React.useState(false);
@@ -76,7 +83,7 @@ const EinzelProjectOther = (id) => {
       <div className="grid-container">
         <div
           className="grid-col-7 grid-col-span-8"
-          style={{ height: "auto", paddingBottom: "1rem" }}
+          style={{ paddingBottom: "20rem" }}
         >
           {viewProject &&
             viewProject
@@ -105,14 +112,14 @@ const EinzelProjectOther = (id) => {
                       <span style={{ color: "#686b69" }}>
                         {item.description}
                       </span>
-                      {/* <Button onClick={handleBookmark}>Bookmark </Button>
-                      <Button onClick={handleBookmark}> Share </Button> */}
+                       <Button onClick={handleBookmark}>Bookmark </Button>
+                      {/*<Button onClick={handleBookmark}> Share </Button> */}
                     </p>
 
                     <p>
                       Roles:{" "}
-                      {item.jobList.map((role) => (
-                        <>
+                      {item.jobList.map((role, i) => (
+                        <span key={i}>
                           <Button onClick={handleOpen}>{role.job.title}</Button>
                           <Modal
                             hideBackdrop
@@ -132,7 +139,10 @@ const EinzelProjectOther = (id) => {
                               autoComplete="off"
                             >
                               <h3
-                                style={{ width: "100%", paddingBottom: "1.5rem" }}
+                                style={{
+                                  width: "100%",
+                                  paddingBottom: "1.5rem",
+                                }}
                               >
                                 {role.jobDescription}
                               </h3>
@@ -160,7 +170,7 @@ const EinzelProjectOther = (id) => {
                               <Button onClick={handleClose}>Close</Button>
                             </Box>
                           </Modal>
-                        </>
+                        </span>
                       ))}{" "}
                       (click roles for details & apply)
                     </p>
