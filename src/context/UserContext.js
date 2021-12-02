@@ -1,7 +1,11 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { authenticateUser } from '../helpers/authHelpers/apiCallsAuth';
-import { getJobs, getOwnProjects, getUsers, getProjects } from '../helpers/apiCalls';
-
+import React, { createContext, useState, useEffect } from "react";
+import { authenticateUser } from "../helpers/authHelpers/apiCallsAuth";
+import {
+  getJobs,
+  getOwnProjects,
+  getUsers,
+  getProjects,
+} from "../helpers/apiCalls";
 
 export const UserContext = createContext();
 
@@ -11,11 +15,13 @@ export const UserContextProvider = ({ children }) => {
   const [ownProjects, setOwnProjects] = useState([]);
   const [viewProject, setViewProject] = useState([]);
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   // here we will store our fetched jobs from API
   const [jobs, setJobs] = useState([]);
 
   // array of users in data base
-  const [ usersdb, setUsersdb] = useState([]);
+  const [usersdb, setUsersdb] = useState([]);
 
   const auth = async () => {
     try {
@@ -53,6 +59,9 @@ export const UserContextProvider = ({ children }) => {
       if (!res.error) {
         setProjects(res);
         setViewProject(res);
+        if (viewProject) {
+          setLoading(false);
+        }
         return;
       }
     } catch (error) {
@@ -60,34 +69,32 @@ export const UserContextProvider = ({ children }) => {
     }
   };
 
-
   const getAllUsers = async () => {
     try {
-      const users = await getUsers()
-      if(users.error){
+      const users = await getUsers();
+      if (users.error) {
         console.log(users.error);
-        return
+        return;
       }
 
-      setUsersdb(users)
+      setUsersdb(users);
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    auth()
+    auth();
     allProjects();
     getJobsApi();
-  }, [])
+  }, []);
 
   useEffect(() => {
-    getAllUsers()
+    getAllUsers();
     allProjects();
     fetchOwnProjects();
     getJobsApi();
-  }, [ user ]);
-
+  }, [user]);
 
   return (
     <UserContext.Provider
@@ -104,11 +111,13 @@ export const UserContextProvider = ({ children }) => {
         setProjects,
         viewProject,
         setViewProject,
-        usersdb, setUsersdb
+        usersdb,
+        setUsersdb,
+        loading,
+        setLoading,
       }}
     >
       {children}
     </UserContext.Provider>
   );
-
 };
