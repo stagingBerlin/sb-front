@@ -12,6 +12,9 @@ import InputBase from "@mui/material/InputBase";
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+import LogoGrey from "../../img/LogoGrey.png"
 
 //* ////////////////// MUI ///////////////////////////
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -57,13 +60,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 //* ///////////////////////////////////////////////
 
 function ShowProjects() {
-  const { user, projects, setProjects, viewProject, setViewProject } =
+  const { user, projects, setProjects, viewProject, setViewProject, loading, setLoading } =
     useContext(UserContext);
   const [isMyRole, setIsMyRole] = useState(false);
   const [keyword, setKeyword] = useState("");
   const [showWhat, setShowWhat] = useState("none");
   const [errorMsg, setErrorMsg] = useState("");
-console.log(viewProject);
+console.log(loading)
   useEffect(() => {
     const myRole = user.profession.map((role) => role.title);
 
@@ -144,7 +147,7 @@ console.log(viewProject);
       setViewProject(projects);
     }
   }
-
+  const skeletonArr = Array(20).fill('');
   return (
     <>
       <div className="grid-container" style={{  paddingBottom: "25rem" }}>
@@ -152,7 +155,7 @@ console.log(viewProject);
           className="grid-col-2 grid-col-span-10"
           
         >
-          <h1>All Projects</h1>
+          <h1 style={{ marginTop: "3rem" }}>All Projects</h1>
           <div style={{ display: "flex" }}>
           <div style={{ width: "100%" }}>
           <FormControlLabel control={<Checkbox color="success" checked={isMyRole}
@@ -193,19 +196,33 @@ console.log(viewProject);
           <h2 className="grid-col-2 grid-col-span-10">{errorMsg}</h2>
         ) : null}
         <div className="grid-col-2 grid-col-span-10" id="project-grid">
-          {viewProject && viewProject.map((project, i) => (
-            <div style={{ marginTop: "3rem" }} key={i}>
+
+        {loading &&
+        skeletonArr.map((item, i) => (
+          <div className="item" key={i} >
+          <Skeleton variant="rectangular" width={220} height={220} style={{ borderRadius: "4px" }}/>
+          </div>
+        ))
+      }
+          {!loading && viewProject.map((project, i) => (
+            <div key={i}>
               <Link
                 style={{ textDecoration: "none" }}
                 to={`/account/allprojects/${project._id}`}
                 state={{ viewProject: [] }}
                 className="button-link"
               >
-                <img
-                  src={project.images[0]}
+                 {<img
+                  src={project.images.length === 0 ? LogoGrey : project.images[0] }
                   width="100%"
-                  style={{ borderRadius: "4px" }}
-                ></img>
+                  style={
+                    project.images.length === 0 ?
+                    { borderRadius: "4px", width: "25rem", height: "25rem"}
+                    : 
+                    { borderRadius: "4px" }
+                    }
+                />}
+                
                 <h3 style={{ textAlign: "center" }}>
                   {project.title} by {project.authorship}
                 </h3>

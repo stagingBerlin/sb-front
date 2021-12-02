@@ -9,7 +9,7 @@ const PrivateRoute = ({ path, component, redirectTo='/' }) => {
     if (!authIsDone)
     return (
         <section className='page-wrapper'>
-            <h5>Loading...</h5>
+            {/* <h5>Loading...</h5> */}
         </section>
     )
 
