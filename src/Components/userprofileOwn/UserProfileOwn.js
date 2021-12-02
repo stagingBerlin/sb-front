@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import Stack from "@mui/material/Stack";
@@ -10,6 +10,7 @@ import profile1 from "../../img/profile1.png";
 import profile2 from "../../img/profile2.png";
 import blue from "../../img/bluelogo.png";
 import NotificationsBox from './NotificationsBox'
+import Link from "@mui/material/Link";
 
 /**************************** MUI FEATURES ****************************/
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -54,8 +55,8 @@ function stringAvatar(name) {
 
 /*********************** Main Component Function **************************/
 function UserProfileOwn() {
-  const { user } = useContext(UserContext);
-
+  const { user, setUser} = useContext(UserContext);
+  console.log(user.appliedProject)
   return (
     <>
     <div 
@@ -113,12 +114,10 @@ function UserProfileOwn() {
             </h3>
             <h3>Email: {user.email}</h3>
             <h3>
-              {" "}
-              {user.isHiring ? (
-                <Link to="/account/project">My Own Projects</Link>
-              ) : (
-                <Link to="#">Applied Projects:</Link>
-              )}
+            Applied Projects: <Link href="#" underline="hover">{ user.appliedProject.length ?? "0" } projects </Link>
+            </h3>
+            <h3>
+            Bookmarked Projects: <Link href="#" underline="hover">{ user.bookmark.length ?? "0" } projects </Link>
             </h3>
             <h3>My Networks</h3>
             <AvatarGroup
