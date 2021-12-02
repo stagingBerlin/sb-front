@@ -141,7 +141,9 @@ function UserProfileOwn() {
         </Link>
       </div>
     </div>
-    <NotificationsBox />
+    <div className="notifications-section">
+      <NotificationsBox />
+    </div>
     </>
   );
 }

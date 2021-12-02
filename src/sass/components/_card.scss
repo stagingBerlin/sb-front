@@ -33,6 +33,7 @@
   }
 
   &__heading-span {
+    word-break: break-all;
     padding: 1rem 1.5rem;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
@@ -47,21 +48,21 @@
     position: absolute;
     top: 10rem;
     right: 1.2rem;
-    z-index: 1000;
+    z-index: 500;
   }
 
   &__updateAuthorship {
     position: absolute;
     top: 26rem;
     left: 1.8rem;
-    z-index: 1000;
+    // z-index: 1000;
   }
 
   &__updateDescription {
     position: absolute;
     top: 36rem;
     left: 1.8rem;
-    z-index: 1000;
+    // z-index: 1000;
   }
 
   &__body {
@@ -88,6 +89,7 @@
     padding-right: 1.5rem;
     white-space: pre-wrap;
     color: $color-grey-dark-3;
+    word-break: break-all;
   }
 
   &__jobList > *:not(:last-child) {
