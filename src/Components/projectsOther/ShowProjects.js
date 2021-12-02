@@ -14,6 +14,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import LogoGrey from "../../img/LogoGrey.png"
 
 //* ////////////////// MUI ///////////////////////////
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -211,11 +212,17 @@ console.log(loading)
                 state={{ viewProject: [] }}
                 className="button-link"
               >
-                <img
-                  src={project.images[0]}
+                 {<img
+                  src={project.images.length === 0 ? LogoGrey : project.images[0] }
                   width="100%"
-                  style={{ borderRadius: "4px" }}
-                ></img>
+                  style={
+                    project.images.length === 0 ?
+                    { borderRadius: "4px", width: "25rem", height: "25rem"}
+                    : 
+                    { borderRadius: "4px" }
+                    }
+                />}
+                
                 <h3 style={{ textAlign: "center" }}>
                   {project.title} by {project.authorship}
                 </h3>

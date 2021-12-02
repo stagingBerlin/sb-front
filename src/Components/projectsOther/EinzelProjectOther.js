@@ -9,6 +9,7 @@ import { createNotification, bookmarkIt } from "../../helpers/apiCalls";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import LogoGrey from "../../img/LogoGrey.png";
 
 //******** MUI ********//
 const style = {
@@ -133,10 +134,14 @@ const EinzelProjectOther = (id) => {
                     </h3>
                   </div>
                   <div>
-                    <img
-                      src={item.images}
-                      style={{ borderRadius: "4px", width: "auto" }}
-                    ></img>
+                  {<img
+                  src={item.images.length === 0 ? LogoGrey : item.images}
+                  style={ 
+                    item.images.length === 0 ?
+                    { borderRadius: "4px", width: "40rem" }
+                    :  { borderRadius: "4px", width: "auto" }
+                    }
+                  />}
                     <p style={{ padding: "1rem 0" }}>
                       Description:{" "}
                       <span style={{ color: "#686b69" }}>
