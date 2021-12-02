@@ -113,6 +113,15 @@ import axios from './axios-config'
     }
   }
 
+  export const getNotifications = async () => {
+    try {
+      const res = await axios.get(`/notifications`)
+      return res.data
+    } catch (error) {
+      return error.response.data
+    }
+  }
+
   export const bookmarkIt = async (data) => {
 
     try {
