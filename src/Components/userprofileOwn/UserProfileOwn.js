@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
-// import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import Stack from "@mui/material/Stack";
@@ -135,7 +135,7 @@ function UserProfileOwn() {
             </AvatarGroup>
           </div>
         </div>
-        <Link to="/account/editprofile" className="button-link-short">
+        <Link href="/account/editprofile" className="button-link-short">
           EDIT
         </Link>
       </div>
