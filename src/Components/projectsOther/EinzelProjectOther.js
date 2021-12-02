@@ -48,7 +48,6 @@ const EinzelProjectOther = (id) => {
 
     if (appliedProjects.includes(id.id)) {
       setErrorMsg(`You've already applied for this project.`);
-      
     } else {
       if (matchingRoles.length !== 0) {
         try {
@@ -58,7 +57,6 @@ const EinzelProjectOther = (id) => {
         } catch (error) {
           console.log(error);
         }
-        
       } else {
         setErrorMsg(
           `No matching roles found. Check if the role suits your skills.`
@@ -68,22 +66,29 @@ const EinzelProjectOther = (id) => {
   };
 
   const handleBookmark = async () => {
+    handleOpenBookmark();
     const data = {
-      projectId: id.id
+      projectId: id.id,
+    };
+    const bookmarkedProject = user.bookmark.map((p) => p._id);
+    setErrorMsg("");
+    console.log(bookmarkedProject.includes(id.id));
+    if (!bookmarkedProject.includes(id.id)) {
+      try {
+        const res = await bookmarkIt(data);
+        setUser(res);
+        console.log(res);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      setErrorMsg(`You've already bookmarked this project.`);
     }
-
-    try {
-      const res = await bookmarkIt(data);
-      setUser(res);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-    
   };
 
   //******** MUI ********//
   const [open, setOpen] = React.useState(false);
+  const [openBookmark, setOpenBookmark] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -92,8 +97,17 @@ const EinzelProjectOther = (id) => {
     setErrorMsg("");
   };
 
+  const handleOpenBookmark = () => {
+    setOpenBookmark(true);
+  };
+
+  const handleCloseBookmark = () => {
+    setOpenBookmark(false);
+    setErrorMsg("");
+  };
+
   //*********************/
- 
+
   return (
     <>
       <div className="grid-container">
@@ -130,8 +144,38 @@ const EinzelProjectOther = (id) => {
                       </span>
                       <Button onClick={handleBookmark}>Add to Bookmark </Button>
                       {/*<Button onClick={handleBookmark}> Share </Button> */}
+                      <Modal
+                        hideBackdrop
+                        open={openBookmark}
+                        onClose={handleCloseBookmark}
+                        aria-labelledby="child-modal-title"
+                        aria-describedby="child-modal-description"
+                      >
+                        <Box
+                          sx={{
+                            ...style,
+                            width: 600,
+                            maxWidth: "100%",
+                          }}
+                          component="form"
+                          noValidate
+                          autoComplete="off"
+                        >
+                          {errorMsg ? (
+                            <Stack sx={{ width: "100%" }} spacing={2}>
+                              <Alert severity="error">{errorMsg}</Alert>
+                            </Stack>
+                          ) : (
+                            <Stack sx={{ width: "100%" }} spacing={2}>
+                              <Alert severity="success">
+                                This project has been added to your bookmark!
+                              </Alert>
+                            </Stack>
+                          )}
+                          <Button onClick={handleCloseBookmark}>Close</Button>
+                        </Box>
+                      </Modal>
                     </p>
-
                     <p>
                       Roles:{" "}
                       {item.jobList.map((role, i) => (
@@ -160,7 +204,7 @@ const EinzelProjectOther = (id) => {
                                   paddingBottom: "1.5rem",
                                 }}
                               >
-                                {role.jobDescription}
+                                Role Requirement: {role.jobDescription}
                               </h3>
                               {errorMsg ? (
                                 <Stack sx={{ width: "100%" }} spacing={2}>
