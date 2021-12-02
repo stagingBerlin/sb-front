@@ -136,8 +136,17 @@
       border: none;
       cursor: pointer;
       margin-bottom: 0.9rem;
-      margin-left: 3.3rem;
+      margin-left: 4rem;
       transition: 0.5s;
+
+      @include respond(tab-land) {
+        margin-left: 3.5rem;
+      }
+
+      @include respond(tab-port) {
+        margin-left: 0;
+      }
+
       & i {
         font-size: 1.6rem;
       }
