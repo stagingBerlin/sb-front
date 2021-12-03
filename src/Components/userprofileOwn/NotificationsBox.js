@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react'
-import DeleteButton from '../utilities/DeleteButton'
-import AvatarImg from '../utilities/AvatarImg'
 import Notification from './Notification'
 import UserApplyNoti from './UserApplyNoti'
-import { getNotifications } from '../../helpers/apiCalls'
+import { getNotifications, updateNotification } from '../../helpers/apiCalls'
 import { UserContext } from '../../context/UserContext'
 
 
 export default function NotificationsBox() {
 
     const { user } = useContext(UserContext)
-    console.log(user);
-
-    const [ notifications, setNotifications ] = useState([])
+    
+    const [ fromNoti, setFromNoti ] = useState([])
+    const [ toNoti, setToNoti ] = useState([])
 
     const [ otherApply, setOtherApply ] = useState("show")
     const [ userApply, setUserApply ] = useState(!user.isHiring ? "show" : "hide")
+
+    const [ replyMessage, setReplyMessage ] = useState("")
 
     const allNotifications = async () =>{
         try {
@@ -24,7 +24,11 @@ export default function NotificationsBox() {
                 console.log(notis.error);
                 return
             }
-            setNotifications(notis)
+            const fromUserNotis = notis.filter(item => item.fromUser._id === user._id) 
+            const toUserNotis = notis.filter(item => item.toUser._id === user._id) 
+            
+            setFromNoti(fromUserNotis)
+            setToNoti(toUserNotis)
         } catch (error) {
             console.log(error);
         }
@@ -33,8 +37,6 @@ export default function NotificationsBox() {
     useEffect(()=> {
         allNotifications()
     },[])
-
-    console.log(notifications);
 
 
     const handleOtherApply = () => {
@@ -47,14 +49,114 @@ export default function NotificationsBox() {
         setUserApply("show")
     }
 
+    const handleDeleteInitiator = async (e) => {
+        const id = e.target.id
+        const data = {
+            readInitiator: true
+        }
+        const respApi = await updateNotification(id, data);
+        const updated = fromNoti.map(item => {
+            return item._id === respApi._id ?
+            respApi
+            :
+            item
+        })
+        setFromNoti(updated)
+    }
+
+    const handleDeleteReceiver = async (e) => {
+        const id = e.target.id
+        const data = {
+            readReceiver: true
+        }
+
+        const respApi = await updateNotification(id, data);
+        const updated = toNoti.map(item => {
+            return item._id === respApi._id ?
+            respApi
+            :
+            item
+        })
+        setToNoti(updated)
+    }
+
+    const handleReplyMessage = async (e) => {
+        const id = e.target.id
+        const data = {
+            status: e.target.value,
+            replyMessage
+        }
+        
+        const respApi = await updateNotification(id, data)
+        console.log(respApi);
+        const updated = toNoti.map(item => {
+            return item._id === respApi._id ?
+            respApi
+            :
+            item
+        })
+
+        setToNoti(updated)
+        setReplyMessage("")
+    }
+    console.log(toNoti);
+    console.log(fromNoti);
+
+    const toNotiDisplay = () => {
+        return toNoti.map(item => {
+            return item.readReceiver ?
+                ""
+                :
+                <Notification 
+                    key={item._id} 
+                    id={item._id}
+                    username={item.fromUser.username} 
+                    name={item.fromUser.name}
+                    appliedProject={item.projectId} 
+                    status={item.status}
+                    readInitiator={item.readInitiator}
+                    readReceiver={item.readReceiver}
+                    updatedAt={item.updatedAt}
+                    createdAt={item.createdAt}
+                    avatar={item.fromUser.avatar}
+                    initialMessage={item.initialMessage}
+                    replyMessage={item.replyMessage}
+                    setReplyMessage={setReplyMessage}
+                    handleReplyMessage={handleReplyMessage}
+                    handleDeleteReceiver={handleDeleteReceiver}
+                />
+            }
+        )
+    }
+
+    const fromNotiDisplay = () => {
+        return fromNoti.map(item => {
+            return item.readInitiator ?
+                ""
+                :
+            <UserApplyNoti 
+                key={item._id} 
+                id={item._id}
+                // username={item.fromUser.username} 
+                // name={item.fromUser.name}
+                appliedProject={item.projectId} 
+                status={item.status}
+                readInitiator={item.readInitiator}
+                readReceiver={item.readReceiver}
+                updatedAt={item.updatedAt}
+                createdAt={item.createdAt}
+                toUserAvatar={item.toUser.avatar}
+                initialMessage={item.initialMessage}
+                replyMessage={item.replyMessage}
+                handleDeleteInitiator={handleDeleteInitiator}
+            />
+        }
+    )
+    }
 
     return (
         <div className="notifications-box">
             <div className="notifications-box__tab-bar">
-                <h1 
-                    onClick={handleUserApply} 
-                    className={`notifications-box__tab notifications-box__tab--${userApply}`}
-                >My Applications</h1>
                 {
                     user.isHiring ? 
                     <h1 
@@ -64,104 +166,23 @@ export default function NotificationsBox() {
                     :
                     <></>
                 }
+                <h1 
+                    onClick={handleUserApply} 
+                    className={`notifications-box__tab notifications-box__tab--${userApply}`}
+                >My Applications</h1>
             </div>
 
             <div className="notifications-box__all-notifications">
 
             {
-                user.isHiring ?
-                <>
-                    <Notification />
-                    <UserApplyNoti />
-
-                </>
+                !user.isHiring ? 
+                fromNotiDisplay()
                 :
-                <UserApplyNoti />
+                otherApply === "show" ?
+                    toNotiDisplay()
+                    :
+                    fromNotiDisplay() 
             }
-
-
-
-                <div className="notification">
-                    <div className="notification__top">
-                        <DeleteButton
-                            fontSize="2" 
-                            transformScale="1.2"
-                            color="#93291e" 
-                            colorHover="#ed213a"
-                            // handleClick={handleDeleteJob}
-                        />
-                    </div>
-
-                    <div className="notification__info-box">
-                        <div className="notification__info-box--data">
-                            <div className="notification__data"> 
-                                <AvatarImg 
-                                    large="7"
-                                    image={"https://media.istockphoto.com/photos/woman-hacker-face-picture-id1147603755?b=1&k=20&m=1147603755&s=170667a&w=0&h=OlPOOjxOqBOlRCIs0tP3r1WLJ6o99anuBROeb6QihwI="}
-                                />
-                                <h2>Username&nbsp;&nbsp;&nbsp;&nbsp;(name)</h2>
-                            </div>
-                            <div className="notification__data">
-                                <h2>Applied Project:&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Link to the project</a></h2> 
-                            </div>
-                        </div>
-                        <div className="notification__info-box--status">
-                            <div className="notification__data">
-                                {/* <h2 className="notification__status">Status:&nbsp;&nbsp;&nbsp;&nbsp;<span className="notification__status--pending">Pending</span></h2>  */}
-                                {/* <h2 className="notification__status">Status:&nbsp;&nbsp;&nbsp;&nbsp;<span className="notification__status--rejected">Rejected</span></h2>  */}
-                                <h2 className="notification__status">Status:&nbsp;&nbsp;&nbsp;&nbsp;<span className="notification__status--accepted">Accepted</span></h2>  
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="notification__message-box">
-                        <div className="notification__message notification__message--from-user">
-                            <div className="notification__message--from-user-avatar">
-                                <AvatarImg 
-                                    large="4"
-                                    image={"https://media.istockphoto.com/photos/woman-hacker-face-picture-id1147603755?b=1&k=20&m=1147603755&s=170667a&w=0&h=OlPOOjxOqBOlRCIs0tP3r1WLJ6o99anuBROeb6QihwI="}
-                                />
-                            </div>
-
-                            <div className="notification__message--container">
-                                <div className="notification__message--from-user-text">
-                                    <p>Men del aplinte Mensaje  Mensaje del aplsdvsvsddvsante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante</p>
-                                </div>
-                                <div className="notification__message--time">
-                                    <p>at monday bla bla bla</p>
-                                    
-                                </div>
-                            </div>
-
-                        </div>
-                        <div className="notification__message--to-user">
-                            <div className="notification__message--container">
-                                <div className="notification__message--to-user-text">
-                                    <p>Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante Mensaje del aplicante</p>
-                                </div>
-                                <div className="notification__message--time">
-                                    <p>at monday bla bla bla</p>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {/* <div className="notification__acction-buttons">
-                        <button className="button-primary">Accept</button> <button className="button-primary">Reject</button>
-                    </div> */}
-                </div>
-
-
-                
-                
-
-
-
-
-
-
-
-
             </div>            
         </div>
     )

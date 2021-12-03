@@ -64,7 +64,7 @@
   }
 
   & > *:not(:last-child) {
-    margin-bottom: 3.5rem;
+    margin-bottom: 2rem;
   }
 
   &__top {
@@ -76,10 +76,14 @@
 
   &__info-box {
     display: flex;
+
     & > *:not(:last-child) {
       @include respond(phone) {
         padding-right: 3rem;
       }
+    }
+    &--data {
+      width: 65%;
     }
     &--data > *:not(:last-child) {
       margin-bottom: 1rem;
@@ -87,6 +91,7 @@
 
     &--status {
       margin: auto;
+      // width: 30%;
     }
   }
   &__data > *:not(:last-child) {
@@ -111,14 +116,14 @@
   }
 
   &__message-box > *:not(:last-child) {
-    margin-bottom: 3.5rem;
+    margin-bottom: 3rem;
   }
 
   &__message-box {
     // border: 1px solid #929eae;
     width: 90%;
     margin: 0 auto;
-    padding: 1.5rem 2rem;
+    padding: 2.5rem;
     background-color: $color-white;
 
     @include respond(tab-port) {
@@ -137,6 +142,7 @@
       cursor: pointer;
       margin-bottom: 0.9rem;
       margin-left: 4rem;
+      letter-spacing: 0.05rem;
       transition: 0.5s;
 
       @include respond(tab-land) {
@@ -194,7 +200,7 @@
       //   width: 75%;
 
       & p {
-        word-break: break-all;
+        // word-break: break-all;
         line-height: 2rem;
         white-space: pre-wrap;
       }
@@ -216,17 +222,65 @@
 
       margin-left: auto;
       & p {
-        word-break: break-all;
+        // word-break: break-all;
         line-height: 2rem;
         white-space: pre-wrap;
       }
     }
   }
 
-  &__acction-buttons {
+  &__acctions {
+    width: 90%;
+    // height: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
     text-align: right;
-    & > *:not(:last-child) {
-      margin-right: 1rem;
+    display: flex;
+    justify-content: space-between;
+    // align-items: center;
+    @include respond(tab-port) {
+      width: 100%;
+    }
+    @include respond(phone) {
+      display: block;
+      width: 100%;
+    }
+
+    &--text-area {
+      flex-grow: 2;
+      background-color: $color-white;
+      // border: 1px solid #ccc;
+      // border: 1px solid #ccc;
+      box-shadow: $box-shadow;
+
+      & textarea {
+        padding: 1.5rem 2rem;
+        line-height: 2rem;
+        font-family: inherit;
+        letter-spacing: 0.08rem;
+        border: none;
+        width: 100%;
+        overflow: hidden;
+        resize: none;
+        overflow: auto;
+        height: auto;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  &__acction-buttons {
+    box-shadow: $box-shadow;
+    align-self: flex-end;
+    margin-left: 1rem;
+
+    @include respond(phone) {
+      box-shadow: none;
+      margin-top: 0.5rem;
     }
   }
 }
