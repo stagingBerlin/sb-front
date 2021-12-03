@@ -6,6 +6,7 @@ export default function DeleteButton({
     colorHover = color,
     transformScale,
     handleClick, 
+    id
 }) {
 
     const [ fontColor, setFontColor ] = useState(color)
@@ -38,6 +39,7 @@ export default function DeleteButton({
             onClick={handleClick}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            id={id}
         />
     )
 }

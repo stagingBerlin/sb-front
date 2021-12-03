@@ -122,6 +122,15 @@ import axios from './axios-config'
     }
   }
 
+  export const updateNotification = async (id, data) => {
+    try {
+      const res = await axios.put(`/notifications/${id}`, data)
+      return res.data
+    } catch (error) {
+      return error.response.data
+    }
+  }
+
   export const bookmarkIt = async (data) => {
 
     try {
