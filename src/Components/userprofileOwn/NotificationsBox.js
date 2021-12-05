@@ -88,7 +88,7 @@ export default function NotificationsBox() {
         }
         
         const respApi = await updateNotification(id, data)
-        console.log(respApi);
+        
         const updated = toNoti.map(item => {
             return item._id === respApi._id ?
             respApi
@@ -99,9 +99,7 @@ export default function NotificationsBox() {
         setToNoti(updated)
         setReplyMessage("")
     }
-    console.log(toNoti);
-    console.log(fromNoti);
-
+    
     const toNotiDisplay = () => {
         return toNoti.map(item => {
             return item.readReceiver ?

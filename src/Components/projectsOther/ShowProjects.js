@@ -212,16 +212,28 @@ console.log(loading)
                 state={{ viewProject: [] }}
                 className="button-link"
               >
-                 {<img
-                  src={project.images.length === 0 ? LogoGrey : project.images[0] }
-                  width="100%"
-                  style={
-                    project.images.length === 0 ?
-                    { borderRadius: "4px", width: "25rem", height: "25rem"}
-                    : 
-                    { borderRadius: "4px" }
-                    }
-                />}
+                   {/* <img
+                    src={project.images.length === 0 ? LogoGrey : project.images[0] }
+                    width="100%" 
+                    style={
+                      project.images.length === 0 ?
+                      { borderRadius: "4px", width: "25rem", height: "25rem"}
+                      : 
+                      { borderRadius: "4px" }}
+                  /> */}
+
+                {/* Since we are able to add pictures to a project, they come in different sizes and this page doesn't looks great anymore, compare the previous code with the new one  */}
+                <div
+                  style={{
+                    backgroundImage: `url(${project.images.length === 0 ? LogoGrey : project.images[0]})`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                    backgroundSize: project.images.length === 0 ? "contain" : "cover",
+                    width: "25rem",
+                    height: "25rem", 
+                    borderRadius: "4px"
+                  }}
+                ></div>
                 
                 <h3 style={{ textAlign: "center" }}>
                   {project.title} by {project.authorship}

@@ -8,16 +8,38 @@
   box-shadow: 0 1.5rem 4rem rgba($color-black, 0.1);
 
   &__picture {
+    position: relative;
     background-image: url("https://images.unsplash.com/photo-1503095396549-807759245b35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1771&q=80");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 23rem;
+    height: 30rem;
+    background-color: rgba(255, 0, 0, 0.5);
     background-blend-mode: screen;
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    overflow: scroll;
+    display: -webkit-box;
+
+    &--addPicture {
+      position: absolute;
+      top: 2rem;
+      left: 2.5rem;
+      z-index: 500;
+    }
+
+    &--1 {
+      width: 33.333333%;
+      height: 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      cursor: pointer;
+
+      @include respond(phone) {
+        width: 50%;
+      }
+    }
   }
 
   &__heading {
@@ -27,7 +49,7 @@
     text-align: right;
     color: $color-white;
     position: absolute;
-    top: 12rem;
+    top: 20rem;
     right: 2rem;
     width: 75%;
   }
@@ -46,21 +68,21 @@
 
   &__updateTitle {
     position: absolute;
-    top: 10rem;
+    top: 18rem;
     right: 1.2rem;
     z-index: 500;
   }
 
   &__updateAuthorship {
     position: absolute;
-    top: 26rem;
+    top: 33rem;
     left: 1.8rem;
     // z-index: 1000;
   }
 
   &__updateDescription {
     position: absolute;
-    top: 36rem;
+    top: 43rem;
     left: 1.8rem;
     // z-index: 1000;
   }
@@ -89,7 +111,7 @@
     padding-right: 1.5rem;
     white-space: pre-wrap;
     color: $color-grey-dark-3;
-    word-break: break-all;
+    // word-break: break-all;
   }
 
   &__jobList > *:not(:last-child) {

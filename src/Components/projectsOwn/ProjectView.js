@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { UserContext } from '../../context/UserContext.js'
 import { updateOwnProject } from '../../helpers/apiCalls.js'
 import JobOfferCard from './JobOfferCard'
 import UpdateButton from '../utilities/UpdateButton'
 import AddJobButton from '../utilities/AddJobButton'
 import AddProjectDetail from './AddProjectDetail'
+import AddPicture from '../utilities/AddPicture'
+import ImageBox from './ImageBox'
 
 const mountedTextArea = { 
     WebkitAnimation: "text-focus-in .8s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
@@ -16,9 +19,10 @@ const unmountedTextArea = {
 
 export default function ProjectView({
     newProject,
-    setNewProject
+    setNewProject,
 }) {
-    // console.log(newProject);
+
+    const { viewProject, setViewProject, projects, setProjects } = useContext(UserContext)
 
     const [ showCreateJob, setShowCreteJob ] = useState(false)
 
@@ -27,6 +31,9 @@ export default function ProjectView({
     const [ newDescription, setNewDescription ] = useState({description: newProject ? newProject.description : ""})
 
     const [ jobOffers, setJobOffers ] = useState([])
+
+    const [ showPicture, setShowPicture ] = useState( false )
+    const [ popupPicture, setPopupPicture ] = useState("")
 
     useEffect(()=> {
         setNewTitle({title: newProject ? newProject.title : ""})
@@ -48,13 +55,30 @@ export default function ProjectView({
     const update = async (inputValue) => {
         try {
             const newResp = await updateOwnProject(newProject._id, inputValue)
-            console.log(newResp);
+            
             if(newResp.error){
                 console.log(newResp.error);
                 return;
             }
 
             setNewProject(newResp)
+
+            const updated = viewProject.map(item =>  
+                item._id === newResp._id ?
+                newResp
+                :
+                item
+            )
+
+            const updated2 = projects.map(item =>  
+                item._id === newResp._id ?
+                newResp
+                :
+                item
+            )
+            setViewProject(updated)
+            setProjects(updated2)
+
         } catch (error) {
             console.log(error);
         }
@@ -92,7 +116,17 @@ export default function ProjectView({
         setShowCreteJob(true)
     }
 
-    // console.log(jobOffers);
+    const handleShowImage = (e) => {
+        setShowPicture(true)
+        setPopupPicture(e.target.id)
+    }
+
+    const handleClosePicture = (e) => {
+        if (e.target.contains(e.target)) {
+            setShowPicture(false)
+        }
+    }
+
     const displayJobs = () => {
         return jobOffers
         // .sort((a, b) => a.job.title.localeCompare(b.job.title))
@@ -109,9 +143,39 @@ export default function ProjectView({
             />
         )
     }
+
+
+    const displayImages = () => {
+        return newProject.images.map( item => {
+            return item === "" ?
+            ""
+            :
+            <ImageBox
+                image={item}
+                key={item}
+                handleClick={handleShowImage}
+            />
+        })
+    }
     
+   
     return (
         <div className="project-view">
+            {
+                showPicture ? 
+                <div className="popup"  onClick={handleClosePicture}>
+                    <img 
+                        src={popupPicture}
+                        className="popup__image" 
+                        // style={{width: "50%",  
+                        // border: "1px solid white", }} 
+                        alt="theater picture" 
+                    />
+                </div>
+                :
+                <></>
+            
+            }
             {
                 showCreateJob ?
                 <div className="popup">
@@ -127,8 +191,33 @@ export default function ProjectView({
                 <></>
 
             }
+            
             <div className="card">
-                <div className="card__picture"></div>
+                <div className="card__picture--addPicture">
+                    {
+                        newProject ? 
+                        <AddPicture
+                            color="white"
+                            fontSize="4" // fontSize in rem
+                            transformScale="1.2"
+                            id={newProject._id}
+                            setNewProject={setNewProject}
+                        />
+                        :
+                        <></>
+                    }
+                </div>
+                <div 
+                    className="card__picture" 
+                >
+                    {
+                        newProject ? 
+                        displayImages()
+                        :
+                        <></>
+                    }
+                </div>
+
                 <div className="card__updateTitle">
                     {
                         newProject ? 

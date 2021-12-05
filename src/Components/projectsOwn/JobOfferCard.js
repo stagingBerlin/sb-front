@@ -29,7 +29,7 @@ export default function JobOfferCard({
     jobOfferId
 }) {
 
-    const { usersdb, jobs } = useContext(UserContext)
+    const { usersdb, jobs, viewProject, setViewProject, project, setProject } = useContext(UserContext)
     // const [participants, setparticipants] = useState([])
 
     const filterByJob = usersdb.filter(user => {
@@ -95,7 +95,7 @@ export default function JobOfferCard({
     const hireParticipant = async (participantId) => {
         try {
             const newParticipantDB = await addParticipant(newProjectId, jobOfferId, participantId)
-            console.log(newParticipantDB);
+            
             if(newParticipantDB.error) {
                 console.log(newParticipantDB.error);
                 return

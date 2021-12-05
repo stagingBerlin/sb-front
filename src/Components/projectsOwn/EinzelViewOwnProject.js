@@ -23,6 +23,14 @@ const EinzelViewOwnProject = ({id}) => {
         // eslint-disable-next-line
     }, [])
 
+    if(!projectToShow){
+        return (
+            <div className="loading-wrapper">
+                <h1><i>Loading...</i></h1>
+            </div>
+        )
+    }
+
     return (
         <div className="project-own-view">
             <ProjectView
