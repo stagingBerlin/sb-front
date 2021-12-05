@@ -13,15 +13,14 @@ const CreateProjectsOwn = () => {
     viewProject,
     setViewProject,
   } = useContext(UserContext);
+
   const [data, setData] = useState({
     title: "",
     authorship: "",
-    images: "",
-    description: "",
+    description: ""
   });
   const [newProject, setNewProject] = useState();
   const [showCreateForm, setShowCreateForm] = useState(true);
-  // const [imgPreview, setImgPreview] = useState("")
 
   const history = useHistory();
 
@@ -31,19 +30,6 @@ const CreateProjectsOwn = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  // const uploadImg = (e) => {
-  //   let fileSelected = e.target.files[0];
-
-  // if (!fileSelected) return;
-
-  // let fileReader = new FileReader();
-  // fileReader.readAsDataURL(fileSelected);
-
-  // fileReader.onloadend = (ev) => {
-  //   setImgPreview(fileReader.result);
-  // };
-  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -90,7 +76,6 @@ const CreateProjectsOwn = () => {
                   name="title"
                   className="create-project-form__input"
                   type="text"
-                  // value={data.title}
                   placeholder="Title"
                   onChange={handleInput}
                 />
@@ -106,7 +91,6 @@ const CreateProjectsOwn = () => {
                   placeholder="Concept"
                   className="create-project-form__input"
                   type="text"
-                  // defaultValue={data.authorship}
                   onChange={handleInput}
                 />
                 <label

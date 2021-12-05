@@ -1,6 +1,10 @@
 .project-own-view {
-  padding: 3rem 6rem 25rem;
+  padding: 3rem 25rem 15rem;
+
+  @include respond(tab-land) {
+    padding: 3rem 10rem 15rem;
+  }
   @include respond(tab-port) {
-    padding: 3rem 0 25rem;
+    padding: 3rem 0 15rem;
   }
 }

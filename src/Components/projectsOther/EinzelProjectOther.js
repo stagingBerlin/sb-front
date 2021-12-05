@@ -135,12 +135,12 @@ const EinzelProjectOther = (id) => {
                   </div>
                   <div>
                   {<img
-                  src={item.images.length === 0 ? LogoGrey : item.images}
+                  src={item.images.length === 0 ? LogoGrey : item.images[0]}
                   style={ 
                     item.images.length === 0 ?
-                    { borderRadius: "4px", width: "40rem" }
-                    :  { borderRadius: "4px", width: "auto" }
-                    }
+                    { borderRadius: "4px", maxWidth: "40rem" }
+                    :  { borderRadius: "4px", maxWidth: "40rem" } // I change the width since we are geting new images with diferent sizes 
+                    } // with this new settings there is no need to use conditional rendering in the styles, check it out!
                   />}
                     <p style={{ padding: "1rem 0" }}>
                       Description:{" "}
