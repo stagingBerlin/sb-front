@@ -9,11 +9,17 @@ export default function InputSelectUser({
     const [ searchUser, setSearchUser ] = useState("")
     
     const filteredUser = usersToChoose.filter(user => {
+        if(user.name){
+            return (
+                user.name.toLowerCase().indexOf(searchUser.toLowerCase()) !== -1
+                || 
+                user.username.toLowerCase().indexOf(searchUser.toLowerCase()) !== -1
+            )
+        }
         return (
-            user.name.toLowerCase().indexOf(searchUser.toLowerCase()) !== -1
-            || 
             user.username.toLowerCase().indexOf(searchUser.toLowerCase()) !== -1
-        )})
+            )
+        })
    
 
     const style={
