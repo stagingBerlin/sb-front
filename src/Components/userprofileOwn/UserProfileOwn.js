@@ -9,7 +9,7 @@ import AvatarGroup from "@mui/material/AvatarGroup";
 import profile1 from "../../img/profile1.png";
 import profile2 from "../../img/profile2.png";
 import blue from "../../img/bluelogo.png";
-import NotificationsBox from './NotificationsBox'
+import NotificationsBox from "./NotificationsBox";
 import Link from "@mui/material/Link";
 
 /**************************** MUI FEATURES ****************************/
@@ -55,27 +55,36 @@ function stringAvatar(name) {
 
 /*********************** Main Component Function **************************/
 function UserProfileOwn() {
-  const { user, setUser} = useContext(UserContext);
-  console.log(user.appliedProject)
+  const { user, setUser } = useContext(UserContext);
+  console.log(user.appliedProject);
   return (
     <>
-    <div 
-      className="grid-container"
-    >
-      <div
-        className="grid-row-6 grid-col-5 grid-col-span-4"
-      >
-        <h1 style={{ marginBottom: "1rem", textAlign: "center" }}>
-          {user.username}'s Profile
-        </h1>
-        <div style={{ display: "flex" }}>
-          <Stack direction="row" spacing={2}>
-            {user.isHiring || user.ownedProject?.length !== 0 ? (
-              <Badge
-                overlap="circular"
-                anchorOrigin={{ vertical: "top", horizontal: "left" }}
-                badgeContent={<Avatar {...stringAvatar("Project Manager")} />}
-              >
+      <div className="grid-container">
+        <div className="grid-row-6 grid-col-5 grid-col-span-4">
+          <h1 style={{ marginBottom: "1rem", textAlign: "center" }}>
+            {user.username}'s Profile
+          </h1>
+          <div style={{ display: "flex" }}>
+            <Stack direction="row" spacing={2}>
+              {user.isHiring || user.ownedProject?.length !== 0 ? (
+                <Badge
+                  overlap="circular"
+                  anchorOrigin={{ vertical: "top", horizontal: "left" }}
+                  badgeContent={<Avatar {...stringAvatar("Project Manager")} />}
+                >
+                  <StyledBadge
+                    overlap="circular"
+                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                    variant="dot"
+                  >
+                    <Avatar
+                      sx={{ width: 94, height: 94 }}
+                      alt="profile pic"
+                      src={user.avatar}
+                    />
+                  </StyledBadge>
+                </Badge>
+              ) : (
                 <StyledBadge
                   overlap="circular"
                   anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
@@ -87,62 +96,55 @@ function UserProfileOwn() {
                     src={user.avatar}
                   />
                 </StyledBadge>
-              </Badge>
-            ) : (
-              <StyledBadge
-                overlap="circular"
-                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-                variant="dot"
-              >
-                <Avatar
-                  sx={{ width: 94, height: 94 }}
-                  alt="profile pic"
-                  src={user.avatar}
-                />
-              </StyledBadge>
-            )}
-          </Stack>
+              )}
+            </Stack>
 
-          <div style={{ margin: "1rem 3rem" }}>
-            <h3>Name: {user.name ?? ""}</h3>
-            <h3>
-              Roles:
-              {user.isHiring || user.ownedProject?.length !== 0
-                ? " Project Manager ∙ "
-                : ""}
-              {user.profession.map((job, i) => job.title).join(" ∙ ")}{" "}
-            </h3>
-            <h3>Email: {user.email}</h3>
-            <h3>
-            Applied Projects: <Link href="#" underline="hover">{ user.appliedProject.length ?? "0" } projects </Link>
-            </h3>
-            <h3>
-            Bookmarked Projects: <Link href="#" underline="hover">{ user.bookmark.length ?? "0" } projects </Link>
-            </h3>
-            <h3>My Networks</h3>
-            <AvatarGroup
-              max={4}
-              sx={{
-                "& .MuiAvatar-root": { width: 24, height: 24, fontSize: 15 },
-              }}
-            >
-              <Avatar alt="first" src={profile1} />
-              <Avatar alt="second" src={blue} />
-              <Avatar alt="third" src={profile2} />
-              <Avatar alt="fourth" src={profile1} />
-              <Avatar alt="fifth" src={blue} />
-              <Avatar alt="fifth" src={blue} />
-            </AvatarGroup>
+            <div style={{ margin: "1rem 3rem" }}>
+              <h3>Name: {user.name ?? ""}</h3>
+              <h3>
+                Roles:
+                {user.isHiring || user.ownedProject?.length !== 0
+                  ? " Project Manager ∙ "
+                  : " "}
+                {user.profession.map((job, i) => job.title).join(" ∙ ")}{" "}
+              </h3>
+              <h3>Email: {user.email}</h3>
+              <h3>
+                Applied Projects:{" "}
+                <Link href="#" underline="hover">
+                  {user.appliedProject.length ?? "0"} projects{" "}
+                </Link>
+              </h3>
+              <h3>
+                Bookmarked Projects:{" "}
+                <Link href="#" underline="hover">
+                  {user.bookmark.length ?? "0"} projects{" "}
+                </Link>
+              </h3>
+              <h3>My Networks</h3>
+              <AvatarGroup
+                max={4}
+                sx={{
+                  "& .MuiAvatar-root": { width: 24, height: 24, fontSize: 15 },
+                }}
+              >
+                <Avatar alt="first" src={profile1} />
+                <Avatar alt="second" src={blue} />
+                <Avatar alt="third" src={profile2} />
+                <Avatar alt="fourth" src={profile1} />
+                <Avatar alt="fifth" src={blue} />
+                <Avatar alt="fifth" src={blue} />
+              </AvatarGroup>
+            </div>
           </div>
+          <Link href="/account/editprofile" className="button-link-short">
+            EDIT
+          </Link>
         </div>
-        <Link href="/account/editprofile" className="button-link-short">
-          EDIT
-        </Link>
       </div>
-    </div>
-    <div className="notifications-section">
-      <NotificationsBox />
-    </div>
+      <div className="notifications-section">
+        <NotificationsBox />
+      </div>
     </>
   );
 }

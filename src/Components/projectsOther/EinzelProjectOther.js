@@ -42,7 +42,7 @@ const EinzelProjectOther = (id) => {
       initialMessage: initialMessage,
       jobSlotId: jobSlotId,
       job: job,
-      jobDescription: jobDescription
+      jobDescription: jobDescription,
     };
     console.log(data);
     const thisProject = (id) => projects.find((p) => p._id === id.id);
@@ -59,7 +59,7 @@ const EinzelProjectOther = (id) => {
         try {
           const res = await createNotification(data);
           setUser(res);
-          setMsg(`You've successfully applied for this project.`)
+          setMsg(`You've successfully applied for this project.`);
           console.log(res);
         } catch (error) {
           console.log(error);
@@ -140,14 +140,18 @@ const EinzelProjectOther = (id) => {
                     </h3>
                   </div>
                   <div>
-                  {<img
-                  src={item.images.length === 0 ? LogoGrey : item.images[0]}
-                  style={ 
-                    item.images.length === 0 ?
-                    { borderRadius: "4px", maxWidth: "40rem" }
-                    :  { borderRadius: "4px", maxWidth: "40rem" } // I change the width since we are geting new images with diferent sizes 
-                    } // with this new settings there is no need to use conditional rendering in the styles, check it out!
-                  />}
+                    {
+                      <img
+                        src={
+                          item.images.length === 0 ? LogoGrey : item.images[0]
+                        }
+                        style={
+                          item.images.length === 0
+                            ? { borderRadius: "4px", maxWidth: "40rem" }
+                            : { borderRadius: "4px", maxWidth: "40rem" } // I change the width since we are geting new images with diferent sizes
+                        } // with this new settings there is no need to use conditional rendering in the styles, check it out!
+                      />
+                    }
                     <p style={{ padding: "1rem 0" }}>
                       Description:{" "}
                       <span style={{ color: "#686b69" }}>
@@ -223,12 +227,9 @@ const EinzelProjectOther = (id) => {
                                 </Stack>
                               ) : msg ? (
                                 <Stack sx={{ width: "100%" }} spacing={2}>
-                              <Alert severity="success">
-                                {msg}
-                              </Alert>
-                            </Stack>
-                            ) : null
-                            }
+                                  <Alert severity="success">{msg}</Alert>
+                                </Stack>
+                              ) : null}
                               <TextField
                                 id="standard-basic"
                                 label="Message to the project manager"
@@ -240,7 +241,14 @@ const EinzelProjectOther = (id) => {
                                 }
                               />
                               <Button
-                                onClick={() => handleApply(item.owner._id, role._id, role.job.title, role.jobDescription)}
+                                onClick={() =>
+                                  handleApply(
+                                    item.owner._id,
+                                    role._id,
+                                    role.job.title,
+                                    role.jobDescription
+                                  )
+                                }
                               >
                                 Apply
                               </Button>

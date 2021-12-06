@@ -98,30 +98,28 @@ function UserDashboard() {
               </StyledBadge>
             )}
           </Stack>
-        <div style={{marginTop: "-12px", marginBottom: "12px"}}>
-              <Link
-                href="/account/createproject"
-                underline="hover"
-                className="button-grid-1fr border-right-none justify-items-center"
-              >
-                <div >Create a new Project</div>
-              </Link>
-      
+          <div style={{ marginTop: "-12px", marginBottom: "12px" }}>
+            <Link
+              href="/account/createproject"
+              underline="hover"
+              className="button-grid-1fr border-right-none justify-items-center"
+            >
+              <div>Create a new Project</div>
+            </Link>
+
             <Link
               href="/account/editprofile"
               underline="hover"
               className="button-grid-1fr border-right-none  justify-items-center button"
             >
-             <div style={{ textAlign: "center"}}> Edit Profile</div>
+              <div style={{ textAlign: "center" }}> Edit Profile</div>
             </Link>
-            </div>
+          </div>
         </div>
       </div>
       <div className="grid-container">
         <div className="grid-col-span-5 grid-col-2 min-height-85 border-right ">
           <div className="grid-container-left grid-col-span-2">
-           
-
             <div className="grid-col-1 grid-col-span-6">
               <div className="heading-centered-grid">
                 <div>Current Project</div>
@@ -132,7 +130,7 @@ function UserDashboard() {
         </div>
 
         <div className="grid-col-7 grid-col-span-5">
-        <div className="heading-centered-grid">
+          <div className="heading-centered-grid">
             <div>Bookmarked Project</div>
           </div>
           <DashboardFeed />
