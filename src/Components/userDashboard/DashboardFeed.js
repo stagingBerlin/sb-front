@@ -1,21 +1,30 @@
 import React, { useState, useContext } from "react"
 import { UserContext } from "../../context/UserContext"
+import Link from "@mui/material/Link";
 
 function DashboardFeed() {
   const { user, setUser, ownProjects, setOwnProjects  } = useContext(UserContext)
+  console.log(user.bookmark)
   return (
     <div>
-      <div className="post-container">
-        <div className="grid-container-feed">
+      <div className="post-container"
+      style={{display: "flex", flexDirection:"column"}}>
+        <div >
         {
-          user.appliedProject && user.appliedProject.map(
-           (project, i) => {
-            <div >
-              <h3 key={i}>
-              Applied: {project.title} by {project.authorship}</h3>
-              <img src={project.images[0]} />
-            </div>
-           } 
+          user.bookmark && user.bookmark.map(
+           (project, i) => (
+            <>
+            <Link href={`/account/allprojects/${project._id}`} underline="hover"
+            style={{display: "flex", flexDirection:"row", justifyContent: "space-around", padding: "6px"}}>
+             <img src={project.images[0]} width="20%" style={{borderRadius: "4px"}}/>
+            <h3 key={i} 
+                style={{alignSelf: 'center'}}>
+              {project.title} by {project.authorship}</h3>
+           
+              
+            </Link>
+            </>
+            )
           )
         }
           {/* <textarea

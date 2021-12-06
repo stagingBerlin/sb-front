@@ -1,14 +1,15 @@
-import React, { useState, useContext } from "react"
-import { NavLink } from "react-router-dom"
-import { UserContext } from "../../context/UserContext"
-import DashboardFeed from "./DashboardFeed"
-import DashboardProjectsCurrent from "./DashboardProjectsCurrent"
-import DashboardProjectsFeatured from "./DashboardProjectsFeatured"
-import DashboardNetwork from "./DashboardNetwork"
-import { styled } from "@mui/material/styles"
-import Badge from "@mui/material/Badge"
-import Avatar from "@mui/material/Avatar"
-import Stack from "@mui/material/Stack"
+import React, { useState, useContext } from "react";
+import { NavLink } from "react-router-dom";
+import Link from "@mui/material/Link";
+import { UserContext } from "../../context/UserContext";
+import DashboardFeed from "./DashboardFeed";
+import DashboardProjectsCurrent from "./DashboardProjectsCurrent";
+import DashboardProjectsFeatured from "./DashboardProjectsFeatured";
+import DashboardNetwork from "./DashboardNetwork";
+import { styled } from "@mui/material/styles";
+import Badge from "@mui/material/Badge";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
 
 /****************** MUI FUNCTION ************************/
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -54,8 +55,8 @@ function stringAvatar(name) {
 
 /****************** MAIN FUNCTION ************************/
 function UserDashboard() {
-
-  const { user, setUser, ownProjects, setOwnProjects  } = useContext(UserContext)
+  const { user, setUser, ownProjects, setOwnProjects } =
+    useContext(UserContext);
 
   return (
     <div className="content-margin-top">
@@ -98,40 +99,28 @@ function UserDashboard() {
               </StyledBadge>
             )}
           </Stack>
+        
+              <Link
+                href="/account/createproject"
+                className="button-grid-1fr border-right-none justify-items-center"
+              >
+                <div >Create a new Project</div>
+              </Link>
+      
+            <Link
+              href="/account/editprofile"
+              className="button-grid-1fr border-right-none  justify-items-center button"
+            >
+             <div style={{ textAlign: "center"}}> Edit Profile</div>
+            </Link>
         </div>
       </div>
       <div className="grid-container">
-        <div className="grid-col-span-2 grid-col-2 min-height-85 border-right ">
+        <div className="grid-col-span-5 grid-col-2 min-height-85 border-right ">
           <div className="grid-container-left grid-col-span-2">
-            {user.isHiring && 
-              <NavLink
-                to="/account/createproject"
-                className="button-grid-2fr border-right-none justify-items-center"
-              >
-                <div className="border">Create a new Project</div> 
-              </NavLink>
-            }
-              <NavLink
-                to="/account/editprofile"
-                className="button-grid-2fr grid-col-1 border-right-none"
-              >
-                Edit Profile
-              </NavLink>
-            
+           
 
-            {/* <button className="button-grid-2fr grid-col-1 border-right-none">
-            Edit Profile
-          </button>
-          <button className="button-grid-2fr grid-col-1 border-right-none">
-            Create Project
-          </button> */}
-            {/* <div className="grid-col-1 grid-col-span-2">
-              <div className="heading-centered-grid">
-                <div>Network</div>
-              </div>
-              <DashboardNetwork />
-            </div> */}
-            <div className="grid-col-1 grid-col-span-2">
+            <div className="grid-col-1 grid-col-span-6">
               <div className="heading-centered-grid">
                 <div>Current Project</div>
               </div>
@@ -140,14 +129,12 @@ function UserDashboard() {
           </div>
         </div>
 
-        <div className="grid-col-4 grid-col-span-5 grid-row-1 justify-items-end">
+        <div className="grid-col-7 grid-col-span-5">
+        <div className="heading-centered-grid">
+            <div>Bookmarked Project</div>
+          </div>
           <DashboardFeed />
         </div>
-        {/* <div className="grid-container-right grid-col-span-4 border-left">
-          <div className="grid-col-span-4">
-            <DashboardProjectsFeatured />
-          </div>
-        </div> */}
       </div>
     </div>
   );
