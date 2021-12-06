@@ -60,7 +60,7 @@ function UserDashboard() {
   return (
     <div className="content-margin-top">
       <div className="grid-container">
-        <div className="grid-col-2 grid-col-span-2 justify-self-center">
+        <div className="grid-col-6 grid-col-span-2 justify-self-center">
           <Stack direction="row" spacing={2}>
             {user.isHiring ? (
               <Badge
@@ -103,22 +103,21 @@ function UserDashboard() {
       <div className="grid-container">
         <div className="grid-col-span-2 grid-col-2 min-height-85 border-right ">
           <div className="grid-container-left grid-col-span-2">
-            {user.isHiring ? (
+            {user.isHiring && 
               <NavLink
                 to="/account/createproject"
                 className="button-grid-2fr border-right-none justify-items-center"
               >
-                <div className="border">Create a new Project</div>
-               
+                <div className="border">Create a new Project</div> 
               </NavLink>
-            ) : (
+            }
               <NavLink
                 to="/account/editprofile"
                 className="button-grid-2fr grid-col-1 border-right-none"
               >
                 Edit Profile
               </NavLink>
-            )}
+            
 
             {/* <button className="button-grid-2fr grid-col-1 border-right-none">
             Edit Profile
@@ -126,12 +125,12 @@ function UserDashboard() {
           <button className="button-grid-2fr grid-col-1 border-right-none">
             Create Project
           </button> */}
-            <div className="grid-col-1 grid-col-span-2">
+            {/* <div className="grid-col-1 grid-col-span-2">
               <div className="heading-centered-grid">
                 <div>Network</div>
               </div>
               <DashboardNetwork />
-            </div>
+            </div> */}
             <div className="grid-col-1 grid-col-span-2">
               <div className="heading-centered-grid">
                 <div>Current Project</div>
@@ -144,11 +143,11 @@ function UserDashboard() {
         <div className="grid-col-4 grid-col-span-5 grid-row-1 justify-items-end">
           <DashboardFeed />
         </div>
-        <div className="grid-container-right grid-col-span-4 border-left">
+        {/* <div className="grid-container-right grid-col-span-4 border-left">
           <div className="grid-col-span-4">
             <DashboardProjectsFeatured />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

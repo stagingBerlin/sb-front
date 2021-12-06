@@ -33,6 +33,7 @@ const EinzelProjectOther = (id) => {
 
   const [initialMessage, setInitialMessage] = useState("Please let me join.");
   const [errorMsg, setErrorMsg] = useState("");
+  const [msg, setMsg] = useState("");
 
   const handleApply = async (userId, jobSlotId, job, jobDescription) => {
     const data = {
@@ -58,6 +59,7 @@ const EinzelProjectOther = (id) => {
         try {
           const res = await createNotification(data);
           setUser(res);
+          setMsg(`You've successfully applied for this project.`)
           console.log(res);
         } catch (error) {
           console.log(error);
@@ -219,7 +221,14 @@ const EinzelProjectOther = (id) => {
                                 <Stack sx={{ width: "100%" }} spacing={2}>
                                   <Alert severity="error">{errorMsg}</Alert>
                                 </Stack>
-                              ) : null}
+                              ) : msg ? (
+                                <Stack sx={{ width: "100%" }} spacing={2}>
+                              <Alert severity="success">
+                                {msg}
+                              </Alert>
+                            </Stack>
+                            ) : null
+                            }
                               <TextField
                                 id="standard-basic"
                                 label="Message to the project manager"

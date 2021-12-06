@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 
-function DashboardNetwork() {
-  return (
-    <div>
-        Array of Network Avatars
-    </div>
-  );
+const  DashboardNetwork = () => {
+    return (
+        <div>
+            
+        </div>
+    )
 }
 
-export default DashboardNetwork;
+export default DashboardNetwork
