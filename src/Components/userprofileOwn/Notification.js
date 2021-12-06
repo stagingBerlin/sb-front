@@ -9,8 +9,6 @@ export default function Notification({
     name,
     appliedProject, 
     status,
-    readInitiator,
-    readReceiver,
     updatedAt,
     createdAt,
     avatar,
@@ -18,7 +16,11 @@ export default function Notification({
     setReplyMessage,
     handleReplyMessage,
     replyMessage,
-    handleDeleteReceiver
+    handleDeleteReceiver,
+    jobSlotId,
+    job,
+    jobDescription,
+    fromUserId
 }) {
 
     const [ showMessage, setShowMessage ] = useState(false)
@@ -59,6 +61,12 @@ export default function Notification({
                     <div className="notification__data">
                         <h2>Applied Project:&nbsp;&nbsp;&nbsp;&nbsp;<Link to={`/account/project/${appliedProject._id}`}>{appliedProject.title}</Link></h2> 
                     </div>
+                    <div className="notification__data">
+                        <h2>Position:&nbsp;&nbsp;&nbsp;&nbsp;{job}</h2> 
+                    </div>
+                    <div className="notification__data">
+                        <h2>Description:&nbsp;&nbsp;&nbsp;&nbsp;{jobDescription}.</h2> 
+                    </div>
                 </div>
                 <div className="notification__info-box--status">
                     <div className="notification__data">
@@ -67,8 +75,10 @@ export default function Notification({
                         >Status:&nbsp;&nbsp;&nbsp;&nbsp;<span className={`notification__status--${status}`}>{status.toUpperCase()}</span>
                         </h2> 
                     </div>
+                    
                 </div>
             </div>
+            
 
             <div className="notification__message-box--container">
                 <button 
@@ -132,16 +142,12 @@ export default function Notification({
                     </div>
                     <div className="notification__acction-buttons">
                         <button  
-                            value="accepted"
-                            id={id}
                             className="btn btn__accept"
-                            onClick={handleReplyMessage}
+                            onClick={()=> handleReplyMessage("accepted", id, appliedProject._id, jobSlotId, fromUserId)}
                         >Accept</button> 
                         <button 
-                            value="rejected"
-                            id={id}
                             className="btn btn__reject"
-                            onClick={handleReplyMessage}
+                            onClick={()=> handleReplyMessage("rejected", id)}
                         >Reject</button>
                     </div>
                 </div>

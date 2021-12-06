@@ -29,7 +29,7 @@ export default function JobOfferCard({
     jobOfferId
 }) {
 
-    const { usersdb, jobs, viewProject, setViewProject, project, setProject } = useContext(UserContext)
+    const { usersdb, jobs, viewProject, setViewProject, projects, setProjects } = useContext(UserContext)
     // const [participants, setparticipants] = useState([])
 
     const filterByJob = usersdb.filter(user => {
@@ -73,6 +73,20 @@ export default function JobOfferCard({
                 return
             }
             setNewProject(resApi)
+
+            const updated = projects.map(item => 
+                item._id === resApi._id ?
+                resApi
+                :
+                item)
+            
+            const updated2 = viewProject.map(item => 
+                item._id === resApi._id ?
+                resApi
+                :
+                item)
+                setProjects(updated)
+                setViewProject(updated2)
         } catch (error) {
             console.log(error);
         }
@@ -87,6 +101,20 @@ export default function JobOfferCard({
                 return
             }
             setNewProject(deleted)
+
+            const updated = projects.map(item => 
+                item._id === deleted._id ?
+                deleted
+                :
+                item)
+            
+                const updated2 = viewProject.map(item => 
+                    item._id === deleted._id ?
+                    deleted
+                    :
+                    item)
+                setProjects(updated)
+                setViewProject(updated2)
         } catch (error) {
             console.log(error);
         }
@@ -101,6 +129,20 @@ export default function JobOfferCard({
                 return
             }
             setNewProject(newParticipantDB)
+
+            const updated = projects.map(item => 
+                item._id === newParticipantDB._id ?
+                newParticipantDB
+                :
+                item)
+            
+                const updated2 = viewProject.map(item => 
+                    item._id === newParticipantDB._id ?
+                    newParticipantDB
+                    :
+                    item)
+                setProjects(updated)
+                setViewProject(updated2)
         } catch (error) {
             console.log(error);
         }

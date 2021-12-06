@@ -73,6 +73,11 @@
     transform: translateY(-4rem);
   }
 
+  &__date {
+    display: flex;
+    justify-content: space-around;
+  }
+
   &__buttons-container {
     display: flex;
     justify-content: flex-end;

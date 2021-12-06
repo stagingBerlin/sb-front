@@ -15,7 +15,9 @@ export default function UserApplyNoti({
     initialMessage,
     replyMessage,
     toUserAvatar,
-    handleDeleteInitiator
+    handleDeleteInitiator,
+    job,
+    jobDescription
 }) {
 
     const [ showMessage, setShowMessage ] = useState(false)
@@ -46,6 +48,16 @@ export default function UserApplyNoti({
                                         {appliedProject.title}
                                     </Link>
                                 
+                                </h2> 
+                            </div>
+                            <div className="notification__data">
+                                <h2>
+                                    Position:&nbsp;&nbsp;&nbsp;&nbsp;{job}
+                                </h2> 
+                            </div>
+                            <div className="notification__data">
+                                <h2>
+                                    Description:&nbsp;&nbsp;&nbsp;&nbsp;{jobDescription}
                                 </h2> 
                             </div>
                         </div>
