@@ -58,7 +58,7 @@ function UserDashboard() {
     useContext(UserContext);
 
   return (
-    <div className="content-margin-top">
+    <div className="content-margin-top2">
       <div className="grid-container">
         <div className="grid-col-6 grid-col-span-2 justify-self-center">
           <Stack direction="row" spacing={2}>
