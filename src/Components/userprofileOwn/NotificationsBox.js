@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import Notification from './Notification'
 import UserApplyNoti from './UserApplyNoti'
 import { getNotifications, updateNotification } from '../../helpers/apiCalls'
+import { addParticipant } from '../../helpers/apiCallsAddJob'
 import { UserContext } from '../../context/UserContext'
 
 
@@ -80,15 +81,18 @@ export default function NotificationsBox() {
         setToNoti(updated)
     }
 
-    const handleReplyMessage = async (e) => {
-        const id = e.target.id
-        const data = {
-            status: e.target.value,
-            replyMessage
+    const handleReplyMessage = async (newStatus, notiId, appliedProjectId, jobSlotId, fromUserId) => {
+       const data = {
+           status: newStatus,
+           replyMessage
+       }
+
+        if(newStatus === "accepted"){
+            const newParticipant = await addParticipant(appliedProjectId, jobSlotId, fromUserId) 
         }
-        
-        const respApi = await updateNotification(id, data)
-        
+
+        const respApi = await updateNotification(notiId, data)
+         
         const updated = toNoti.map(item => {
             return item._id === respApi._id ?
             respApi
@@ -108,6 +112,7 @@ export default function NotificationsBox() {
                 <Notification 
                     key={item._id} 
                     id={item._id}
+                    fromUserId={item.fromUser._id}
                     username={item.fromUser.username} 
                     name={item.fromUser.name}
                     appliedProject={item.projectId} 
@@ -119,6 +124,9 @@ export default function NotificationsBox() {
                     avatar={item.fromUser.avatar}
                     initialMessage={item.initialMessage}
                     replyMessage={item.replyMessage}
+                    jobSlotId={item.jobSlotId}
+                    job={item.job}
+                    jobDescription={item.jobDescription}
                     setReplyMessage={setReplyMessage}
                     handleReplyMessage={handleReplyMessage}
                     handleDeleteReceiver={handleDeleteReceiver}
@@ -147,6 +155,8 @@ export default function NotificationsBox() {
                 initialMessage={item.initialMessage}
                 replyMessage={item.replyMessage}
                 handleDeleteInitiator={handleDeleteInitiator}
+                job={item.job}
+                jobDescription={item.jobDescription}
             />
         }
     )

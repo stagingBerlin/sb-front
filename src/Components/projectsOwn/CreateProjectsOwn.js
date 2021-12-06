@@ -17,8 +17,11 @@ const CreateProjectsOwn = () => {
   const [data, setData] = useState({
     title: "",
     authorship: "",
-    description: ""
+    description: "",
+    starting: "",
+    deadline: ""
   });
+
   const [newProject, setNewProject] = useState();
   const [showCreateForm, setShowCreateForm] = useState(true);
 
@@ -48,6 +51,8 @@ const CreateProjectsOwn = () => {
         title: "",
         authorship: "",
         description: "",
+        starting: "",
+        deadline: ""
       });
     } catch (error) {
       console.log(error);
@@ -59,6 +64,7 @@ const CreateProjectsOwn = () => {
     return history.push("/account/project");
   };
 
+  // console.log(new Date().toISOString().split("T")[0]);
   return (
     // pages styles
     <div className="project-own-view">
@@ -70,6 +76,7 @@ const CreateProjectsOwn = () => {
               className="create-project-form__project"
               onSubmit={handleSubmit}
             >
+             
               <div className="create-project-form__group">
                 <input
                   id="title"
@@ -122,7 +129,40 @@ const CreateProjectsOwn = () => {
                   Project description...
                 </label>
               </div>
+              <div className="create-project-form__group">
+                <div className="create-project-form__date">
+                  <div className="create-project-form__date--starting">
+                    <input 
+                      className="create-project-form__input"
+                      type="date" 
+                      name="starting" 
+                      id="starting" 
+                      min={new Date().toISOString().split("T")[0]}
+                      onChange={handleInput}
+                    />
+                    <label 
+                       className="create-project-form__label"
+                        htmlFor="starting"
+                      >Starting</label>
+                  </div>
 
+                  <div className="create-project-form__date--deadline">
+                    <input 
+                      type="date" 
+                      className="create-project-form__input"
+                      name="deadline" 
+                      id="deadline" 
+                      min={new Date().toISOString().split("T")[0]}
+                      onChange={handleInput}
+                    />
+                    <label  
+                      className="create-project-form__label" 
+                      htmlFor="deadline"
+                    >Deadline</label>
+                  </div>
+                </div>
+              </div>
+              
               <div className="create-project-form__buttons-container">
                 <input
                   type="button"
@@ -143,7 +183,10 @@ const CreateProjectsOwn = () => {
       ) : (
         <></>
       )}
-      <ProjectView newProject={newProject} setNewProject={setNewProject} />
+      <ProjectView 
+        newProject={newProject} 
+        setNewProject={setNewProject} 
+      />
     </div>
   );
 };

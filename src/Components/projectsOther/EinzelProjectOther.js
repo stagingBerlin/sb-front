@@ -34,12 +34,16 @@ const EinzelProjectOther = (id) => {
   const [initialMessage, setInitialMessage] = useState("Please let me join.");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleApply = async (userId) => {
+  const handleApply = async (userId, jobSlotId, job, jobDescription) => {
     const data = {
       projectId: id.id,
       toUser: userId,
       initialMessage: initialMessage,
+      jobSlotId: jobSlotId,
+      job: job,
+      jobDescription: jobDescription
     };
+    console.log(data);
     const thisProject = (id) => projects.find((p) => p._id === id.id);
     const roles = thisProject(id).jobList.map((role) => role.job.title);
     const myRoles = user.profession.map((p) => p.title);
@@ -227,7 +231,7 @@ const EinzelProjectOther = (id) => {
                                 }
                               />
                               <Button
-                                onClick={() => handleApply(item.owner._id)}
+                                onClick={() => handleApply(item.owner._id, role._id, role.job.title, role.jobDescription)}
                               >
                                 Apply
                               </Button>
