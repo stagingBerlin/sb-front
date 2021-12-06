@@ -36,7 +36,7 @@ export default function JobOfferCard({
         const filteredUser = user.profession.filter(job => job.title === title) 
         return filteredUser.length !== 0
     })
-    // console.log(filterByJob);
+    console.log(filterByJob);
 
     // state to handle job Id in  BasicSelect component
     const [inputJob, setInputJob] = useState(jobId);
