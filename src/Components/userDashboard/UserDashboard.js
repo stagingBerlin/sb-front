@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { NavLink } from "react-router-dom";
 import Link from "@mui/material/Link";
 import { UserContext } from "../../context/UserContext";
 import DashboardFeed from "./DashboardFeed";
@@ -99,9 +98,10 @@ function UserDashboard() {
               </StyledBadge>
             )}
           </Stack>
-        
+        <div style={{marginTop: "-12px", marginBottom: "12px"}}>
               <Link
                 href="/account/createproject"
+                underline="hover"
                 className="button-grid-1fr border-right-none justify-items-center"
               >
                 <div >Create a new Project</div>
@@ -109,10 +109,12 @@ function UserDashboard() {
       
             <Link
               href="/account/editprofile"
+              underline="hover"
               className="button-grid-1fr border-right-none  justify-items-center button"
             >
              <div style={{ textAlign: "center"}}> Edit Profile</div>
             </Link>
+            </div>
         </div>
       </div>
       <div className="grid-container">

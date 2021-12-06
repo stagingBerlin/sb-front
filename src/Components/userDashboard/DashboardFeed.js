@@ -16,7 +16,8 @@ function DashboardFeed() {
             <>
             <Link href={`/account/allprojects/${project._id}`} underline="hover"
             style={{display: "flex", flexDirection:"row", justifyContent: "space-around", padding: "6px"}}>
-             <img src={project.images[0]} width="20%" style={{borderRadius: "4px"}}/>
+             <img src={project.images[0]} height="100rem"
+              width="100rem" style={{borderRadius: "4px"}}/>
             <h3 key={i} 
                 style={{alignSelf: 'center'}}>
               {project.title} by {project.authorship}</h3>
