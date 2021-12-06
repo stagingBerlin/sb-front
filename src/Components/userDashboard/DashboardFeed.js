@@ -17,6 +17,7 @@ function DashboardFeed() {
             user.bookmark.map((project, i) => (
               <>
                 <Link
+                 key={i}
                   href={`/account/allprojects/${project._id}`}
                   underline="hover"
                   style={{
@@ -32,7 +33,7 @@ function DashboardFeed() {
                     width="100rem"
                     style={{ borderRadius: "4px" }}
                   />
-                  <h3 key={i} style={{ alignSelf: "center" }}>
+                  <h3 style={{ alignSelf: "center" }}>
                     {project.title} by {project.authorship}
                   </h3>
                 </Link>

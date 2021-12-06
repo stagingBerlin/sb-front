@@ -3,8 +3,6 @@ import Link from "@mui/material/Link";
 import { UserContext } from "../../context/UserContext";
 import DashboardFeed from "./DashboardFeed";
 import DashboardProjectsCurrent from "./DashboardProjectsCurrent";
-import DashboardProjectsFeatured from "./DashboardProjectsFeatured";
-import DashboardNetwork from "./DashboardNetwork";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import Avatar from "@mui/material/Avatar";
@@ -56,13 +54,14 @@ function stringAvatar(name) {
 function UserDashboard() {
   const { user, setUser, ownProjects, setOwnProjects } =
     useContext(UserContext);
+  console.log(ownProjects);
 
   return (
-    <div className="content-margin-top">
+    <div className="content-margin-top2">
       <div className="grid-container">
         <div className="grid-col-6 grid-col-span-2 justify-self-center">
           <Stack direction="row" spacing={2}>
-            {user.isHiring ? (
+            {user.isHiring || ownProjects?.length !== 0 ? (
               <Badge
                 overlap="circular"
                 anchorOrigin={{ vertical: "top", horizontal: "left" }}
@@ -104,7 +103,7 @@ function UserDashboard() {
               underline="hover"
               className="button-grid-1fr border-right-none justify-items-center"
             >
-              <div>Create a new Project</div>
+              <h3>Create a new Project</h3>
             </Link>
 
             <Link
@@ -112,7 +111,7 @@ function UserDashboard() {
               underline="hover"
               className="button-grid-1fr border-right-none  justify-items-center button"
             >
-              <div style={{ textAlign: "center" }}> Edit Profile</div>
+              <h3 style={{ textAlign: "center" }}> Edit Profile</h3>
             </Link>
           </div>
         </div>
@@ -122,7 +121,7 @@ function UserDashboard() {
           <div className="grid-container-left grid-col-span-2">
             <div className="grid-col-1 grid-col-span-6">
               <div className="heading-centered-grid">
-                <div>Current Project</div>
+                <h3>Current Project</h3>
               </div>
               <DashboardProjectsCurrent />
             </div>
@@ -131,7 +130,7 @@ function UserDashboard() {
 
         <div className="grid-col-7 grid-col-span-5">
           <div className="heading-centered-grid">
-            <div>Bookmarked Project</div>
+            <h3>Bookmarked Project</h3>
           </div>
           <DashboardFeed />
         </div>
