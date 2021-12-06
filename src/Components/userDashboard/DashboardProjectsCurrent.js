@@ -16,6 +16,7 @@ function DashboardProjectsCurrent() {
           ownProjects.map((project, i) => (
             <>
               <Link
+                key={i}
                 href={`/account/project/${project._id}`}
                 underline="hover"
                 style={{
@@ -31,8 +32,16 @@ function DashboardProjectsCurrent() {
                   height="100rem"
                   width="100rem"
                 />
-                <h3 key={i} style={{ alignSelf: "center" }}>
-                  <span style={{ backgroundColor: "#d5f7da" }}>Owned </span>{" "}
+                <h3 style={{ alignSelf: "center" }}>
+                  <span
+                    style={{
+                      backgroundColor: "#d5f7da",
+                      padding: "4px",
+                      marginRight: "2px",
+                    }}
+                  >
+                    Owned{" "}
+                  </span>{" "}
                   {project.title} by {project.authorship}
                 </h3>
               </Link>
@@ -59,7 +68,13 @@ function DashboardProjectsCurrent() {
                 />
                 <h3 key={i} style={{ alignSelf: "center" }}>
                   {" "}
-                  <span style={{ backgroundColor: "#f7e9c3" }}>
+                  <span
+                    style={{
+                      backgroundColor: "#f7e9c3",
+                      padding: "4px",
+                      marginRight: "2px",
+                    }}
+                  >
                     Applied{" "}
                   </span>{" "}
                   {project.title} by {project.authorship}{" "}

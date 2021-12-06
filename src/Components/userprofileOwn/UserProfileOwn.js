@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
-//import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import Stack from "@mui/material/Stack";
@@ -55,8 +54,8 @@ function stringAvatar(name) {
 
 /*********************** Main Component Function **************************/
 function UserProfileOwn() {
-  const { user, setUser } = useContext(UserContext);
-  console.log(user.appliedProject);
+  const { user, setUser, ownProjects, setOwnProjects } = useContext(UserContext);
+  
   return (
     <>
       <div className="grid-container">
@@ -64,7 +63,7 @@ function UserProfileOwn() {
           <h1 style={{ marginBottom: "1rem", textAlign: "center" }}>
             {user.username}'s Profile
           </h1>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", justifyContent: "space-around" }}>
             <Stack direction="row" spacing={2}>
               {user.isHiring || user.ownedProject?.length !== 0 ? (
                 <Badge
