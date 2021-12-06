@@ -6,8 +6,6 @@ export default function InputSelectUser({
     usersToChoose = [], // array of users to filter
     getId // event onClick to extract id of user
 }) {
-    // console.log(usersToChoose);
-    
     const [ searchUser, setSearchUser ] = useState("")
     
     const filteredUser = usersToChoose.filter(user => {
@@ -15,10 +13,8 @@ export default function InputSelectUser({
             user.name.toLowerCase().indexOf(searchUser.toLowerCase()) !== -1
             || 
             user.username.toLowerCase().indexOf(searchUser.toLowerCase()) !== -1
-            // ||
-            // user.email.toLowerCase().indexOf(searchUser.toLowerCase()) !== -1
         )})
-    // console.log(filteredUser);
+   
 
     const style={
         borderBottom:  searchUser && filteredUser.length !== 0 ? "3px solid #48fb47": "3px solid #ffb900"
