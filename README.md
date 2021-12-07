@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a target="_blank" href="https://github.com/stagingBerlin/sb-front/blob/main/public">
+    <img src="img/LogoGrey.png" alt="Logo" width="180" height="180">
+  </a>
+ </p>
+  <h3 align="center">Staging Berlin</h3>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+  <p align="center">
+ Web based Job-searching Platform for independent Theatre Professionals in Berlin
+  </p>
+  <p align="center">
+    <a target="_blank" href="https://staging-berlin.vercel.app/"><strong>App Link</strong></a>
+  </p>
+  
+## Built With
 
-## Available Scripts
+* [ReactJS](https://reactjs.org/)
+* [Express](https://expressjs.com/)
+* [Mongoose](https://mongoosejs.com/)
+* [MongoDB](https://www.mongodb.com/cloud/atlas?utm_content=rlsapostreg&utm_source=google&utm_campaign=gs_emea_rlsamulti_search_brand_dsa_atlas_desktop_rlsa_postreg&utm_term=&utm_medium=cpc_paid_search&utm_ad=b&utm_ad_campaign_id=14412646473&gclid=Cj0KCQjwkIGKBhCxARIsAINMioIyMxUNrRdawAnWoV8sA15dkmCwz9HL-QdMTRDK2_Q6rXjdo-8MsuQaAr-OEALw_wcB)
+* [Material-UI](https://material-ui.com)
+* [SASS](https://sass-lang.com/)
 
-In the project directory, you can run:
+## Deployed with
+* [vercel](https://vercel.com)
 
-### `npm start`
+<!-- ABOUT THE PROJECT -->
+## About The Project
+<p align="center">
+<a href="https://github.com/stagingBerlin/sb-front/blob/main/public">
+  <img src="img/Screenshot1.png" alt="Screenshot" width="400" height="200">
+  <img src="img/Screenshot2.png" alt="Screenshot" width="170" height="300">
+  <img src="img/Screenshot3.png" alt="Screenshot" width="400" height="200">
+  </a>
+</p>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Contact
+Daniel Matczak [Github](https://github.com/danielczak) - daniel.matczak@network.rca.ac.uk <br />
+Habid Badillo Bespinosa [Github](https://github.com/habidbesp) - habidbespinosa@gmail <br />
+Shinhee Chae [Github](https://github.com/shinheechae) - shinheechae@gmail.com <br />
+              
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Acknowledgements
 
-### `npm test`
+* [Project Link](https://github.com/stagingBerlin)
+* [GitHub Project](https://pages.github.com)
+* [trello](https://trello.com/)
+* [Kumamon](https://kumamon-official.jp/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
