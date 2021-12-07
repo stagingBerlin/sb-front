@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a target="_blank" href="https://github.com/stagingBerlin/sb-front/blob/main/public">
+  <a target="_blank" href="https://github.com/stagingBerlin/sb-front/blob/main/public/img/LogoGrey.png">
     <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/img/LogoGrey.png" alt="Logo" width="150" height="180">
   </a>
  </p>
