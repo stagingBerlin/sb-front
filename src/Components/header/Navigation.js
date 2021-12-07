@@ -126,13 +126,13 @@ export default function Navigation() {
             className="navigation__link navigation__link--AppName">
             <h5 className="navigation__title">Staging Berlin</h5>
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/about"
             className="navigation__link navigation__link--AppName"
             activeStyle={activeStyle}
           >
             About
-          </NavLink>
+          </NavLink> */}
         </div>
 
         <ul className="navigation__list">
