@@ -1,0 +1,85 @@
+.ownProjects {
+  & > *:not(:last-child) {
+    margin-bottom: 5rem;
+  }
+  &__heading {
+    text-align: center;
+    font-size: 3.5rem;
+    letter-spacing: 0.25rem;
+  }
+
+  &__create-project {
+    text-align: end;
+    & a {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+
+  &__item-box {
+    & > *:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  &__item {
+    box-shadow: $box-shadow;
+    padding: 2.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__info {
+    width: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @include respond(phone) {
+      display: block;
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+      color: $color-grey-dark-2;
+      transition: all 0.2s;
+    }
+
+    &--heading {
+      letter-spacing: 0.1rem;
+      @include respond(phone) {
+        margin-bottom: 1.3rem;
+      }
+    }
+  }
+
+  &__date {
+    & > *:not(:last-child) {
+      margin-right: 2.5rem;
+      @include respond(phone) {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    & p {
+      font-size: 1.4rem;
+      letter-spacing: 0.08rem;
+    }
+    &--deadline {
+      color: $color-red;
+    }
+
+    &--starting {
+      color: $color-primary;
+    }
+
+    display: flex;
+    justify-content: flex-end;
+
+    @include respond(phone) {
+      display: block;
+    }
+  }
+}

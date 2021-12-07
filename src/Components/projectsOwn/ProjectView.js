@@ -22,7 +22,7 @@ export default function ProjectView({
     setNewProject,
 }) {
 
-    const { viewProject, setViewProject, projects, setProjects } = useContext(UserContext)
+    const { viewProject, setViewProject, projects, setProjects, ownProjects,setOwnProjects } = useContext(UserContext)
 
     const [ showCreateJob, setShowCreteJob ] = useState(false)
 
@@ -76,8 +76,16 @@ export default function ProjectView({
                 :
                 item
             )
+
+            const updated3 = ownProjects.map(item =>  
+                item._id === newResp._id ?
+                newResp
+                :
+                item
+            )
             setViewProject(updated)
             setProjects(updated2)
+            setOwnProjects(updated3)
 
         } catch (error) {
             console.log(error);

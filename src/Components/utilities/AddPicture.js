@@ -12,7 +12,7 @@ export default function AddPicture({
     setNewProject
 }) {
 
-    const { setViewProject, viewProject, projects, setProjects } = useContext(UserContext)
+    const { setViewProject, viewProject, projects, setProjects, ownProjects, setOwnProjects} = useContext(UserContext)
     
 
     const [ fontColor, setFontColor ] = useState(color)
@@ -65,9 +65,16 @@ export default function AddPicture({
                 :
                 item
             })
-            
+
+            const updated3 = ownProjects.map(item => {
+                return item._id === newImage._id ?
+                newImage
+                :
+                item
+            })
             setViewProject(updated)
             setProjects(updated2)
+            setOwnProjects(updated3)
         };
     }
 

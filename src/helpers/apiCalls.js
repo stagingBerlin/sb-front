@@ -85,6 +85,15 @@ export const updateOwnProject = async (id, data) => {
   }
 };
 
+export const deleteOwnProject = async ( id ) => {
+  try {
+    const res = await axios.delete(`/projects/ownProjects/${id}`);
+    return res.data
+  } catch (error) {
+    return error.response.data;
+  }
+}
+
 export const updateUser = async (id, data) => {
   try {
     const res = await axios.put(`/users/${id}`, data);

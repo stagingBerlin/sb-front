@@ -34,4 +34,11 @@
       color: $color-white;
     }
   }
+
+  &__create {
+    &:hover {
+      background-color: $grid-border-color;
+      color: $background-col;
+    }
+  }
 }
