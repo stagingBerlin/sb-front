@@ -28,9 +28,9 @@
 ## About The Project
 <p align="center">
 <a href="https://github.com/stagingBerlin/sb-front/blob/main/public">
-  <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/Screenshot1.png" alt="Screenshot" width="400" height="220">
-  <img src="https://github.com/stagingBerlin/sb-front/blob/main/pubic/Screenshot2.png" alt="Screenshot" width="400" height="220">
-  <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/Screenshot3.png" alt="Screenshot" width="400" height="220">
+  <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/Screenshot1.png" alt="Screenshot" width="400" height="190">
+  <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/Screenshot2.png" alt="Screenshot" width="400" height="190">
+  <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/Screenshot3.png" alt="Screenshot" width="400" height="190">
   </a>
 </p>
 
