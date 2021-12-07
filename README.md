@@ -22,8 +22,6 @@
 * [MongoDB](https://www.mongodb.com/cloud/atlas?utm_content=rlsapostreg&utm_source=google&utm_campaign=gs_emea_rlsamulti_search_brand_dsa_atlas_desktop_rlsa_postreg&utm_term=&utm_medium=cpc_paid_search&utm_ad=b&utm_ad_campaign_id=14412646473&gclid=Cj0KCQjwkIGKBhCxARIsAINMioIyMxUNrRdawAnWoV8sA15dkmCwz9HL-QdMTRDK2_Q6rXjdo-8MsuQaAr-OEALw_wcB)
 * [Material-UI](https://material-ui.com)
 * [SASS](https://sass-lang.com/)
-
-## Deployed with
 * [vercel](https://vercel.com)
 
 <!-- ABOUT THE PROJECT -->
@@ -47,6 +45,5 @@ Shinhee Chae [Github](https://github.com/shinheechae) - shinheechae@gmail.com <b
 * [Project Link](https://github.com/stagingBerlin)
 * [GitHub Project](https://pages.github.com)
 * [trello](https://trello.com/)
-* [Kumamon](https://kumamon-official.jp/)
 
 
