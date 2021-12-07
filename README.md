@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a target="_blank" href="https://github.com/stagingBerlin/sb-front/blob/main/public">
-    <img src="img/LogoGrey.png" alt="Logo" width="180" height="180">
+    <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/img/LogoGrey.png" alt="Logo" width="180" height="180">
   </a>
  </p>
   <h3 align="center">Staging Berlin</h3>
@@ -30,9 +30,9 @@
 ## About The Project
 <p align="center">
 <a href="https://github.com/stagingBerlin/sb-front/blob/main/public">
-  <img src="img/Screenshot1.png" alt="Screenshot" width="400" height="200">
-  <img src="img/Screenshot2.png" alt="Screenshot" width="170" height="300">
-  <img src="img/Screenshot3.png" alt="Screenshot" width="400" height="200">
+  <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/Screenshot1.png" alt="Screenshot" width="400" height="200">
+  <img src="https://github.com/stagingBerlin/sb-front/blob/main/pubic/Screenshot2.png" alt="Screenshot" width="170" height="300">
+  <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/Screenshot3.png" alt="Screenshot" width="400" height="200">
   </a>
 </p>
 
