@@ -14,30 +14,25 @@ function DashboardProjectsCurrent() {
       >
         {ownProjects &&
           ownProjects.map((project, i) => (
-            <>
               <Link
-                key={i}
+                key={project._id}
+                className="dashboard-boxes"
                 href={`/account/project/${project._id}`}
                 underline="hover"
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  padding: "6px",
-                  justifyContent: "space-around",
-                }}
               >
                 <img
                   src={project.images[0]}
-                  style={{ borderRadius: "4px" }}
+                  style={{ borderRadius: "4px", marginLeft: "1.5rem" }}
                   height="100rem"
                   width="100rem"
                 />
-                <h3 style={{ alignSelf: "center" }}>
+                <h3 style={{ alignSelf: "center", marginLeft:"1.5rem" }}>
                   <span
                     style={{
+                      
                       backgroundColor: "#d5f7da",
                       padding: "4px",
-                      marginRight: "2px",
+                      marginRight: "1rem",
                     }}
                   >
                     Owned{" "}
@@ -45,34 +40,30 @@ function DashboardProjectsCurrent() {
                   {project.title} by {project.authorship}
                 </h3>
               </Link>
-            </>
           ))}
+
         {user.appliedProject &&
           user.appliedProject.map((project, i) => (
-            <div>
+           
               <Link
+                key={project._id}
+                className="dashboard-boxes"
                 href={`/account/allprojects/${project._id}`}
                 underline="hover"
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                  padding: "6px",
-                }}
               >
                 <img
                   src={project.images[0]}
                   height="100rem"
                   width="100rem"
-                  style={{ borderRadius: "4px" }}
+                  style={{ borderRadius: "4px", marginLeft: "1.5rem" }}
                 />
-                <h3 key={i} style={{ alignSelf: "center" }}>
+                <h3 key={i} style={{ alignSelf: "center", marginLeft: "1.5rem" }}>
                   {" "}
                   <span
                     style={{
                       backgroundColor: "#f7e9c3",
                       padding: "4px",
-                      marginRight: "2px",
+                      marginRight: "1rem",
                     }}
                   >
                     Applied{" "}
@@ -80,7 +71,7 @@ function DashboardProjectsCurrent() {
                   {project.title} by {project.authorship}{" "}
                 </h3>
               </Link>
-            </div>
+            
           ))}
       </div>
     </div>

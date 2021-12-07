@@ -75,7 +75,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 export default function Navigation() {
-  const { user, setUser } = useContext(UserContext)
+  const { user, setUser, setOwnProjects, setViewProject, setProjects } = useContext(UserContext)
   const [outMsg, setOutMsg] = useState()
 
  //*************  MUI ************/
@@ -93,6 +93,9 @@ export default function Navigation() {
   const handleClick = async () => {
     const resp = await Signout()
     setUser()
+    setOwnProjects([]) 
+    // setViewProject([]) 
+    // setProjects([])
     setOutMsg(resp)
     setTimeout(() => {
       setOutMsg()
@@ -198,7 +201,7 @@ export default function Navigation() {
                   className="navigation__link"
                   activeStyle={activeStyle}
                 >
-                  My Project
+                  My Projects
                 </NavLink>
               </li>
               <li className="navigation__item">

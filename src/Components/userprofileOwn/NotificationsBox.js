@@ -25,6 +25,7 @@ export default function NotificationsBox() {
                 console.log(notis.error);
                 return
             }
+           
             const fromUserNotis = notis.filter(item => item.fromUser._id === user._id) 
             const toUserNotis = notis.filter(item => item.toUser._id === user._id) 
             

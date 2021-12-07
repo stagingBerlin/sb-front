@@ -3,9 +3,9 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { updateUser } from "../../helpers/apiCalls";
 import MultipleSelect from "./MultipleSelect";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+// import AddCircleIcon from "@mui/icons-material/AddCircle";
 // import { styled } from "@mui/material/styles";
-import Badge from "@mui/material/Badge";
+// import Badge from "@mui/material/Badge";
 // import Avatar from "@mui/material/Avatar";
 // import { fontSize } from "@mui/system";
 
@@ -89,13 +89,6 @@ function EditUserProfile() {
       <form onSubmit={handleSubmit} className="form grid-col-5 grid-col-span-4 grid-row-6">
         <div className="avatar">
           <label className="avatar__label" htmlFor="avatar">
-            <Badge
-              overlap="circular"
-              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-              badgeContent={
-                <AddCircleIcon style={{ marginRight: "25", color: "white" }} />
-              }
-            >
               <img
                 className="avatar__img"
                 width="100"
@@ -103,7 +96,14 @@ function EditUserProfile() {
                 src={avatarPreview ? avatarPreview : user.avatar}
                 alt="avatar"
               />
-            </Badge>
+            {/* <Badge
+              overlap="circular"
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+              badgeContent={
+                <AddCircleIcon style={{ marginRight: "25", color: "white" }} />
+              }
+            >
+            </Badge> */}
           </label>
           <input
             id="avatar"

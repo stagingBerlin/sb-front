@@ -29,7 +29,7 @@ export default function JobOfferCard({
     jobOfferId
 }) {
 
-    const { usersdb, jobs, viewProject, setViewProject, projects, setProjects } = useContext(UserContext)
+    const { usersdb, jobs, viewProject, setViewProject, projects, setProjects, ownProjects, setOwnProjects} = useContext(UserContext)
     // const [participants, setparticipants] = useState([])
 
     const filterByJob = usersdb.filter(user => {
@@ -84,8 +84,16 @@ export default function JobOfferCard({
                 resApi
                 :
                 item)
+
+            const updated3 = ownProjects.map(item =>  
+                item._id === resApi._id ?
+                resApi
+                :
+                item
+            )
                 setProjects(updated)
                 setViewProject(updated2)
+                setOwnProjects(updated3)
         } catch (error) {
             console.log(error);
         }
@@ -107,13 +115,21 @@ export default function JobOfferCard({
                 :
                 item)
             
-                const updated2 = viewProject.map(item => 
-                    item._id === deleted._id ?
-                    deleted
-                    :
-                    item)
+            const updated2 = viewProject.map(item => 
+                item._id === deleted._id ?
+                deleted
+                :
+                item)
+
+            const updated3 = ownProjects.map(item =>  
+                item._id === deleted._id ?
+                deleted
+                :
+                item
+            )
                 setProjects(updated)
                 setViewProject(updated2)
+                setOwnProjects(updated3)
         } catch (error) {
             console.log(error);
         }
@@ -135,13 +151,22 @@ export default function JobOfferCard({
                 :
                 item)
             
-                const updated2 = viewProject.map(item => 
-                    item._id === newParticipantDB._id ?
-                    newParticipantDB
-                    :
-                    item)
+            const updated2 = viewProject.map(item => 
+                item._id === newParticipantDB._id ?
+                newParticipantDB
+                :
+                item)
+
+            const updated3 = ownProjects.map(item => 
+                item._id === newParticipantDB._id ?
+                newParticipantDB
+                :
+                item)
+                    
                 setProjects(updated)
                 setViewProject(updated2)
+                setOwnProjects(updated3)
+                
         } catch (error) {
             console.log(error);
         }

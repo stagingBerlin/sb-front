@@ -1,0 +1,11 @@
+.ownProjects-page {
+  padding: 3rem 20rem 15rem;
+  min-height: 90vh;
+
+  @include respond(tab-land) {
+    padding: 3rem 10rem 15rem;
+  }
+  @include respond(tab-port) {
+    padding: 3rem 0 15rem;
+  }
+}

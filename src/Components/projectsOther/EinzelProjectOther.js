@@ -1,15 +1,16 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 // import { Link, useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import { createNotification, bookmarkIt } from "../../helpers/apiCalls";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import LogoGrey from "../../img/LogoGrey.png";
+import AvatarImg from "../utilities/AvatarImg"
 
 //******** MUI ********//
 const style = {
@@ -28,23 +29,20 @@ const style = {
 //*********************/
 
 const EinzelProjectOther = (id) => {
+
   const { user, setUser, projects, setProjects, viewProject, setViewProject } =
     useContext(UserContext);
 
-  const [initialMessage, setInitialMessage] = useState("Please let me join.");
-  const [errorMsg, setErrorMsg] = useState("");
-  const [msg, setMsg] = useState("");
-
-  const handleApply = async (userId, jobSlotId, job, jobDescription) => {
-    const data = {
-      projectId: id.id,
-      toUser: userId,
-      initialMessage: initialMessage,
-      jobSlotId: jobSlotId,
-      job: job,
-      jobDescription: jobDescription,
+  const [ initialMessage, setInitialMessage ] = useState("Please let me join.");
+  const [ errorMsg, setErrorMsg ] = useState("");
+  const [ msg, setMsg ] = useState("");
+  const [ notiData, setNotiData ] = useState()
+  
+  const handleApply = async () => {
+    const newNoti = {
+      ...notiData, initialMessage
     };
-    console.log(data);
+    
     const thisProject = (id) => projects.find((p) => p._id === id.id);
     const roles = thisProject(id).jobList.map((role) => role.job.title);
     const myRoles = user.profession.map((p) => p.title);
@@ -57,7 +55,7 @@ const EinzelProjectOther = (id) => {
     } else {
       if (matchingRoles.length !== 0) {
         try {
-          const res = await createNotification(data);
+          const res = await createNotification(newNoti);
           setUser(res);
           setMsg(`You've successfully applied for this project.`);
           console.log(res);
@@ -96,12 +94,22 @@ const EinzelProjectOther = (id) => {
   //******** MUI ********//
   const [open, setOpen] = React.useState(false);
   const [openBookmark, setOpenBookmark] = React.useState(false);
-  const handleOpen = () => {
+  const handleOpen = ( toUserId, jobSlotId, job, jobDescription ) => {
     setOpen(true);
+    const data = {
+      projectId: id.id,
+      toUser: toUserId,
+      jobSlotId: jobSlotId,
+      job: job,
+      jobDescription: jobDescription,
+    };
+    setNotiData(data)
   };
   const handleClose = () => {
     setOpen(false);
     setErrorMsg("");
+    setInitialMessage("Please let me join.")
+    setNotiData()
   };
 
   const handleOpenBookmark = () => {
@@ -194,8 +202,13 @@ const EinzelProjectOther = (id) => {
                     <p>
                       Roles:{" "}
                       {item.jobList.map((role, i) => (
-                        <span key={i}>
-                          <Button onClick={handleOpen}>{role.job.title}</Button>
+                        <span key={role._id}>
+                          <Button onClick={()=>handleOpen(
+                            item.owner._id,
+                            role._id,
+                            role.job.title,
+                            role.jobDescription)}
+                          >{role.job.title}</Button>
                           <Modal
                             hideBackdrop
                             open={open}
@@ -217,9 +230,11 @@ const EinzelProjectOther = (id) => {
                                 style={{
                                   width: "100%",
                                   paddingBottom: "1.5rem",
+                                  lineHeight: "2rem",
+                                  fontSize:"1.4rem"
                                 }}
                               >
-                                Role Requirement: {role.jobDescription}
+                                Role Requirement:&nbsp;&nbsp;&nbsp;&nbsp;{role.jobDescription}
                               </h3>
                               {errorMsg ? (
                                 <Stack sx={{ width: "100%" }} spacing={2}>
@@ -241,14 +256,7 @@ const EinzelProjectOther = (id) => {
                                 }
                               />
                               <Button
-                                onClick={() =>
-                                  handleApply(
-                                    item.owner._id,
-                                    role._id,
-                                    role.job.title,
-                                    role.jobDescription
-                                  )
-                                }
+                                onClick={handleApply}
                               >
                                 Apply
                               </Button>
@@ -256,15 +264,23 @@ const EinzelProjectOther = (id) => {
                             </Box>
                           </Modal>
                         </span>
-                      ))}{" "}
+                      )
+                      )}{" "}
                       (click roles for details & apply)
                     </p>
-                    <p>Participants: {item.jobList.participant}</p>
-                    <p>Deadline: {item.deadline?.substr(0, 10)} </p>
-                    <p>Starting on: {item.starting?.substr(0, 10)} </p>
-                    <p>Contact: {user.username}</p>
+
+                    <AvatarImg
+                      large="6"
+                      image={item.owner.avatar}
+                    />
+                    <p>Contact:&nbsp;&nbsp;&nbsp;&nbsp; {item.owner.username}</p>
+                    <p>Name:&nbsp;&nbsp;&nbsp;&nbsp; {item.owner.name}</p>
+                    <p>Participants:&nbsp;&nbsp;&nbsp;&nbsp; {item.jobList.map(item => item.participant ? item.participant.username.toUpperCase():"")}</p>
+                    <p>Deadline: &nbsp;&nbsp;&nbsp;&nbsp; {item.deadline?.substr(0, 10)} </p>
+                    <p>Starting on:&nbsp;&nbsp;&nbsp;&nbsp; {item.starting?.substr(0, 10)} </p>
+
                     <p>
-                      Project status:{" "}
+                      Project status:&nbsp;&nbsp;&nbsp;&nbsp; 
                       {item.isHiring ? "Hiring now" : "Not hiring"}
                     </p>
                   </div>

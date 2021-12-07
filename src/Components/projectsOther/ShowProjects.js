@@ -66,7 +66,7 @@ function ShowProjects() {
   const [keyword, setKeyword] = useState("");
   const [showWhat, setShowWhat] = useState("none");
   const [errorMsg, setErrorMsg] = useState("");
-console.log(loading)
+// console.log(loading)
   useEffect(() => {
     const myRole = user.profession.map((role) => role.title);
 
@@ -205,7 +205,7 @@ console.log(loading)
         ))
       }
           {!loading && viewProject.map((project, i) => (
-            <div key={i}>
+            <div key={project._id}>
               <Link
                 style={{ textDecoration: "none" }}
                 to={`/account/allprojects/${project._id}`}
@@ -224,6 +224,7 @@ console.log(loading)
 
                 {/* Since we are able to add pictures to a project, they come in different sizes and this page doesn't looks great anymore, compare the previous code with the new one  */}
                 <div
+                  className="project-box"
                   style={{
                     backgroundImage: `url(${project.images.length === 0 ? LogoGrey : project.images[0]})`,
                     backgroundRepeat: "no-repeat",
@@ -231,9 +232,11 @@ console.log(loading)
                     backgroundSize: project.images.length === 0 ? "contain" : "cover",
                     width: "25rem",
                     height: "25rem", 
-                    borderRadius: "4px"
+                    borderRadius: "4px",
                   }}
-                ></div>
+                >
+                  <div></div>
+                </div>
                 
                 <h3 style={{ textAlign: "center" }}>
                   {project.title} by {project.authorship}

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Link from "@mui/material/Link";
 import { UserContext } from "../../context/UserContext";
 import DashboardFeed from "./DashboardFeed";
@@ -52,9 +52,9 @@ function stringAvatar(name) {
 
 /****************** MAIN FUNCTION ************************/
 function UserDashboard() {
-  const { user, setUser, ownProjects, setOwnProjects } =
+  const { user, ownProjects } =
     useContext(UserContext);
-  console.log(ownProjects);
+
 
   return (
     <div className="content-margin-top2">
