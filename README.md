@@ -29,14 +29,14 @@
 <p align="center">
 <a href="https://github.com/stagingBerlin/sb-front/blob/main/public">
   <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/Screenshot1.png" alt="Screenshot" width="400" height="200">
-  <img src="https://github.com/stagingBerlin/sb-front/blob/main/pubic/Screenshot2.png" alt="Screenshot" width="170" height="300">
+  <img src="https://github.com/stagingBerlin/sb-front/blob/main/pubic/Screenshot2.png" alt="Screenshot" width="400" height="200">
   <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/Screenshot3.png" alt="Screenshot" width="400" height="200">
   </a>
 </p>
 
 ## Contact
 Daniel Matczak [Github](https://github.com/danielczak) - daniel.matczak@network.rca.ac.uk <br />
-Habid Badillo Bespinosa [Github](https://github.com/habidbesp) - habidbespinosa@gmail <br />
+Habid Badillo Bespinosa [Github](https://github.com/habidbesp) - habidbespinosa@gmail.com <br />
 Shinhee Chae [Github](https://github.com/shinheechae) - shinheechae@gmail.com <br />
               
 
