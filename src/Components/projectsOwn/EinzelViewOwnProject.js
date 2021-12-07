@@ -26,7 +26,7 @@ const EinzelViewOwnProject = ({id}) => {
     if(!projectToShow){
         return (
             <div className="loading-wrapper">
-                <h1><i>Loading...</i></h1>
+                 <p><i>Loading...</i></p> 
             </div>
         )
     }
