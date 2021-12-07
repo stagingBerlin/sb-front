@@ -13,6 +13,7 @@
   <p align="center">
     <a target="_blank" href="https://staging-berlin.vercel.app/"><strong>App Link</strong></a>
   </p>
+   <p align="center">(deployed via Vercel)</p>
   
 ## Built With
 
@@ -35,9 +36,9 @@
 </p>
 
 ## Contact
-Daniel Matczak [Github](https://github.com/danielczak) - daniel.matczak@network.rca.ac.uk <br />
-Habid Badillo Bespinosa [Github](https://github.com/habidbesp) - habidbespinosa@gmail.com <br />
-Shinhee Chae [Github](https://github.com/shinheechae) - shinheechae@gmail.com <br />
+[Daniel Matczak (Github)](https://github.com/danielczak) - daniel.matczak@network.rca.ac.uk <br />
+[Habid Badillo Bespinosa (Github)](https://github.com/habidbesp) - habidbespinosa@gmail.com <br />
+[Shinhee Chae (Github)](https://github.com/shinheechae) - shinheechae@gmail.com <br />
               
 
 ## Acknowledgements
