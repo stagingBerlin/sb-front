@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a target="_blank" href="https://github.com/stagingBerlin/sb-front/blob/main/public">
-    <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/img/LogoGrey.png" alt="Logo" width="180" height="180">
+    <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/img/LogoGrey.png" alt="Logo" width="150" height="180">
   </a>
  </p>
   <h3 align="center">Staging Berlin</h3>
@@ -22,15 +22,15 @@
 * [MongoDB](https://www.mongodb.com/cloud/atlas?utm_content=rlsapostreg&utm_source=google&utm_campaign=gs_emea_rlsamulti_search_brand_dsa_atlas_desktop_rlsa_postreg&utm_term=&utm_medium=cpc_paid_search&utm_ad=b&utm_ad_campaign_id=14412646473&gclid=Cj0KCQjwkIGKBhCxARIsAINMioIyMxUNrRdawAnWoV8sA15dkmCwz9HL-QdMTRDK2_Q6rXjdo-8MsuQaAr-OEALw_wcB)
 * [Material-UI](https://material-ui.com)
 * [SASS](https://sass-lang.com/)
-* [vercel](https://vercel.com)
+* [Vercel](https://vercel.com)
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 <p align="center">
 <a href="https://github.com/stagingBerlin/sb-front/blob/main/public">
-  <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/Screenshot1.png" alt="Screenshot" width="400" height="200">
-  <img src="https://github.com/stagingBerlin/sb-front/blob/main/pubic/Screenshot2.png" alt="Screenshot" width="400" height="200">
-  <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/Screenshot3.png" alt="Screenshot" width="400" height="200">
+  <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/Screenshot1.png" alt="Screenshot" width="400" height="220">
+  <img src="https://github.com/stagingBerlin/sb-front/blob/main/pubic/Screenshot2.png" alt="Screenshot" width="400" height="220">
+  <img src="https://github.com/stagingBerlin/sb-front/blob/main/public/Screenshot3.png" alt="Screenshot" width="400" height="220">
   </a>
 </p>
 
